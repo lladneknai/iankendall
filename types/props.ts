@@ -1,0 +1,249 @@
+import { KeyboardReactInterface } from "react-simple-keyboard";
+import type {
+  About,
+  Project,
+  KeyboardLayout,
+  ProjectsOrganized,
+} from "./entities";
+import type {
+  CollapsibleProps,
+  FormFieldProps,
+  MouseHoverHandlers,
+  PaperStyles,
+  SetEditorFn,
+  SoundEffectName,
+  TypewriterFlowProps,
+  UpdateFieldFn,
+} from "./shared";
+import { MutableRefObject, RefObject } from "react";
+
+/**
+ * PROP TYPES
+ * - Interfaces and types used as component props (alphabetized for legibility)
+ * - Some props use shared types directly (ex: ChildrenProps) to avoid over-cluttering
+ */
+
+export interface ActionsProps {
+  handleSave: () => void;
+  isSaving: boolean;
+  isUploading: boolean;
+  setIsEditing: (value: boolean) => void;
+}
+
+export interface CandleProps {
+  bottom?: string;
+  height?: string;
+  width?: string;
+}
+
+export type CheckboxProps<T extends Record<string, any>> = FormFieldProps<T>;
+
+export interface ContactButtonProps {
+  handleContactClick: () => void;
+}
+
+export interface ContentEditorProps {
+  inData: Record<string, any>;
+  onSave: (data: Record<string, any>) => void;
+  setIsEditing: (isEditing: boolean) => void;
+}
+
+export interface FileBrowserProps extends CollapsibleProps {
+  isWindow?: boolean;
+}
+
+export interface FileInputProps {
+  fileInputRef: React.RefObject<HTMLInputElement>;
+  handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface FileViewerProps {
+  decrementFontSize: () => void;
+  fontSize: number;
+  incrementFontSize: () => void;
+  isWindow?: boolean;
+}
+
+export interface FileViewerActionsProps {
+  decrementFontSize: () => void;
+  incrementFontSize: () => void;
+  isWindow?: boolean;
+}
+
+export interface HiddenTextAreaProps {
+  handleUserKeystroke: (text: string) => void;
+  text: string;
+}
+
+export interface IanKendallProps {
+  handleIanKendall: () => void;
+}
+
+export interface KeyboardProps {
+  isActive: boolean;
+  keyboardRef: (instance: KeyboardReactInterface | null) => void;
+  layoutName: KeyboardLayout;
+  onKeyPress: (keyPressed: string) => void;
+  onKeyboardRender: () => void;
+}
+
+export interface MenuButtonProps {
+  handleMenuToggle: () => void;
+  isOpen: boolean;
+}
+
+export interface MenuItemsProps extends MouseHoverHandlers {
+  handleContactClick: () => void;
+  handleMenuToggle: () => void;
+  isContactDisabled: boolean;
+  subtext: string;
+}
+
+export interface MenuSubItemsProps {
+  handleNewPage: () => void;
+  handleToggleSound: () => void;
+  subtextShown: boolean;
+}
+
+export interface MenuSubtextProps {
+  subtext: string;
+  subtextShown: boolean;
+}
+
+export interface MessageCreationFormProps extends TypewriterFlowProps {
+  onFinish: () => void;
+}
+
+export interface MobileContactDialogProps extends TypewriterFlowProps {
+  suggestionTextAc?: string;
+}
+
+export interface NamePlateProps {
+  hammerRef: RefObject<HTMLDivElement>;
+}
+
+export interface NavbarProps {
+  handleContactClick: () => void;
+  handleIanKendall: () => void;
+  handleMenuToggle: () => void;
+  isOpen: boolean;
+  isScrolled: boolean;
+}
+
+export interface PaperProps {
+  paperStyles: PaperStyles;
+  rows: string[];
+  suggestionText?: string;
+  suggestionTextAc?: string;
+}
+
+export interface ProjectProps {
+  project: Project;
+}
+
+export interface ProjectContentProps {
+  isEditing: boolean;
+  onSave: () => void;
+  project: Project;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ProjectDataProps {
+  data: Project;
+  updateField: UpdateFieldFn;
+}
+
+export interface ProjectEditorProps {
+  onSave: () => void;
+  project: Project;
+  setIsEditing: (value: boolean) => void;
+}
+
+export interface ProjectHeaderProps {
+  isEditing: boolean;
+  name: string;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ProjectNavProps {
+  id: string;
+  projectsOrganized: ProjectsOrganized;
+  setId: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ProjectSelectProps {
+  id: string;
+  projects: Project[];
+  projectsOrganized: ProjectsOrganized;
+  selectProjectMobile: (key: string) => void;
+}
+
+export interface SoundEffectsToggleProps {
+  handleToggleSound: () => void;
+}
+
+export type TextFieldProps<T extends Record<string, any>> = FormFieldProps<T>;
+
+export interface TypewriterProps {
+  isAutoType?: boolean;
+  isMobileContact?: boolean;
+}
+
+export interface TypewriterRefs {
+  hammerRef: RefObject<HTMLDivElement>;
+  keyboardRef: (instance: KeyboardReactInterface | null) => void;
+  keyRefs: RefObject<Element[]>;
+  linkageRefs: RefObject<Record<string, HTMLDivElement | null>>;
+  soundRef: MutableRefObject<((soundType: SoundEffectName) => void) | null>;
+  spaceLinkagesRef: RefObject<HTMLDivElement[]>;
+}
+
+export interface TypingTipsProps {
+  handleDismissTip: () => void;
+  paperStyles: PaperStyles;
+  tipText: string;
+}
+
+export interface UseContentEditorProps {
+  inData: About;
+  onSave: () => void;
+}
+
+export interface UseTypewriterAutoTypingProps {
+  handleKeystrokeEffects: (key: string) => void;
+  isAutoType: boolean;
+  isMobileContact: boolean;
+  keyboardInstanceRef: MutableRefObject<KeyboardReactInterface | null>;
+  resetKey?: number;
+  setText: (text: string | ((prev: string) => string)) => void;
+  text: string;
+}
+
+export interface UseTypewriterKeyEffectsProps {
+  isActive: boolean;
+  refs: TypewriterRefs;
+}
+
+export interface UseTypewriterRowsProps {
+  playSound: ((soundType: SoundEffectName) => void) | null;
+  text: string;
+}
+
+export interface UseTypingTipsProps {
+  isAutoTypeConcluded: boolean;
+  isAutoTyping: boolean;
+  isPromptRendered: boolean;
+  isSuggestionRendered: boolean;
+  progress: number;
+  rows: string[];
+}
+
+export interface WysiWygProps {
+  editorRef: React.RefObject<any>;
+  fileInputRef: React.RefObject<HTMLInputElement>;
+  label: string;
+  name: "description" | "content";
+  setCurrentEditor: SetEditorFn;
+  updateField: UpdateFieldFn;
+  value: string;
+}

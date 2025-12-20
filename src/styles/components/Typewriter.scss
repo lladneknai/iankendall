@@ -1,0 +1,350 @@
+@use "../shared.scss" as *;
+
+//
+// TYPEWRITER STYLES
+//
+// Styles for the Typewriter and Base components.
+// Uses a lot of clip paths to achieve the angular effects.
+// Declares the `hammer-strike` animation that runs when typing text.
+//
+// $typewriter-bottom: 110px;
+$typewriter-actions-top: 10px;
+
+#Typewriter {
+  bottom: 0;
+  height: var(--typewriter-height, 380px);
+  perspective: 666px;
+  perspective-origin: bottom;
+  position: relative;
+  transition: height $drawer-transition-speed;
+  width: 635px;
+  z-index: 1;
+}
+
+#NamePlate {
+  background: $typewriter-body;
+  border-radius: 10px 10px 0 0;
+  color: $typewriter-key-letter;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  position: relative;
+  text-transform: uppercase;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 1;
+}
+
+#ian {
+  background-color: $typewriter-body;
+  font-family: $serif;
+  position: absolute;
+  letter-spacing: 0.15rem;
+  padding-top: 17px;
+  // padding-bottom: 15px;
+  font-size: 20px;
+  z-index: 2;
+}
+
+//
+// HIDDEN TEXT AREA
+//
+#HiddenTextArea {
+  border: 0;
+  font-family: monospace;
+  font-size: 8px;
+  height: 0px;
+  left: -5000px;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  resize: none;
+  top: -5000px;
+  width: 0px;
+  word-break: break-all;
+  z-index: -9999999999;
+  //
+  // CHANGE THIS IF YOU WANT TO SEE IT
+  //
+  // opacity: 0.5;
+  // height: 40px;
+  // width: 100px;
+}
+
+// Manually block user interactivity
+#InteractivityBlocker {
+  // background-color: #f0f1;
+  height: calc(100% - 100px);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+//
+// TYPING TIPS
+// This div gets a `top` and `right` from JSX
+// It's used to keep the tips positioned above the paper.
+//
+#TypingTips {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  position: absolute;
+  width: 502px;
+  &:hover {
+    p {
+      color: $light;
+      animation: none;
+    }
+    button {
+      background-color: $dark-1;
+      animation: none;
+    }
+  }
+
+  // Shared between paper and tips
+  @include paper-transitions;
+
+  &.hidden {
+    opacity: 0;
+  }
+  button {
+    align-items: center;
+    animation: tipButtonPulse 1.5s ease-in-out infinite;
+    border: 0;
+    background-color: $dark;
+    border-radius: 2rem;
+    color: $light-1;
+    cursor: pointer;
+    display: flex;
+    font: 0.75rem $sans-serif;
+    justify-content: center;
+    text-transform: uppercase;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  p {
+    animation: tipTextPulse 1.5s ease-in-out infinite;
+    color: $light-1;
+    margin: 0;
+  }
+}
+
+@keyframes tipTextPulse {
+  0%,
+  100% {
+    color: $light;
+  }
+  50% {
+    color: $light-2;
+  }
+}
+
+@keyframes tipButtonPulse {
+  0%,
+  100% {
+    background-color: $dark;
+  }
+  50% {
+    background-color: $dark-1;
+  }
+}
+
+//
+// [SHARED] BUTTON / INPUT STYLES
+//
+#ActionButtonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  left: -10%;
+  position: relative;
+  top: $typewriter-actions-top;
+  width: 120%;
+  @include fadeInAnimations();
+
+  button {
+    background: $dark-transparent-2;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    color: $light;
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem 0.75rem 1.5rem;
+    transition: all 125ms ease;
+    @include alpha-prop(border-color, $light, -0.75);
+    svg {
+      font-size: 0.75rem;
+      margin-left: 0.6rem;
+      &.fa-code {
+        font-size: 0.9rem;
+      }
+    }
+    &:not(:disabled) {
+      background-color: $dark-1;
+      color: $light;
+      cursor: pointer;
+      &:focus,
+      &:focus-within {
+        background-color: $dark-2;
+        @include alpha-prop(border-color, $sienna, -0.25);
+        outline: none;
+      }
+      &:hover {
+        @include alpha-prop(border-color, $sienna, -0.1);
+      }
+    }
+    &:disabled {
+      @include alpha-prop(color, $light, -0.9);
+      @include alpha-prop(background-color, $dark, -0.75);
+      @include alpha-prop(border-color, $light, -0.9);
+    }
+  }
+}
+
+//
+// IT'S HAMMER TIME
+//
+#hammer {
+  position: absolute;
+  background-color: black;
+  width: 3px;
+  height: 5px;
+  bottom: 30px;
+  left: calc(50% - 1px);
+  transform: translateY(0);
+  transform-origin: bottom center;
+
+  &.active {
+    animation: hammerStrike 0.1s ease-out;
+  }
+}
+
+@keyframes hammerStrike {
+  0% {
+    height: 40px;
+  }
+  25% {
+    height: 50px;
+  }
+  50% {
+    height: 60px;
+  }
+  75% {
+    height: 50px;
+  }
+  100% {
+    height: 40px;
+  }
+}
+
+//
+// BACK TO BASE-ICS
+//
+#Base {
+  position: absolute;
+  width: 635px;
+  height: 280px;
+  /* top: 300px; */
+  z-index: 0;
+
+  .back,
+  .left-side,
+  .left-side-slanted,
+  .left-bottom,
+  .right-bottom,
+  .center-bottom,
+  .right-side-slanted,
+  .right-side {
+    background-color: $typewriter-body;
+    border-radius: 5px;
+    position: absolute;
+  }
+
+  .back {
+    background: $typewriter-body-dark;
+    height: 279px;
+    width: 680px;
+    left: -22px;
+    clip-path: polygon(
+      var(--clip-top-left, 34px) 0,
+      var(--clip-top-right, 646px) 0,
+      var(--clip-bottom-right, 680px) 279px,
+      var(--clip-bottom-left, 0px) 279px
+    );
+  }
+
+  .left-foot,
+  .right-foot {
+    @include lighten-prop(background-color, $dark, 25%);
+    border-radius: 0 0 2px 2px;
+    height: 3px;
+    position: absolute;
+    bottom: -3px;
+    width: 42px;
+  }
+
+  .left-foot {
+    left: 10px;
+  }
+
+  .right-foot {
+    right: 10px;
+  }
+
+  .left-side,
+  .right-side {
+    height: 70px;
+    margin-top: 10px;
+    width: 8px;
+  }
+
+  .left-side-slanted,
+  .right-side-slanted {
+    height: 190px;
+    top: 74px;
+    width: 8px;
+  }
+
+  .left-bottom,
+  .right-bottom {
+    width: 100px;
+    height: 20px;
+    bottom: 0;
+  }
+
+  .left-side-slanted {
+    left: -11px;
+    transform: skew(-7deg);
+  }
+
+  .right-side-slanted {
+    right: -11px;
+    transform: skew(7deg);
+  }
+
+  .left-bottom {
+    left: -23px;
+  }
+
+  .center-bottom {
+    bottom: 0;
+    height: 10px;
+    left: 67px;
+    width: 500px;
+  }
+
+  .right-bottom {
+    right: -23px;
+  }
+
+  .right-side {
+    right: 0;
+  }
+}

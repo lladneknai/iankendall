@@ -1,0 +1,169 @@
+@use "./shared.scss" as *;
+
+//
+// ROOT STYLES
+//
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 18px;
+}
+
+//
+// BASE ELEMENT STYLES
+// Abstracted so they can also apply to the content-editor
+//
+@include base-document-styles;
+
+//
+// UTILITY CLASSES
+//
+.flex {
+  display: flex;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.gap-025 {
+  gap: 0.25rem;
+}
+.gap-05 {
+  gap: 0.5rem;
+}
+.gap-1 {
+  gap: 1rem;
+}
+.gap-2 {
+  gap: 2rem;
+}
+.no-marg {
+  margin: 0;
+}
+.b-marg-05 {
+  margin-bottom: 0.5rem;
+}
+.b-marg-1 {
+  margin-bottom: 1rem;
+}
+.b-marg-2 {
+  margin-bottom: 2rem;
+}
+.t-marg-1 {
+  margin-top: 1rem;
+}
+.t-marg-2 {
+  margin-top: 2rem;
+}
+.no-pad {
+  padding: 0;
+}
+
+//
+// APPWIDE CLASSES
+//
+.page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+.hero {
+  align-items: center;
+  background-color: $dark;
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: $hero-height-desktop; // overridden for mobile
+  justify-content: flex-end;
+  width: 100%;
+}
+.hero-content {
+  color: $light;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 1920px;
+  padding: 6rem 1.5rem 1rem;
+  width: calc(100% - 3rem);
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+.page-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  max-width: 1920px;
+  width: calc(100% - 3rem);
+  opacity: 1;
+  transition: opacity 500ms ease;
+  &.loading {
+    opacity: 0;
+    transition: opacity 250ms ease;
+    pointer-events: none; // Prevent interaction during fade
+  }
+}
+.page-content-restricted {
+  max-width: 800px;
+}
+
+.cms-html {
+  h4,
+  h5,
+  h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  ol,
+  ul {
+    padding-left: 1.5rem;
+  }
+}
+
+@include bp(non-xl) {
+  .xl-only {
+    display: none;
+  }
+  .non-xl-only {
+    display: flex;
+  }
+}
+
+@include bp(xl) {
+  .non-xl-only {
+    display: none;
+  }
+  .xl-only {
+    display: flex;
+  }
+}
+
+.bg-light {
+  background: $light;
+}
+.bg-mint {
+  background: $mint;
+}
+.bg-aqua {
+  background: $aqua;
+}
+.bg-lavendar {
+  background: $lavendar;
+}
+.bg-sienna {
+  background: $sienna;
+}
+.bg-coral {
+  background: $coral;
+}

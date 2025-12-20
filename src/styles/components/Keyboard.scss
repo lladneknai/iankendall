@@ -1,0 +1,187 @@
+@use "../shared.scss" as *;
+
+/**
+ * KEYBOARD STYLES
+ * 
+ * Styles for the the `react-simple-keyboard` instance.
+ * The `typewriter` theme is invoked in the `Keyboard.tsx` file.
+ * 
+ */
+
+#Keyboard {
+  position: relative;
+  top: -10px;
+  transform: rotateX(27deg);
+}
+
+.simple-keyboard.typewriter {
+  background-color: transparent;
+  font-family: $serif;
+  // font-family: American Typewriter, monospace;
+
+  .hg-button {
+    align-items: center;
+    background-color: $typewriter-key-bg !important; /* Plugin's active state is crap; have to use !important.*/
+    border: 1px solid $typewriter-key-border;
+    border-radius: 50px;
+    color: $typewriter-key-letter;
+    display: flex;
+    height: 40px;
+    max-width: 40px;
+    text-transform: uppercase;
+    width: 40px;
+
+    &:not(:last-child) {
+      margin-right: 14px;
+    }
+
+    /* LEFT SIDE KEYS */
+    &.key-tab {
+      font-size: 0.65rem;
+      margin-left: 0;
+      text-transform: unset;
+    }
+
+    &.key-q {
+      margin-left: 27px;
+    }
+
+    &.key-caps {
+      font-size: 0.65rem;
+      margin-left: 14px;
+      line-height: 1.05;
+      text-align: center;
+      text-transform: unset;
+    }
+
+    &.key-shift {
+      font-size: 0.65rem;
+      margin-left: 40px;
+      line-height: 1.05;
+      text-align: center;
+      text-transform: unset;
+    }
+
+    &.key-bksp {
+      font-size: 0.65rem;
+      padding-left: 7px;
+      line-height: 1.05;
+      text-align: center;
+      text-transform: unset;
+    }
+
+    &.key-enter {
+      font-size: 0.65rem;
+      padding-left: 7px;
+      line-height: 1.05;
+      text-align: center;
+      text-transform: unset;
+    }
+
+    &.key-modifier {
+      font-size: 1rem;
+      padding-left: 5px;
+    }
+
+    /* Two-line keys took a LOT of tweaking... */
+    &.key-twoline,
+    &.key-period,
+    &.key-quote {
+      display: flex;
+      font-size: 50px;
+      line-height: 1.15;
+      padding: 0px 14px;
+      text-align: center;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    &.key-twoline span {
+      zoom: 0.25;
+    }
+
+    &.key-period span,
+    &.key-quote span {
+      font-weight: bold;
+      line-height: 0.9;
+      position: relative;
+      zoom: 0.2;
+    }
+
+    &.key-period span {
+      zoom: 0.25;
+      line-height: 1;
+      top: -14px;
+    }
+
+    &.key-quote span {
+      line-height: 1.4;
+      top: 5px;
+    }
+
+    &.key-space {
+      border: 1px solid $typewriter-space-border;
+      border-radius: 27px;
+      height: 27px;
+      margin-left: 87px;
+      margin-top: 10px;
+      max-width: 431px;
+    }
+
+    &.active {
+      background-color: $typewriter-key-bg !important;
+      color: #fff !important;
+      transform: rotateX(15deg) translateY(5px);
+    }
+
+    /* Typewriter has a hidden row on the bottom row that allows us to use keys (see keyOverrides). */
+    &.key-hidden {
+      display: none;
+    }
+
+    /* Override any plugin-applied active states that might cause black text */
+    &.hg-active,
+    &.hg-selected,
+    &.hg-pressed,
+    &[data-skbtn].hg-active,
+    &[data-skbtn].hg-selected,
+    &[data-skbtn].hg-pressed {
+      color: #eee !important;
+      background-color: $typewriter-key-bg !important;
+    }
+
+    /* Additional override for any inline styles the plugin might apply */
+    &[style*="color"] {
+      color: #eee !important;
+    }
+
+    &[style*="background"] {
+      background-color: $typewriter-key-bg !important;
+    }
+  }
+}
+
+.hg-theme-default {
+  position: relative;
+  z-index: 1;
+
+  // .hg-row:not(:nth-last-child(1)),
+  // .hg-row:not(:nth-last-child(2)) {
+  .hg-row {
+    margin-bottom: 5px;
+    margin-left: 8px;
+  }
+  .hg-row:nth-last-child(1) {
+    margin-bottom: 0;
+  }
+}
+
+/* 
+For the shift key, we never actually need to update in the DOM.
+We can rely on the layout change to update the className for us. Neat!
+*/
+.hg-layout-shift .hg-button.key-shift {
+  background-color: $typewriter-key-bg !important;
+  color: #fff !important;
+  transform: rotateX(15deg) translateY(5px);
+}

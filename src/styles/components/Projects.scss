@@ -1,0 +1,247 @@
+@use "../shared.scss" as *;
+
+// ========================
+//   PROJECTS PAGE STYLES
+// ========================
+
+$color-lightness: 15%;
+$color-lightness-2: 30%;
+$color-lightness-3: 45%;
+$primary-color: $sienna;
+
+#Projects {
+  background: $dark-1;
+  color: $light;
+  font-family: $serif;
+  position: relative;
+
+  .hero {
+    background-blend-mode: multiply;
+    // background-color: #0008;
+    @include alpha-prop(background-color, $dark, -0.33);
+    background-image: url(/img/bg/code.jpg);
+    h1 {
+      @include lighten($primary-color, $color-lightness);
+    }
+    h6,
+    label {
+      @include lighten($primary-color, $color-lightness-2);
+    }
+  }
+
+  @include bp(non-desktop) {
+    .hero {
+      .hero-content {
+        h1 {
+          margin-bottom: 0;
+        }
+      }
+      h6 {
+        display: none;
+      }
+    }
+  }
+
+  // =================
+  //   PAGE CONTENT
+  // =================
+  $page-content-spacing: 2rem;
+  .page-content {
+    @include flex(row, calc($page-content-spacing));
+    padding: 1.5rem 1.5rem 1.5rem 0;
+
+    h3:first-of-type {
+      margin-top: 0;
+    }
+
+    h4 {
+      text-transform: uppercase;
+    }
+
+    h4,
+    h6 {
+      @include lighten($primary-color, $color-lightness);
+      font-weight: 600;
+    }
+  }
+
+  #ProjectContent {
+    flex-grow: 1;
+    // @include flex(column, $page-content-spacing);
+    @include flex(column, 0);
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      @include bp(non-desktop) {
+        display: none;
+      }
+    }
+
+    .content {
+      @include flex(row, $page-content-spacing);
+    }
+
+    ul {
+      @include flex(column, 0.5rem);
+      padding: 0 0 0 0.5rem;
+    }
+
+    li {
+      @include flex(row, 0.5rem);
+      align-items: center;
+      list-style: none;
+    }
+
+    p.company {
+      align-items: center;
+      @include flex(row, calc($page-content-spacing / 4));
+      padding-left: 0.5rem;
+      img {
+        height: 1rem;
+        // width: 1rem;
+      }
+    }
+
+    .disc {
+      background-color: transparent;
+      border: 2px solid $light;
+      border-radius: 10px;
+      height: 0.25rem;
+      width: 0.25rem;
+    }
+
+    .goto {
+      font-size: 0.75em;
+    }
+
+    .link {
+      align-items: center;
+      color: $light;
+      display: flex;
+      gap: 5px;
+      &:visited {
+        color: $light;
+        /* color: #c3b59e; */
+      }
+    }
+
+    .tech {
+      @include flex(row, 1rem);
+      margin: 0.5rem 0 0;
+      // margin: 0.5rem 0 1rem;
+      padding-left: 0;
+      li {
+        margin: 0;
+      }
+      @include bp(non-xl) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .details {
+    padding-bottom: 10rem;
+    @include flex(column, 1rem);
+    @include bp(non-desktop) {
+      padding-bottom: 5rem;
+    }
+    flex-grow: 1;
+    img {
+      border-radius: 13px;
+      max-width: 100%;
+    }
+  }
+
+  #ProjectDetailsSidebar {
+    @include flex(column, 1rem);
+    flex-shrink: 0;
+    width: 350px;
+
+    @include bp(non-xl) {
+      display: none;
+    }
+  }
+
+  // =========================
+  //   SUBNAV | DESKTOP ONLY
+  // =========================
+  #ProjectNav {
+    flex-shrink: 0;
+    min-width: 325px; // note: you might have to change this if you add a longer name
+    padding-top: 8px; // align w/header baseline (TODO: I still don't love this design)
+    width: fit-content;
+
+    @include bp(non-desktop) {
+      display: none;
+    }
+
+    .MuiRichTreeView-root {
+      .MuiCollapse-root {
+        .MuiTreeItem-content {
+          border-radius: 0.5rem;
+        }
+
+        .MuiTreeItem-root {
+          border-radius: 0.5rem;
+          transition: background-color 125ms;
+          &:hover {
+            @include alpha-prop(background-color, $light, -0.95);
+          }
+        }
+
+        .Mui-selected {
+          @include alpha-prop(background-color, $light, -0.925);
+          &:hover {
+            @include alpha-prop(background-color, $light, -0.925);
+          }
+        }
+      }
+    }
+  }
+
+  // ================================
+  //   PROJECT SELECT | MOBILE ONLY
+  // ================================
+  #ProjectSelect {
+    @include bp(desktop) {
+      display: none;
+    }
+
+    label {
+      font-family: $sans-serif;
+      margin: 0.5rem 0 0.75rem;
+      display: block;
+    }
+    select {
+      border: 1px solid;
+      border-radius: 0.75rem;
+      color: $light;
+      @include alpha-prop(background-color, $dark, -0.5);
+      @include lighten-prop(border-color, $garnet, $color-lightness-2);
+      font-family: $serif;
+      font-size: 1.25rem;
+      padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+      padding-right: 2rem;
+      width: 100%;
+
+      @include bp(bp-tiny) {
+        font-size: 1rem;
+      }
+
+      // Custom arrow
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffefd5' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      &:focus,
+      &:focus-within {
+        outline: none;
+        border: 1px solid $sienna;
+      }
+    }
+  }
+}

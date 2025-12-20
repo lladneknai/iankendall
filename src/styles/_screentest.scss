@@ -1,0 +1,48 @@
+/***********************[  BREAKPOINT TEST FILE  ]******************** /
+
+This is a helpful reference file for debugging CSS breakpoints. 
+
+Re-enabling it via the index.css barrel file paints the room a different 
+color for every breakpoint. Much quicker than using the page rulers.
+
+***********************************************************************/
+
+#RoomSize {
+  display: flex;
+}
+#RoomContainer {
+  background: #808;
+  @media screen and (min-width: 768px) and (min-height: 432px) {
+    background: darkgreen;
+  }
+  @media screen and (min-width: 1024px) and (min-height: 576px) {
+    background: darkgrey;
+  }
+  @media screen and (min-width: 1100px) and (min-height: 619px) {
+    background: brown;
+  }
+  @media screen and (min-width: 1200px) and (min-height: 675px) {
+    background: darkgoldenrod;
+  }
+  @media screen and (min-width: 1300px) and (min-height: 731px) {
+    background: goldenrod;
+  }
+  @media screen and (min-width: 1400px) and (min-height: 788px) {
+    background: orange;
+  }
+  @media screen and (min-width: 1550px) and (min-height: 872px) {
+    background: red;
+  }
+  @media screen and (min-width: 1700px) and (min-height: 956px) {
+    background: purple;
+  }
+  @media screen and (min-width: 1900px) and (min-height: 1069px) {
+    background: navy;
+  }
+  @media screen and (min-width: 2100px) and (min-height: 1181px) {
+    background: blue;
+  }
+  @media screen and (min-width: 2400px) and (min-height: 1350px) {
+    background: lightblue;
+  }
+}

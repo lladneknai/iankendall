@@ -1,0 +1,33 @@
+/**
+ * Returns @param string with the first letter in Uppercase.
+ */
+export function ucFirst(string = "") {
+  return `${string.slice(0, 1).toUpperCase()}${string.slice(1)}`;
+}
+
+/**
+ * Returns @param string built one char at a time after @param delay ms
+ */
+export async function buildString(string: string, delay: number = 100) {
+  return string;
+}
+
+export function lorem() {
+  const start = Math.ceil(Math.random() * 5);
+  const end = start + 1;
+  const loremArr = loremText.split("\n");
+  const string = loremArr.slice(start, end);
+  return string[0];
+}
+
+const loremText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut sem eget arcu placerat luctus. Donec interdum, tellus sed consequat elementum, massa sem condimentum leo, sit amet tempor eros diam eget libero. Vivamus eu erat justo. Maecenas imperdiet laoreet eleifend. Ut tellus nulla, vehicula sit amet est vel, euismod maximus magna. 
+Nulla sit amet sem tincidunt, bibendum ex vitae, varius turpis. Curabitur ac faucibus est. Proin dignissim erat lacus, mollis viverra mi pretium et. Etiam vel dapibus tellus. Aliquam posuere elementum nisl eget lacinia. Nulla id est egestas, ultrices arcu in, tincidunt nibh. Phasellus eget dolor a urna venenatis porta.
+Nulla pulvinar dapibus hendrerit. Praesent commodo lacus quis arcu aliquet ultrices. Donec et mattis purus, vel convallis odio. Maecenas vulputate erat lacus, et sodales ex congue sit amet. Ut eu ante nec nibh rutrum pretium ut volutpat leo. Aenean ac molestie lectus. Morbi massa tellus, molestie vitae enim at, venenatis tempus dui. Fusce condimentum dolor a arcu rhoncus, a sagittis purus pharetra. Cras fringilla nibh eget vulputate iaculis. Donec eu sapien tempor, pellentesque ex sed, malesuada neque.
+Mauris neque tortor, aliquam eget dictum vitae, rhoncus id nunc. Suspendisse aliquet placerat risus. Proin at maximus massa. Donec tortor odio, lobortis ac sodales et, placerat sit amet ipsum. Ut a semper velit. Duis nec nisl vel est finibus lobortis a et neque. Ut ultricies facilisis sodales. Donec vestibulum, urna et accumsan blandit, libero odio aliquet nulla, lobortis eleifend massa lectus vel felis. Suspendisse feugiat sollicitudin faucibus. Sed et mi elit.
+Aliquam tincidunt lectus nec auctor venenatis. Fusce accumsan nunc nec dolor lobortis, ac interdum lacus aliquet. Aenean rhoncus nibh augue, sagittis placerat purus porta id. Pellentesque suscipit iaculis eros ac rutrum. Suspendisse faucibus eleifend mattis. Nunc in faucibus nunc. Duis ultrices ultricies massa. Quisque efficitur nibh leo, eget euismod orci gravida quis. Nam dolor ligula, gravida vel risus at, finibus scelerisque quam. Nulla bibendum dapibus lorem, a aliquet nulla consequat non. Maecenas elementum, odio at fringilla dapibus, dui nulla mattis lacus, vitae imperdiet nunc ex et sem. Proin eleifend, sapien vel aliquet consectetur, dui diam consequat erat, ut ornare nisi nunc sed orci.
+Fusce tristique velit vel eros dapibus, ut malesuada eros euismod. Morbi tristique quam lectus, non efficitur eros bibendum in. Quisque non ex in nunc condimentum hendrerit porta a eros. Pellentesque sodales erat eget efficitur porta. Sed nisi mi, vulputate in arcu ut, bibendum posuere libero. Curabitur et urna vehicula, venenatis est pretium, laoreet nisl. Curabitur eget urna faucibus, pharetra nunc quis, fermentum purus. Aliquam erat volutpat. Phasellus rhoncus dapibus lacus, eu accumsan ipsum fringilla vel. Suspendisse pulvinar erat id risus aliquet sollicitudin. Phasellus vitae euismod augue. Sed eget commodo augue. Praesent congue vel odio in malesuada. Donec non tristique enim. Praesent gravida sem vel pretium dapibus.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut sem eget arcu placerat luctus. Donec interdum, tellus sed consequat elementum, massa sem condimentum leo, sit amet tempor eros diam eget libero. Vivamus eu erat justo. Maecenas imperdiet laoreet eleifend. Ut tellus nulla, vehicula sit amet est vel, euismod maximus magna. Ut eu ante nec nibh rutrum pretium ut volutpat leo. Aenean ac molestie lectus. Morbi massa tellus, molestie vitae enim at, venenatis tempus dui. Fusce condimentum dolor a arcu rhoncus, a sagittis purus pharetra. Cras fringilla nibh eget vulputate iaculis. Donec eu sapien tempor, pellentesque ex sed, malesuada neque.
+Nulla sit amet sem tincidunt, bibendum ex vitae, varius turpis. Curabitur ac faucibus est. Proin dignissim erat lacus, mollis viverra mi pretium et. Etiam vel dapibus tellus. Aliquam posuere elementum nisl eget lacinia. Nulla id est egestas, ultrices arcu in, tincidunt nibh. Phasellus eget dolor a urna venenatis porta.
+Nulla pulvinar dapibus hendrerit. Praesent commodo lacus quis arcu aliquet ultrices. Donec et mattis purus, vel convallis odio. Maecenas vulputate erat lacus, et sodales ex congue sit amet. Mauris neque tortor, aliquam eget dictum vitae, rhoncus id nunc. Suspendisse aliquet placerat risus. Proin at maximus massa. Donec tortor odio, lobortis ac sodales et, placerat sit amet ipsum. Ut a semper velit. Duis nec nisl vel est finibus lobortis a et neque. Ut ultricies facilisis sodales. Donec vestibulum, urna et accumsan blandit, libero odio aliquet nulla, lobortis eleifend massa lectus vel felis. Suspendisse feugiat sollicitudin faucibus. Sed et mi elit.
+Aliquam tincidunt lectus nec auctor venenatis. Fusce accumsan nunc nec dolor lobortis, ac interdum lacus aliquet. Aenean rhoncus nibh augue, sagittis placerat purus porta id. Pellentesque suscipit iaculis eros ac rutrum. Suspendisse faucibus eleifend mattis. Nunc in faucibus nunc. Duis ultrices ultricies massa. Quisque efficitur nibh leo, eget euismod orci gravida quis. Nam dolor ligula, gravida vel risus at, finibus scelerisque quam. Nulla bibendum dapibus lorem, a aliquet nulla consequat non. Maecenas elementum, odio at fringilla dapibus, dui nulla mattis lacus, vitae imperdiet nunc ex et sem. Proin eleifend, sapien vel aliquet consectetur, dui diam consequat erat, ut ornare nisi nunc sed orci.
+Fusce tristique velit vel eros dapibus, ut malesuada eros euismod. Morbi tristique quam lectus, non efficitur eros bibendum in. Quisque non ex in nunc condimentum hendrerit porta a eros. Pellentesque sodales erat eget efficitur porta. Sed nisi mi, vulputate in arcu ut, bibendum posuere libero. Curabitur et urna vehicula, venenatis est pretium, laoreet nisl. Curabitur eget urna faucibus, pharetra nunc quis, fermentum purus. Aliquam erat volutpat. Phasellus rhoncus dapibus lacus, eu accumsan ipsum fringilla vel. Suspendisse pulvinar erat id risus aliquet sollicitudin. Phasellus vitae euismod augue. Sed eget commodo augue. Praesent congue vel odio in malesuada. Donec non tristique enim. Praesent gravida sem vel pretium dapibus.`;

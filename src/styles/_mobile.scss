@@ -1,0 +1,904 @@
+@use "./shared.scss" as *;
+
+@include bp(mobile) {
+  //=================
+  //  GLOBAL STYLES
+  //=================
+  html {
+    font-size: 16px;
+  }
+  h2,
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
+  h5 {
+    font-size: 1.05rem;
+  }
+  p {
+    margin-top: 0.5rem;
+  }
+  // GPU acceleration hints for smooth mobile transitions
+  .page-content {
+    will-change: opacity;
+    transform: translateZ(0);
+  }
+  .page {
+    .hero {
+      background-color: $aqua;
+      height: $hero-height-mobile;
+    }
+    .hero-content {
+      padding: 5rem 1rem 1rem;
+      width: calc(100% - 2rem);
+    }
+    .page-content {
+      padding: 1rem;
+      width: calc(100% - 2rem);
+    }
+  }
+}
+
+// ============================
+//   VERY SMALL MOBILE SCREENS
+// ============================
+@include bp(bp-tiny) {
+  html {
+    font-size: 14px;
+  }
+}
+
+//===============
+//  MENU STYLES
+//===============
+@include bp(mobile) {
+  #Menu {
+    #Navbar {
+      padding: 1rem;
+      width: calc(100% - 2rem);
+      button#ContactButton {
+        display: none;
+      }
+    }
+    #NavbarActions {
+      gap: 1rem;
+    }
+    #MenuContent {
+      .items {
+        .items-main {
+          @include flex(column, 1rem);
+          margin-bottom: 3rem;
+          padding-bottom: 3rem;
+          gap: 1.5rem;
+          button {
+            border: none;
+            color: $dark-2;
+            font-size: 2.5rem;
+          }
+        }
+      }
+      #soundButton,
+      #themeButton {
+        display: none;
+      }
+      .subtext {
+        display: none;
+      }
+      .subItems {
+        @include flex(column, 1.5rem);
+        &.open {
+          top: 0;
+        }
+      }
+    }
+    &.closed {
+      #NavbarSocials {
+        display: none;
+      }
+    }
+  }
+}
+
+//=========================
+// MOBILE TYPEWRITER STYLES
+//=========================
+@include bp(mobile) {
+  #RoomContainer {
+    background: $dark;
+  }
+
+  // Desk styles
+  #Desk {
+    width: 1000px;
+  }
+  #Desk-surface {
+    width: 1100px;
+  }
+  #Desk-surface-container {
+    perspective: 1000px;
+    width: 1000px;
+  }
+
+  #Desk {
+    transform: scale(0.6);
+    #Typewriter {
+      &.mobile-contact {
+        bottom: 25px !important;
+      }
+      #SendMessageDialog {
+        align-items: center;
+        bottom: 0;
+        height: auto;
+        position: absolute;
+        transform: scale(calc(1 / 0.6));
+        opacity: 1;
+        transition: opacity 125ms;
+        width: 100%;
+        z-index: 10;
+
+        input {
+          width: auto;
+        }
+
+        // TODO: this is a bit fucked. On mobile, there may be TWO of these divs.
+        // Either way, it's rendered OUTSIDE of the #Desk, so these don't apply.
+        // &.hidden {
+        // height: 0px !important;
+        // }
+
+        &.is-typing {
+          transition: opacity 500ms;
+          opacity: 0.5;
+        }
+
+        .actions {
+          width: calc(100% + 1rem);
+        }
+
+        .form-btn {
+          background-color: $light;
+          color: $dark;
+          padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+          font-size: 1.2rem;
+          svg {
+            margin: 0;
+          }
+        }
+
+        // height: 80px;
+        .content {
+          flex-grow: 1;
+          // padding: 0;
+          // flex-direction: row;
+          flex-direction: column;
+          justify-content: center;
+          height: auto;
+          padding: 0.5rem 0;
+        }
+
+        .inline-form {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+        }
+      }
+    }
+  }
+  // Typewriter style overrides
+  #Typewriter {
+    bottom: -50px !important;
+    z-index: 2;
+    #hammer {
+      display: none;
+    }
+    #Paper {
+      height: calc(var(--paper-height) * 2);
+      right: calc(var(--paper-right) + 90px);
+      top: calc(var(--paper-top) - 50px);
+
+      padding: 20px 15px 0;
+      width: 340px;
+
+      .row {
+        height: 20px;
+      }
+    }
+    .char {
+      font-size: 20px;
+      height: 20px;
+      width: 10px;
+    }
+  }
+  #CandlesLeft {
+    right: -50px;
+  }
+  #CandlesRight {
+    left: -50px;
+    z-index: 1;
+  }
+  #ActionButtonContainer {
+    display: none;
+  }
+  #MobileHomeContent {
+    border-top: 4px solid $dark;
+    background: linear-gradient(to bottom, $dark-1 0%, $dark 80%);
+    display: flex;
+    color: $light;
+    // max-height: 40vh;
+    width: 100%;
+    z-index: 2;
+
+    .content {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      @include slideUpAnimationsHome(500ms);
+      padding: 1rem 4rem 2rem;
+      width: 100%;
+    }
+  }
+  .action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+    }
+  }
+  .btn.mobile-btn {
+    background: $light;
+    color: $dark;
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+    width: 220px;
+    svg {
+      margin-left: 1rem;
+    }
+  }
+  h3 {
+    margin-bottom: 0;
+  }
+  p {
+    color: $light;
+    margin-bottom: 1rem;
+    line-height: 1.25rem;
+    max-width: 250px;
+    text-align: center;
+  }
+}
+
+@include bp(mobile) {
+  .simple-keyboard.typewriter .hg-button.active {
+    // TODO: subtler
+    background: $mint !important;
+  }
+}
+
+//
+// OVERWRITE DRAWERS (this is sorta fucked)
+// On mobile, the dialog is OUTSIDE of the container
+//
+#SendMessageDialog {
+  &.hidden {
+    height: 0;
+  }
+}
+
+//
+// MOBILE CODE STYLES
+//
+@include bp(mobile) {
+  #Code {
+    max-height: calc(100vh - $hero-height-mobile);
+    .page-content {
+      max-height: calc(100vh - $hero-height-mobile);
+    }
+    .repo-link {
+      display: none !important;
+    }
+    #CodeBrowser {
+      overflow: scroll;
+    }
+    #FileViewer {
+      .loading-bar-root {
+        top: 0;
+      }
+    }
+    #FileViewerActions {
+      // display: none;
+      // TODO - this is close
+      // top: unset;
+      // bottom: 0;
+      // justify-content: flex-end;
+      // border-radius: 0.5rem 0 0 0;
+      border: none;
+      border-bottom: 2px solid $dark-4;
+      border-top: 2px solid $dark-4;
+      // width: fit-content;
+      button {
+        height: 20px;
+      }
+      // This goes in the HERO.
+      .filename {
+        padding-left: 12px;
+        overflow: hidden;
+        white-space: nowrap;
+        h3 {
+          font-size: 0.7rem;
+        }
+        // display: none;
+      }
+      .controls {
+        display: none;
+        // border-radius: 0.5rem 0 0 0;
+      }
+      // .control {
+      //   gap: 1rem;
+      //   border-bottom: none;
+      //   border: none;
+      //   border-radius: 0.5rem 0 0 0;
+      // }
+      // .control:first-of-type {
+      //   display: none;
+      // }
+      // .control:last-of-type {
+      //   display: none;
+      // }
+    }
+
+    $tree-pad: 0.5rem;
+    $collapsed-width: 20px;
+    $expanded-width: calc(100vw - $collapsed-width - calc($tree_pad * 2));
+    // $expanded-width: min(
+    // calc(100vw - $collapsed-width - calc($tree_pad * 2)),
+    // 400px
+    // );
+
+    #FileText {
+      font-size: 8px !important;
+      padding-top: 25px;
+      * {
+        font-size: 8px !important;
+      }
+    }
+    #FileBrowser {
+      border-right: 2px solid $dark-4;
+      flex-grow: 0;
+      padding: 0.5rem;
+      &.collapsed {
+        width: $collapsed-width;
+        min-width: $collapsed-width;
+        max-width: $collapsed-width;
+        // transition: max-width 250ms;
+      }
+      &.expanded {
+        flex-shrink: 0;
+        max-width: $expanded-width;
+        min-width: $expanded-width;
+        width: $expanded-width;
+        // transition: width 250ms;
+      }
+    }
+    #ExpandCollapseTree {
+      background: $dark-4;
+      border: none;
+      border-radius: 2rem 0 0 2rem;
+      display: inline-block;
+      font-size: 1.25rem;
+      padding-left: 2px;
+      height: 30px;
+      position: absolute;
+      right: 0px;
+      top: calc(50% - 15px);
+      width: 28px;
+      z-index: 10;
+      svg {
+        color: $light;
+      }
+    }
+    #FileViewer {
+      code {
+        white-space: inherit !important;
+      }
+    }
+  }
+}
+
+@include bp(mobile) {
+  #About {
+    .hero {
+      height: 30vh;
+    }
+    .hero-content {
+      align-items: flex-end;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 0.5rem 0.5rem;
+      h1 {
+        margin: 0;
+      }
+    }
+    .social-icon svg.goto {
+      display: none;
+    }
+    .action-row {
+      flex-direction: column;
+    }
+  }
+}
+
+//
+//
+//
+//
+//
+//  OLD
+//  OLD
+//  OLD
+//  OLD
+//  OLD
+//  OLD
+//  OLD
+//  OLD
+//
+//
+//
+//
+//
+// MOBILE-SPECIFIC styles.
+//
+// These will OVERRIDE component-level style rules (if duped).
+//
+// Some project use mobile-first design - not this one 	¯\_( ͡° ͜ʖ ͡°)_/¯
+//
+/*
+// iOS Safari viewport fix - only for 100vh issues
+@supports (-webkit-touch-callout: none) {
+  //  iOS-specific styles to prevent viewport issues with 100vh
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+#Mobile {
+  width: 100vw;
+  height: 100vh;
+  background-color: #5b5b5b;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#MobileContent {
+  width: 100vw;
+  height: 400vh; //4 sections × 100vh each
+  box-sizing: border-box;
+  overflow: hidden;
+  position: absolute;
+  top: -100vh; // Default to show Home section (which is now second)
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: Copperplate;
+  color: $light;
+  line-height: 1;
+  align-items: center;
+  justify-content: flex-start;
+  transition: top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#MobileContent.section-contact {
+  top: 0; //  Contact is first - scroll UP to reach it
+}
+
+#MobileContent.section-home {
+  top: -100vh; //  Home is second - this is the default view
+}
+
+#MobileContent.section-code {
+  top: -200vh; //  Code is third - scroll DOWN to reach it
+}
+
+#MobileContent.section-about {
+  top: -300vh; //  About is fourth - scroll DOWN to reach it
+}
+
+#MobileContent section {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  flex-shrink: 0; //  Prevent sections from shrinking
+}
+
+#MobileHome {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  background-color: #5b5b5b; //  Temporarily make it visible
+  justify-content: center;
+  align-items: center;
+}
+#MobileCode {
+  width: 100vw;
+  position: relative;
+}
+#MobileAbout {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+#MobileContact {
+  position: relative;
+}
+
+#MobileOptions {
+  min-height: 200px;
+}
+
+#Mobile .options {
+  gap: 1vh;
+  align-items: center;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: 0;
+  right: 0;
+}
+
+#Mobile .option-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 200px;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+//  Fade in animation
+@keyframes fadeInOption {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+//  When show-options class is added, trigger staggered animations
+#Mobile .options.show-options .option-container:nth-child(1) {
+  animation: fadeInOption 0.5s ease-in-out 0.25s forwards;
+}
+
+#Mobile .options.show-options .option-container:nth-child(2) {
+  animation: fadeInOption 0.5s ease-in-out 1s forwards;
+}
+
+#Mobile .options.show-options .option-container:nth-child(3) {
+  animation: fadeInOption 0.5s ease-in-out 1.75s forwards;
+}
+
+#Mobile .option {
+  font-weight: 400;
+  font-size: 6vw;
+  position: relative;
+  width: fit-content;
+  letter-spacing: -0.5px;
+  font-family: Courier;
+}
+
+#Mobile .option-container svg {
+  font-size: 6vw;
+}
+
+#MobileTypewriterContainer {
+  display: block;
+  position: relative;
+  height: 66vh;
+}
+
+#MobileTypewriterContainer #Typewriter {
+  bottom: 0;
+  transform: scaleX(0.6) scaleY(0.65);
+}
+
+#MobileTypewriterContainer #hammer {
+  display: none !important;
+}
+
+.GoHome {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  background: #111;
+  height: 30px;
+  font-size: 20px;
+}
+.GoHome svg {
+  font-size: 16px;
+}
+.GoHomeContact {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+//  Match the code bg color to prevent weird scroll appearance
+#MobileCode #FileViewer {
+  background-color: rgb(34, 34, 34);
+}
+#MobileCode #FileViewer span {
+  font-size: 8px;
+}
+
+#MobileCode #FileBrowser,
+#MobileCode #FileViewer {
+  transition: height 250ms ease-in-out;
+}
+
+#MobileCode #FileBrowser {
+  overflow: scroll;
+  position: relative;
+}
+#MobileCode .css-jb19z1 {
+  border-radius: 0; //  YUCK! sorry you have to see this...
+}
+#MobileCode #FileBrowser .MuiTreeItem-label {
+  font-size: 12px;
+}
+
+#MobileCode #Filename {
+  color: black;
+  font-family: Courier;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+}
+
+#MobileCode #FileInfoContainer {
+  height: 22px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  transition: all 250ms ease-in-out;
+  width: 100vw;
+  background-color: $light;
+  border-bottom: 2px solid #222;
+  border-top: 2px solid #222;
+}
+
+#MobileCode #FileTreeExpandContainer {
+  background: black;
+  border: 2px solid #222;
+  right: -2px;
+  border-radius: 40px 0 0 40px;
+  padding: 0 0 0 10px;
+  position: absolute;
+  height: 30px;
+  top: -5px;
+  transition: width 250ms ease-in-out;
+}
+
+#MobileCode #FileTreeExpand {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 1px;
+  padding: 6px 0px 6px 9px;
+  font-size: 17px;
+}
+#MobileCode #FileTreeExpand svg {
+  position: relative;
+  height: 10px;
+  top: 1px;
+}
+
+#MobileCode code {
+  white-space: pre !important;
+}
+
+//  MOBILE CODE POSITIONING: FILETREE COLLAPSED
+#MobileCode #FileBrowser {
+  height: calc(20vh - 14px);
+}
+#MobileCode #FileTreeExpandContainer {
+  width: 92px;
+}
+#MobileCode #FileViewer {
+  height: calc(80vh - 28px - 14px);
+}
+
+//  MOBILE CODE POSITIONING: FILETREE EXPANDED
+#MobileCode.expanded #FileBrowser {
+  height: calc(65vh - 14px);
+}
+#MobileCode.expanded #FileTreeExpandContainer {
+  width: 110px;
+}
+#MobileCode.expanded #FileViewer {
+  height: calc(35vh - 28px - 14px);
+}
+
+//  ============
+//  ABOUT STYLES
+//  ============
+#MobileAboutContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: $light;
+  color: black;
+  scrollbar-width: thin;
+  scrollbar-color: $light transparent;
+}
+
+//  Webkit scrollbar styling
+#MobileAboutContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+#MobileAboutContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#MobileAboutContent::-webkit-scrollbar-thumb {
+  background-color: $light;
+  border-radius: 3px;
+  opacity: 0.7;
+}
+
+#MobileAboutContent::-webkit-scrollbar-thumb:hover {
+  background-color: #ffefd5;
+}
+
+#MobileContactContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 25px;
+  text-align: center;
+  gap: 10px;
+  min-height: 100vh;
+}
+#MobileContactContent h1 {
+  padding-top: 50px;
+}
+#MobileContactForm {
+  text-align: left;
+  width: 80vw;
+}
+#MobileContact .contact-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+#MobileContact label {
+  font-size: 16px;
+  font-weight: 500;
+  color: $light;
+  font-family: Courier;
+}
+#MobileContact input,
+#MobileContact textarea {
+  background-color: black;
+  color: $light;
+  border: 2px solid $light;
+  border-radius: 8px;
+  font-size: 16px; //  Minimum 16px to prevent iOS auto-zoom
+  padding: 10px 15px;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  pointer-events: auto;
+  outline: none;
+  //  iOS zoom and viewport prevention
+  -webkit-text-size-adjust: 100%;
+  transform: scale(1);
+  zoom: 1;
+  //  Prevent viewport changes on focus
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#MobileContact input:focus {
+  border-color: white;
+  box-shadow: 0 0 0 2px rgba(255, 239, 213, 0.3);
+}
+#MobileContact .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#MobileContact button {
+  padding: 8px 30px;
+  border-radius: 20px;
+  font-family: Copperplate;
+  font-size: 18px;
+}
+#MobileContact button#SubmitContactForm {
+  background-color: black;
+  color: $light;
+  border: 2px solid black;
+}
+#MobileContact button#Bail {
+  background-color: inherit;
+  border: 2px solid $light;
+  color: $light;
+}
+
+#MobileContact .error-message {
+  background-color: #f44336;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-family: Courier;
+  font-size: 14px;
+  text-align: center;
+}
+
+//  Disabled state for form elements
+#MobileContact input:disabled,
+#MobileContact textarea:disabled,
+#MobileContact button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#MobileContent h1 {
+  font-size: 12vw;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  text-align: center;
+}
+#MobileContent p#MyNameIs {
+  font-size: 6.5vw;
+  margin-top: 0;
+  margin-bottom: 6vw;
+  text-align: center;
+  text-indent: 0px;
+}
+#MobileContent #Ian {
+  font-size: 14vw;
+  font-family: Copperplate;
+  font-weight: 600;
+  margin: 0;
+}
+#MobileContent p {
+  font-family: Courier;
+  font-size: 4vw;
+  margin: 0 0 2vw;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  text-indent: 28px;
+}
+#MobileContent .about p:first-of-type {
+  text-indent: 0;
+}
+#MobileContent .about-heading {
+  margin-top: 20px;
+}
+#MobileContent li {
+  font-family: Courier;
+}
+*/

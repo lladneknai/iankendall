@@ -1,0 +1,116 @@
+@use "sass:color";
+@use "./fonts" as *;
+
+//
+// FONTS
+//
+$serif: Gabriela, Georgia, serif;
+$sans-serif: Archivo, Arial, sans-serif;
+$mono: Fantasque Sans Mono, monospace;
+
+//
+// PRIMARY LIGHT | increments => darker
+//
+$light: #ffefd5;
+$light-1: color.adjust($light, $alpha: -0.1);
+$light-2: color.adjust($light, $alpha: -0.2);
+$light-3: color.adjust($light, $alpha: -0.3);
+$light-4: color.adjust($light, $alpha: -0.4);
+$light-5: color.adjust($light, $alpha: -0.5);
+$light-transparent: color.adjust($light, $alpha: -0.0666);
+
+//
+// PRIMARY DARK | increments => lighter
+//
+$dark: #1c1d21;
+$dark-1: color.adjust($dark, $lightness: 2.5%);
+$dark-2: color.adjust($dark, $lightness: 5%);
+$dark-3: color.adjust($dark, $lightness: 7.5%);
+$dark-4: color.adjust($dark, $lightness: 10%);
+$dark-transparent: color.adjust($dark, $alpha: -0.0666);
+$dark-transparent-1: color.adjust($dark, $alpha: -0.75);
+$dark-transparent-2: color.adjust($dark, $alpha: -0.5);
+$dark-transparent-3: color.adjust($dark, $alpha: -0.25);
+
+//
+// ROOM BACKGROUND COLORS
+//
+$bg-1: color.adjust($dark, $lightness: 12%);
+$bg-2: color.adjust($dark, $lightness: 20%);
+$bg-3: color.adjust($dark, $lightness: 28%);
+$bg-4: color.adjust($dark, $lightness: 35%);
+
+//
+// MISC GLOBO COLORS
+//
+$desk-color: color.adjust($light, $lightness: -83%);
+// $desk-color: #463122; // OG
+$typewriter-body: $dark;
+$typewriter-body-dark: color.adjust($dark, $lightness: -9%);
+$typewriter-key-bg: $dark-1;
+$typewriter-key-letter: color.adjust($light, $lightness: 6%);
+$typewriter-key-border: color.adjust($typewriter-key-letter, $alpha: -0.4);
+$typewriter-space-border: color.adjust($typewriter-key-letter, $alpha: -0.7);
+
+//
+// TRANSITION CONFIG
+//
+$drawer-transition-speed: 500ms;
+$drawer-transition-height: 5rem;
+
+//
+// ACEENT COLORS | increments => brighter
+//
+$lavendar: #b0a3d4;
+$lavendar-1: color.adjust($lavendar, $lightness: 15%);
+$lavendar-2: color.adjust($lavendar, $lightness: 30%);
+
+$indigo: #7d80da;
+$indigo-1: color.adjust($indigo, $lightness: 10%);
+$indigo-2: color.adjust($indigo, $lightness: 20%);
+
+$aqua: #5bc0be;
+$aqua-1: color.adjust($aqua, $lightness: 30%);
+$aqua-2: color.adjust($aqua, $lightness: 40%);
+
+$coral: #fc7753;
+$sienna: #d57a66;
+$blush: #ca6680;
+$garnet: #9a2a2a;
+$tuscan: #7c3030;
+
+$mint: #63a375;
+$washedblue: #7c9eb2;
+
+//
+// SCREEN SIZES
+//
+//
+// BREAKPOINTS
+//
+$max-width-tiny: 375px;
+$min-width-mobile: $max-width-tiny + 1;
+
+$max-width-mobile: 768px;
+$min-width-tablet: $max-width-mobile + 1;
+
+$max-width-tablet: 1024px;
+$min-width-desktop: $max-width-tablet + 1;
+
+$max-width-desktop: 1439px;
+$min-width-xl: $max-width-desktop + 1;
+
+$max-width-xl: 1920px;
+$min-width-2xl: $max-width-xl + 1;
+
+$max-width-2xl: 2400px;
+$min-width-3xl: $max-width-2xl + 1;
+
+$max-width-3xl: 3000px;
+
+//
+// HERO HEIGHTS
+// Need these for offsets
+//
+$hero-height-desktop: 225px;
+$hero-height-mobile: 185px;

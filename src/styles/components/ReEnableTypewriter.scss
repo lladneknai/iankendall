@@ -1,0 +1,77 @@
+@use "../shared.scss" as *;
+
+#ReEnableTypewriterDialog {
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    #0000 0%,
+    $dark-transparent-1 10%,
+    $dark-transparent 50%,
+    $dark 100%
+  );
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 80vh;
+  justify-content: center;
+  opacity: 1;
+  margin-top: 20vh;
+  position: absolute;
+  transition: opacity 125ms ease, z-index 0ms ease;
+  transition-delay: 500ms, 500ms;
+  width: 100vw;
+  z-index: 0;
+
+  &.hidden {
+    opacity: 0;
+    transition: opacity 125ms ease, z-index 0ms ease;
+    transition-delay: 0ms, 125ms;
+    z-index: -100;
+  }
+
+  h1 {
+    color: $light;
+    margin: 0;
+  }
+
+  p {
+    color: $light;
+    font-family: $sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.025rem;
+    margin-bottom: 0.5rem;
+  }
+
+  button {
+    background: $dark-transparent-2;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    @include alpha-prop(border-color, $light, -0.75);
+    color: $light;
+    font-size: 2rem;
+    transition: all 125ms ease;
+    padding: 0.75rem 2.5rem;
+    width: fit-content;
+    &:not(:disabled) {
+      background-color: $dark-1;
+      color: $light;
+      cursor: pointer;
+      &:focus,
+      &:focus-within {
+        background-color: $dark-2;
+        @include alpha-prop(border-color, $sienna, -0.25);
+        outline: none;
+      }
+      &:hover {
+        @include alpha-prop(border-color, $sienna, -0.1);
+      }
+    }
+    &:disabled {
+      @include alpha-prop(color, $light, -0.9);
+      @include alpha-prop(background-color, $dark, -0.75);
+      @include alpha-prop(border-color, $light, -0.9);
+    }
+  }
+}

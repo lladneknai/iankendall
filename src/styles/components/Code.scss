@@ -1,0 +1,391 @@
+@use "../shared.scss" as *;
+
+//
+// CODE PAGE STYLES
+//
+$window-height: 500px;
+$window-header-height: 32px;
+$windowed-browser-width: 275px;
+$window-height-inner: $window-height - $window-header-height;
+
+#Code {
+  background-color: $dark-2;
+  .hero {
+    background-blend-mode: multiply;
+    @include alpha-prop(background-color, $dark, -0.33);
+    background-image: url(/img/bg/code.jpg);
+  }
+  .page-content {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    max-height: calc(100vh - $hero-height-desktop);
+  }
+}
+
+//
+// CODE BROWSER  styles
+//
+#CodeBrowser {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  .MuiDialog-container {
+    width: 100%;
+  }
+
+  #FileBrowser {
+    background: $dark-2;
+    border: 2px $dark-4;
+    color: $light;
+    max-width: 350px;
+    overflow: scroll;
+    padding: 0.75rem 0 0.75rem 1rem;
+    position: relative;
+    width: 300px;
+    h4 {
+      font-size: 1.1rem;
+      margin-left: 7px;
+      @include lighten($mint, 25%);
+    }
+    .repo-link {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      svg {
+        color: $light;
+        margin-left: 10px;
+      }
+      &:visited {
+        @include lighten($mint, 20%);
+      }
+      &:hover {
+        h4 {
+          @include lighten($mint, 30%);
+          text-decoration: underline;
+        }
+        svg {
+          @include lighten($light, 5%);
+        }
+      }
+      .goto {
+        font-size: 0.75rem;
+        position: relative;
+        top: -2px;
+        margin-left: 5px;
+      }
+    }
+    .MuiTreeItem-label {
+      font-size: 0.9rem;
+      font-family: $sans-serif;
+    }
+    .MuiTreeItem-iconContainer {
+      svg {
+        @include lighten($mint, 30%);
+      }
+    }
+    @include bp(non-mobile) {
+      #ExpandCollapseTree {
+        display: none;
+      }
+    }
+  }
+
+  #FileText {
+    display: flex;
+    background: $dark-2;
+    font-size: var(--code-font-size, 0.8rem) !important;
+    flex-grow: 1;
+    overflow: scroll;
+    padding-top: 45px;
+    & > span {
+      display: flex;
+      flex-grow: 1;
+    }
+    & > span > code {
+      flex-grow: 1;
+      line-height: 1.25 !important;
+      padding-left: 0 !important;
+    }
+  }
+
+  #FileViewer {
+    border-left: 2px solid $dark-4;
+    display: flex;
+    flex-grow: 1;
+    font-family: $mono;
+    font-size: var(--code-font-size, 0.8rem);
+    overflow-x: hidden;
+    position: relative;
+    .loading-bar-root {
+      position: absolute;
+      top: 45px;
+    }
+  }
+
+  #FileViewerActions {
+    align-items: center;
+    background: $dark;
+    border-bottom: 2px solid $dark-4;
+    border-top: 2px solid $dark-4;
+    color: $light;
+    display: flex;
+    font-family: $serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    .filename {
+      overflow: hidden;
+      padding: 12px 0;
+      white-space: nowrap;
+      h3 {
+        color: $light;
+        font-size: 0.9rem;
+        margin: 0 0 0 16px;
+        width: 100%;
+      }
+    }
+    .controls {
+      border-radius: 0 0 0 0.5rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .control {
+      height: 1.5rem;
+      @include flex(row, 0.5rem);
+      align-items: center;
+      border-left: 2px solid $dark-4;
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      white-space: nowrap;
+    }
+    button {
+      border: 0;
+      border-radius: 1.25rem;
+      background: $light-2;
+      padding: 0;
+      color: $dark;
+      cursor: pointer;
+      height: 23px;
+      transition: background-color 125ms;
+      &:hover {
+        background: $light;
+      }
+      &.goto-window {
+        background-color: $dark;
+        color: $light;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        padding-top: 3px;
+        font-size: 0.75rem;
+        &:hover {
+          text-decoration: underline;
+        }
+        svg {
+          color: $light;
+          padding-top: 1px;
+        }
+      }
+    }
+    select {
+      background: $dark;
+      border: 1.5px solid $light-2;
+      border-radius: 1rem;
+      color: $light;
+      cursor: pointer;
+      font-family: $serif;
+      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+      font-size: 0.8rem;
+      transition: border-color 125ms;
+      &:hover,
+      &:focus,
+      &:focus-within {
+        border-color: $light;
+      }
+    }
+  }
+
+  @include bp(non-xl) {
+    #FileViewer {
+      .loading-bar-root {
+        top: 31px;
+      }
+    }
+    #FileViewerActions {
+      flex-direction: column;
+      align-items: flex-start;
+      .filename {
+        background: $dark;
+        overflow: hidden;
+        padding: 0;
+        width: 100%;
+        h3 {
+          margin: 4px 0 4px 16px;
+          font-size: 0.9rem;
+        }
+      }
+      .controls {
+        border-top: 2px solid $dark-4;
+        border-radius: 0;
+        justify-content: flex-start;
+        width: 100%;
+        .control {
+          border-bottom: none;
+          &:first-of-type {
+            border-left: none;
+          }
+        }
+      }
+    }
+    #FileText {
+      padding-top: 78px;
+    }
+  }
+
+  &.window {
+    // FUCK THESE:
+    // height: $window-height-inner;
+    // max-height: $window-height-inner;
+    min-height: $window-height-inner;
+    .MuiPaper-root {
+      border-radius: 0.75rem;
+    }
+    #FileBrowser {
+      border-radius: 0 0 0 0.7rem;
+      padding-left: 0.5rem;
+      max-width: $windowed-browser-width;
+      min-width: $windowed-browser-width;
+      width: $windowed-browser-width;
+    }
+    #FileViewer {
+      border-radius: 0 0 0.7rem 0;
+    }
+    #FileText {
+      padding-top: 0;
+      // max-height: $window-height-inner;
+      & > span {
+        min-height: $window-height-inner;
+      }
+    }
+    #FileViewerActions {
+      bottom: 0;
+      top: unset;
+      width: fit-content;
+      border: 2px solid $dark-4;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 0.5rem 0 0.75rem 0;
+      padding-left: 0.5rem;
+      // justify-content: flex-end;
+      .controls {
+        border: none;
+        .control {
+          border: none;
+          padding-left: 0.25rem;
+        }
+        // hide the 'theme' select...
+        .control:first-of-type {
+          display: none;
+        }
+        .control:last-of-type {
+          border-radius: 0 0 0.75rem 0;
+        }
+      }
+    }
+  }
+}
+
+//
+// MAC FINDER WINDOW STYLES
+//
+#WindowHeader {
+  align-items: center;
+  background-color: $light;
+  border-radius: 0.75rem 0.75rem 0 0;
+  display: flex;
+  flex-direction: row;
+  height: $window-header-height;
+  min-height: $window-header-height;
+  max-height: $window-header-height;
+  padding-left: 0.5rem;
+  position: sticky;
+
+  .filename {
+    font-family: $sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    // padding-left: calc($windowed-browser-width - 15px); // acct for CODE PAD
+    width: 100%;
+  }
+  $btn-size: 0.85rem;
+
+  .window-buttons {
+    @include flex(row, 0.33rem);
+
+    button {
+      background: none;
+      border: none !important;
+      border-radius: $btn-size;
+      background: transparent;
+      cursor: pointer;
+      height: $btn-size;
+      outline: none !important;
+      padding: 0;
+      position: relative;
+      // the bg color of the button JUST leaks out by a quarter-pixel (...sigh), SO -
+      // instead of simply setting the bg on the button, we have to create a bg element JUST INSIDE IT
+      .icon-bg {
+        border-radius: $btn-size;
+        height: calc(100% - 2px);
+        left: 1px;
+        position: absolute;
+        top: 1px;
+        width: calc(100% - 2px);
+        z-index: 1;
+      }
+      .svg-inline--fa {
+        height: $btn-size;
+        position: relative;
+        vertical-align: 3px;
+        width: $btn-size;
+        z-index: 2;
+      }
+      &:first-of-type {
+        color: #ff605c;
+        .icon-bg {
+          background-color: #ff605c;
+        }
+      }
+      &:nth-of-type(2) {
+        color: #ffbd44;
+        .icon-bg {
+          background-color: #ffbd44;
+        }
+      }
+      &:nth-of-type(3) {
+        color: #00ca4e;
+        .icon-bg {
+          background-color: #00ca4e;
+        }
+      }
+      &:hover {
+        // filter: brightness(110%);
+        .icon-bg {
+          background: $dark;
+        }
+      }
+    }
+  }
+}

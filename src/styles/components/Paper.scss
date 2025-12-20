@@ -1,0 +1,96 @@
+@use "../shared.scss" as *;
+
+//
+// PAPER STYLES
+// Styles for the Paper component that comes up from the Typewriter.
+//
+#Paper {
+  align-content: flex-start;
+  background-color: $light;
+  background-image: url(/img/bg/paper.png);
+  background-repeat: repeat;
+  color: #111;
+  display: flex;
+  flex-flow: wrap;
+  font-family: Courier, American Typewriter, monospace;
+  font-size: 15px;
+  height: var(--paper-height, 100px);
+  letter-spacing: 0.05rem;
+  margin-left: 290px;
+  padding: 30px 20px;
+  position: absolute;
+  right: var(--paper-right, -40px);
+  top: var(--paper-top, -40px);
+  user-select: none;
+  width: 392px;
+  z-index: 0;
+
+  // Shared between paper and tips
+  @include paper-transitions;
+
+  .row {
+    display: flex;
+    height: 20px;
+    width: 100%;
+  }
+
+  .char {
+    text-align: center;
+    width: 8px;
+  }
+
+  .suggestion {
+    color: #999;
+  }
+
+  &.viewonly {
+    background-color: antiquewhite;
+  }
+
+  &.mobile {
+    font-size: 22px;
+    padding-left: 30px;
+    width: 475px;
+
+    .char {
+      width: 13px;
+    }
+  }
+}
+
+/* 
+
+NOT CURRENTLY IN USE
+
+#PaperContainer {
+  height: 300px;
+  overflow: visible;
+  position: relative;
+}
+
+#Envelope {
+  padding-top: 40px;
+
+  .row {
+    align-items: flex-end;
+    display: flex;
+    height: 40px;
+    width: 340px;
+  }
+
+  .row-label {
+    font-family: Copperplate;
+    font-size: 18px;
+    margin-right: 10px;
+    text-align: right;
+    width: 70px;
+  }
+
+  .row-container {
+    border-bottom: 2px solid black;
+    display: flex;
+    padding-left: 5px;
+    width: 240px;
+  }
+}
+*/

@@ -1,0 +1,604 @@
+@use "../shared.scss" as *;
+
+#Menu {
+  background-color: transparent;
+  display: flex;
+  font-family: $serif;
+  height: 0vh;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  //==========
+  //  NAVBAR
+  //==========
+  #Navbar {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    position: fixed;
+    transition: background-color 500ms ease;
+    width: calc(100% - 3rem);
+    z-index: 11;
+
+    #NavbarContent {
+      @include flex(row, 0);
+      justify-content: space-between;
+      max-width: 1920px;
+      width: 100%;
+    }
+
+    button {
+      align-items: center;
+      background: none;
+      border: 0;
+      color: $light;
+      cursor: pointer;
+      display: flex;
+      font-family: $serif;
+      font-size: 1.25rem;
+      padding: 0;
+      transition: color 250ms;
+
+      &#ContactButton.has-been-clicked {
+        cursor: default;
+        opacity: 0;
+        transition: opacity 500ms 100ms;
+      }
+
+      #ContactIcon {
+        font-size: 1rem;
+        position: relative;
+        top: 0;
+        right: 0;
+        transition: top 250ms, right 250ms;
+      }
+
+      @include bp(desktop) {
+        &:hover {
+          #ContactIcon {
+            top: -3px;
+            right: -2px;
+          }
+        }
+      }
+
+      @include bp(xl) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .action-icon {
+      font-size: 1.25rem;
+      margin-left: 5px;
+    }
+
+    // When scrolled past threshold
+    &.scrolled {
+      background-color: $dark-transparent;
+    }
+  }
+
+  #NavbarIan {
+    align-items: center;
+    display: flex;
+  }
+
+  #NavbarSocials {
+    align-items: center;
+    @include flex(row, 15px);
+    margin-left: 5px;
+    padding: 0 10px;
+
+    svg.goto {
+      opacity: 0;
+      height: 10px;
+      position: absolute;
+      left: 15px;
+      top: -7px;
+      transition: opacity 125ms;
+      transition-delay: 125ms;
+    }
+
+    .social-icon {
+      position: relative;
+
+      svg.social {
+        height: 20px;
+      }
+
+      &:hover svg.goto {
+        opacity: 1;
+      }
+    }
+  }
+
+  #NavbarActions {
+    @include flex(row, 2rem);
+  }
+
+  #NavbarMenuBtn {
+    @include flex(row, 8px);
+    align-items: center;
+    #NavbarMenuBtnText {
+      text-align: left;
+      width: 3.5rem;
+      @include bp(xl) {
+        width: 4.5rem;
+      }
+    }
+  }
+
+  $top-gap: 6px;
+  $top-offset: 5px;
+  $top-1: calc($top-offset);
+  $top-2: calc($top-offset + calc($top-gap * 1));
+  $top-3: calc($top-offset + calc($top-gap * 2));
+
+  $top-gap-xl: 7px;
+  $top-offset-xl: 5px;
+  $top-1-xl: calc($top-offset-xl);
+  $top-2-xl: calc($top-offset-xl + calc($top-gap-xl * 1));
+  $top-3-xl: calc($top-offset-xl + calc($top-gap-xl * 2));
+
+  #NavbarMenuIcon {
+    cursor: pointer;
+    display: flex;
+    height: 24px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+    width: 20px;
+    span {
+      background-color: $light;
+      border-radius: 2px;
+      display: block;
+      height: 2px;
+      left: 0;
+      opacity: 1;
+      position: absolute;
+      transform: rotate(0deg);
+      transition: 0.25s ease-in-out;
+      width: 100%;
+      &:nth-child(1) {
+        top: $top-1;
+      }
+      &:nth-child(2) {
+        top: $top-2;
+      }
+      &:nth-child(3) {
+        top: $top-3;
+      }
+      @include bp(xl) {
+        height: 3px;
+        &:nth-child(1) {
+          top: $top-1-xl;
+        }
+        &:nth-child(2) {
+          top: $top-2-xl;
+        }
+        &:nth-child(3) {
+          top: $top-3-xl;
+        }
+      }
+    }
+    &.open {
+      span {
+        background-color: $dark;
+        &:nth-child(1) {
+          top: $top-2;
+          -webkit-transform: rotate(135deg);
+          -moz-transform: rotate(135deg);
+          -o-transform: rotate(135deg);
+          transform: rotate(135deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+          left: -60px;
+        }
+        &:nth-child(3) {
+          top: $top-2;
+          -webkit-transform: rotate(-135deg);
+          -moz-transform: rotate(-135deg);
+          -o-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+
+  #NavbarMenuBtn:hover {
+    #NavbarMenuIcon:not(.open) {
+      span {
+        &:nth-child(1) {
+          top: calc($top-1 - 2px);
+        }
+        &:nth-child(3) {
+          top: calc($top-3 + 2px);
+        }
+      }
+      @include bp(xl) {
+        span {
+          &:nth-child(1) {
+            top: calc($top-1-xl - 2px);
+          }
+          &:nth-child(3) {
+            top: calc($top-3-xl + 2px);
+          }
+        }
+      }
+    }
+  }
+
+  &.closed {
+    #NavbarIan button {
+      color: $light;
+      transition: color 250ms;
+    }
+
+    #Navbar button:hover {
+      filter: brightness(110%);
+      transition: all 125ms;
+    }
+
+    #Navbar .action-icon {
+      margin-left: 5px;
+      width: 20px; // Displays empty after click
+    }
+
+    #NavbarSocials .social-icon {
+      color: $light;
+      opacity: 0;
+      transition: opacity 125ms;
+
+      &:hover {
+        filter: brightness(110%);
+        transition: filter 250ms;
+        transition-delay: 125ms;
+      }
+
+      &:nth-of-type(2) {
+        transition: opacity 250ms;
+        transition-delay: 0ms;
+      }
+
+      &:nth-of-type(1) {
+        transition: opacity 250ms;
+        transition-delay: 125ms;
+      }
+    }
+
+    #NavbarIan:hover #NavbarSocials .social-icon {
+      opacity: 1;
+      transition: opacity 250ms;
+
+      &:nth-of-type(2) {
+        transition-delay: 125ms;
+      }
+    }
+  }
+
+  &.open {
+    #Navbar button {
+      color: #333;
+
+      &:hover {
+        filter: brightness(0%);
+        transition: all 125ms;
+      }
+    }
+
+    #ContactButton {
+      display: none;
+    }
+
+    #NavbarSocials {
+      svg {
+        color: #333;
+      }
+
+      .social-icon {
+        opacity: 1;
+        transition: opacity 250ms, color 250ms;
+        transition-delay: 150ms;
+
+        &:nth-of-type(2) {
+          transition-delay: 300ms;
+        }
+
+        &:hover {
+          filter: brightness(0%);
+          transition: filter 125ms;
+        }
+      }
+    }
+  }
+
+  #ContactButtonFlightPath {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+
+  //=====================
+  //   OPEN MENU STYLES
+  //=====================
+  #MenuContentContainer {
+    background-color: $light;
+    background-image: url(/img/bg/paper.png); /* this is transparent */
+    background-repeat: repeat;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+
+  &.closed #MenuContentContainer {
+    height: 0;
+    transition: height 500ms, z-index 0ms 500ms, background-color 0ms 500ms,
+      background-image 0ms 500ms;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &.open #MenuContentContainer {
+    transition: height 500ms, width 500ms, z-index 0ms 0ms, background 0ms 0ms;
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  #MenuContent {
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    @include flex(column, 0);
+
+    .items {
+      .items-main {
+        @include flex(row, min(50px, 5vw));
+        justify-content: space-between;
+        margin-bottom: min(2rem, 10vh);
+        padding: 0 min(5vw, 50px) 2rem;
+        border-bottom: 2px solid #333;
+      }
+
+      button:not(.btn) {
+        background: none;
+        border: 0;
+        cursor: pointer;
+        font-family: $serif;
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 0.8;
+        padding: 0;
+        transition: color 250ms;
+
+        &.gray {
+          color: #3333;
+          transition: color 250ms;
+        }
+        &.strikethrough {
+          cursor: default;
+          text-decoration: line-through;
+        }
+      }
+    }
+
+    //================
+    //  MENU SUBTEXT
+    //================
+    .subtext-container {
+      max-width: 666px;
+      @include bp(non-desktop) {
+        max-width: 80vw;
+      }
+    }
+
+    .subtext {
+      font-size: 1.25rem;
+      height: 50px;
+      opacity: 0;
+      position: relative;
+      text-align: center;
+      transition: all 250ms;
+
+      &.closed {
+        opacity: 0;
+        top: 10px;
+        transition: opacity 100ms, top 100ms;
+        transition-delay: 125ms;
+      }
+
+      &.open {
+        opacity: 1;
+        top: 0;
+        transition: opacity 250ms, top 250ms;
+        transition-delay: 125ms;
+      }
+    }
+
+    .subtext-header {
+      align-items: center;
+      @include flex(row, 1rem);
+      font-size: 28px;
+      justify-content: flex-start;
+    }
+
+    .subtext-content {
+      font-size: 18px;
+      text-align: left;
+    }
+
+    //========================
+    //  2ND-LEVEL MENU ITEMS
+    //========================
+    .subItems {
+      @include flex(row, min(50px, 5vw));
+      position: relative;
+
+      &.closed {
+        opacity: 0;
+        top: 0;
+        transition: all 250ms;
+      }
+
+      &.open {
+        opacity: 1;
+        top: -44px;
+        transition: all 500ms;
+        transition-delay: 500ms;
+        padding: 0px 30px;
+      }
+
+      button:not(.btn) {
+        // button:not(.btn) {
+        background: none;
+        border: 0;
+        color: #3339;
+        cursor: pointer;
+        font-family: $sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.025rem;
+        line-height: 0.8;
+        text-transform: uppercase;
+        transition: color 125ms;
+
+        &:hover {
+          color: #333;
+          transition: color 250ms;
+        }
+      }
+    }
+    .subItem-detail {
+      @include slideUpAnimations;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      justify-content: center;
+      padding: 1.5rem 1rem 2rem;
+      position: absolute;
+      left: -1rem;
+      top: 1.25rem;
+      width: 100%;
+      input[type="checkbox"] {
+        margin-top: -3px;
+      }
+      button {
+        color: $dark-4;
+        border: 2px solid $dark-4;
+        font-size: 1.25rem;
+        padding: 0.25rem 0.75rem;
+        &:hover {
+          border-color: $dark-1;
+          color: $light;
+          // color: $dark-1;
+          // opacity: 0.9;
+          // @include alpha-prop(background-color, current, -0.5);
+        }
+        &.bg-light {
+          &:hover {
+            background: $dark-4;
+          }
+        }
+      }
+      label {
+        color: $dark-4;
+        cursor: pointer;
+        font-size: 1.1rem;
+        width: fit-content;
+      }
+      p {
+        color: #3339;
+        font-family: $sans-serif;
+        font-size: 0.9rem;
+        line-height: 1;
+        text-align: center;
+      }
+      p.theme-label {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  &.closed #MenuContent {
+    opacity: 0;
+    transition: opacity 250ms;
+  }
+
+  &.open #MenuContent {
+    opacity: 1;
+    transition: opacity 250ms;
+    transition-delay: 250ms;
+  }
+
+  //===============
+  //  MENU FOOTER
+  //===============
+  #MenuFooter {
+    @include flex(row, 10px);
+
+    align-items: center;
+    bottom: 0;
+    color: #3339;
+    font-size: 14px;
+    justify-content: center;
+    padding: 10px 0px;
+    position: absolute;
+    width: 100%;
+
+    img {
+      filter: grayscale(75%);
+      transition: filter 100ms;
+
+      &:hover {
+        filter: none;
+        transition: filter 100ms;
+      }
+    }
+  }
+
+  //===============
+  //  LIGHT THEME
+  //===============
+  &.closed.light {
+    #Navbar:not(.scrolled) {
+      button,
+      #NavbarIan button,
+      #NavbarSocials .social-icon {
+        color: $dark;
+      }
+      #NavbarMenuIcon span {
+        background-color: $dark;
+      }
+    }
+  }
+}
+
+//  #NavbarMenuIconOld {
+// .bar1,
+// .bar2,
+// .bar3 {
+// background-color: #333;
+// }
+// }
+// #NavbarMenuIconOld {
+// height: 22px;
+// @include flex(column, 4px);
+// justify-content: center;
+// transition: gap 125ms;
+// width: 17px;
+//
+// .bar1,
+// .bar2,
+// .bar3 {
+// height: 2px;
+// border-radius: 2px;
+// background-color: $light;
+// }
+// }

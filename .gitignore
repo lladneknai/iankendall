@@ -1,0 +1,14 @@
+_TODO.txt
+.ampt
+.ampt*rc
+.ampt/
+.env
+.vscode/
+.DS_Store
+data/
+node_modules/
+node_modules.amptrc
+public/sourcecode/
+public/mp3/src/
+src/config/typing-dev.ts
+static/

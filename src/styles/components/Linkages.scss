@@ -1,0 +1,316 @@
+/**
+ * KEYBOARD LINKAGE MECHANISM STYLES
+ * 
+ * Every ::after element has its own skew to connect to the corresponding key.
+ * These were calculated PROGRAMMATICALLY and then converted to pure CSS for performance.
+ * I like to keep clean sheets, so I separated this file to tuck away the litany of one-off style rules.
+ * 
+ */
+
+#Linkages {
+  display: flex;
+  position: absolute;
+  margin-top: -10px;
+  z-index: 0;
+  height: 210px;
+  width: 635px;
+}
+
+.linkage-mechanism {
+  transition: background-color 50ms;
+  background-color: #666;
+  height: 25px;
+  margin-left: 9px;
+  width: 3px;
+
+  &,
+  &::after {
+    background-color: #333;
+  }
+
+  &.active {
+    &,
+    &::after {
+      background-color: #666;
+    }
+  }
+
+  /* ::AFTER STYLES accomplish the "bend" in the linkage. */
+  &::after {
+    content: "";
+    display: block;
+    position: relative;
+    transform-origin: top center;
+    width: 3px;
+  }
+
+  &:first-of-type {
+    margin-left: 65px;
+  }
+
+  /* 
+  * There are different heights for each row. 
+  * I use bright colors like this for debugging. 
+  * See "test.css" for more examples of this pattern.
+  */
+
+  /* First row (tab key) */
+  &:nth-of-type(4n + 1) {
+    /* background-color: #ff0; */
+    height: 35px;
+
+    &::after {
+      /* background-color: #ff0; */
+      height: 10px;
+      margin-top: 35px;
+    }
+  }
+
+  /* 2nd row (q key) */
+  &:nth-of-type(4n + 3) {
+    /* background-color: #0f0; */
+    height: 55px;
+
+    &::after {
+      /* background-color: #0f0 */
+      height: 28px;
+      margin-top: 55px;
+    }
+  }
+
+  /* 3rd row (shift lock) */
+  &:nth-of-type(4n + 2) {
+    /* background-color: #0ff; */
+    height: 76px;
+
+    &::after {
+      /* background-color: #0ff; */
+      height: 40px;
+      margin-top: 76px;
+    }
+  }
+
+  /* 4th row (shift key) */
+  &:nth-of-type(4n) {
+    /* background-color: #f0f; */
+    height: 100px;
+
+    &::after {
+      /* background-color: #f0f; */
+      height: 52px;
+      margin-top: 100px;
+    }
+  }
+}
+
+.linkage-mechanism-space {
+  background-color: #222;
+
+  &.active {
+    background-color: #333;
+  }
+}
+
+#linkage-space-left,
+#linkage-space-right {
+  height: 195px;
+  position: absolute;
+  top: 0;
+  width: 3px;
+}
+
+#linkage-space-left {
+  left: 52px;
+}
+
+#linkage-space-right {
+  right: 52px;
+}
+
+#linkage-space-horiz-left,
+#linkage-space-horiz-right {
+  top: 195px;
+  height: 4px;
+  position: absolute;
+  width: 39px;
+}
+
+#linkage-space-horiz-left {
+  left: 52px;
+}
+
+#linkage-space-horiz-right {
+  right: 52px;
+}
+
+#linkage-tab::after {
+  transform: skew(-30deg);
+}
+
+#linkage-lock::after {
+  transform: skew(-31deg);
+}
+
+#linkage-q::after {
+  transform: skew(-22deg);
+}
+
+#linkage-shift::after {
+  transform: skew(-30deg);
+}
+
+#linkage-one::after {
+  transform: skew(-25deg);
+}
+
+#linkage-a::after {
+  transform: skew(-27deg);
+}
+
+#linkage-w::after {
+  transform: skew(-18deg);
+}
+
+#linkage-z::after {
+  transform: skew(-25deg);
+}
+
+#linkage-two::after {
+  transform: skew(-16deg);
+}
+
+#linkage-s::after {
+  transform: skew(-22deg);
+}
+
+#linkage-e::after {
+  transform: skew(-16deg);
+}
+
+#linkage-x::after {
+  transform: skew(-19deg);
+}
+
+#linkage-three::after {
+  transform: skew(-5deg);
+}
+
+#linkage-d::after {
+  transform: skew(-14deg);
+}
+
+#linkage-r::after {
+  transform: skew(-9deg);
+}
+
+#linkage-c::after {
+  transform: skew(-10deg);
+}
+
+#linkage-four::after {
+  transform: skew(-4deg);
+}
+
+#linkage-f::after {
+  transform: skew(-6deg);
+}
+
+#linkage-t::after {
+  transform: skew(-6deg);
+}
+
+#linkage-v::after {
+  transform: skew(-6deg);
+}
+
+#linkage-five::after {
+  transform: skew(-3deg);
+}
+
+#linkage-g::after {
+  transform: skew(-1deg);
+}
+
+#linkage-y::after {
+  transform: skew(-1deg);
+}
+
+#linkage-b::after {
+  transform: skew(2deg);
+}
+
+#linkage-six::after {
+  transform: skew(-2deg);
+}
+
+#linkage-h::after {
+  transform: skew(5deg);
+}
+
+#linkage-u::after {
+  transform: skew(3deg);
+}
+
+#linkage-n::after {
+  transform: skew(8deg);
+}
+
+#linkage-seven::after {
+  transform: skew(-1deg);
+}
+
+#linkage-j::after {
+  transform: skew(12deg);
+}
+
+#linkage-i::after {
+  transform: skew(10deg);
+}
+
+#linkage-m::after {
+  transform: skew(14deg);
+}
+
+#linkage-eight::after {
+  transform: skew(0deg);
+}
+
+#linkage-k::after {
+  transform: skew(18deg);
+}
+
+#linkage-o::after {
+  transform: skew(15deg);
+}
+
+#linkage-period::after {
+  transform: skew(20deg);
+}
+
+#linkage-nine::after {
+  transform: skew(1deg);
+}
+
+#linkage-l::after {
+  transform: skew(22deg);
+}
+
+#linkage-p::after {
+  transform: skew(20deg);
+}
+
+#linkage-quote::after {
+  transform: skew(25deg);
+}
+
+#linkage-exmark::after {
+  transform: skew(2deg);
+}
+
+#linkage-enter::after {
+  transform: skew(28deg);
+}
+
+#linkage-bksp::after {
+  transform: skew(25deg);
+}

@@ -1,0 +1,145 @@
+@use "../shared.scss" as *;
+
+.btn {
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: $light;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 125ms;
+  padding: 0.5rem;
+
+  &.btn-edit {
+    background: transparent;
+    border: 2px solid $light;
+    color: $light;
+    width: 140px;
+
+    @include bp(non-desktop) {
+      display: none;
+    }
+    &:hover {
+      background-color: #ffefd522;
+    }
+  }
+}
+
+// =========================
+//   EDITOR | DESKTOP ONLY
+// =========================
+#ContentEditor {
+  color: black !important;
+  max-width: 1200px;
+  padding-bottom: 100px;
+  width: 100%;
+  h3,
+  h6 {
+    color: $light;
+  }
+  input,
+  select {
+    background-color: $light;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+  }
+
+  input[type="text"] {
+    width: 420px;
+  }
+  input[type="checkbox"] {
+    background: transparent;
+    border: 2px solid $light;
+    position: relative;
+    top: 7px;
+    margin-right: 10px;
+    &:checked::before {
+      top: 0px;
+    }
+  }
+
+  select {
+    width: 440px;
+  }
+
+  .header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .editor-container {
+    background: $light;
+    margin-bottom: 10px;
+
+    &,
+    .quill {
+      border-radius: 8px;
+    }
+  }
+
+  .ql-toolbar.ql-snow {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .ql-container.ql-snow {
+    border-radius: 0 0 8px 8px;
+  }
+
+  .ql-editor {
+    @include base-document-styles;
+    color: $dark;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: $dark;
+    }
+  }
+
+  .ql-divider {
+    width: 28px !important;
+    &::before {
+      content: "—";
+    }
+  }
+  .ql-header.ql-picker {
+    width: 200px;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    &.sm {
+      border: 1px solid $light;
+      width: 25px;
+      height: 25px;
+      padding: 0 0 1px;
+      margin-top: 6px;
+      border-radius: 30px;
+      font-weight: 700;
+      &.add {
+        padding: 0;
+        font-size: 1rem;
+      }
+    }
+
+    &.btn-upload {
+      border-color: #4caf50;
+      &:hover {
+        background-color: #45a04944;
+      }
+    }
+
+    &.btn-cancel {
+      border-color: #f32141;
+      &:hover {
+        background-color: #f3214144;
+      }
+    }
+  }
+}

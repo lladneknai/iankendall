@@ -1,0 +1,44 @@
+/**
+ * STYLES INDEX (SCSS)
+ * Import individual SCSS files with proper nesting
+ */
+//
+// BASE STYLES
+//
+@use "./global.scss" as *;
+
+//
+// COMPONENT STYLES
+//
+// Each component is wrapped in a matching ID for targeted styling.
+// Ordinarily, I would co-locate these within each individual component folder.
+// However, the point of this site is for you BROWSE this code easily, hence why they're here! (☞ﾟ∀ﾟ)☞
+//
+@use "./components/About.scss" as *;
+@use "./components/Code.scss" as *;
+@use "./components/ContentEditor.scss" as *;
+@use "./components/Desk.scss" as *;
+@use "./components/Keyboard.scss" as *;
+@use "./components/Linkages.scss" as *;
+@use "./components/LoadingBar.scss" as *;
+@use "./components/Menu.scss" as *;
+@use "./components/Paper.scss" as *;
+@use "./components/Projects.scss" as *;
+@use "./components/ReEnableTypewriter.scss" as *;
+@use "./components/Room.scss" as *;
+@use "./components/SendMessageDialog.scss" as *;
+@use "./components/Typewriter.scss" as *;
+
+//
+// OVERRIDING STYLES
+// Mobile-only styles cascade over rules from global & component styles.
+// On larger-scale apps, I'm a fan of mobile-first design. In this case, it made sense to go desktop-first.
+//
+@use "./mobile.scss" as *;
+
+/** 
+ * TEST FILE (commented out)
+ * This file used to test breakpoints by changing the background-color of the room.
+ * It provides an immediate visual reference when debugging media queries (faster than looking at the ruler).
+ */
+// @use "./screentest.scss" as *;
