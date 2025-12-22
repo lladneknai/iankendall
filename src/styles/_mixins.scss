@@ -77,16 +77,10 @@
   }
 }
 
-//
-// TODO: MAKE THIS GLOBAL
-//
-@mixin slideUpAnimations {
-  animation: slideUp 300ms ease;
-  transition: opacity 300ms ease, transform 300ms ease;
-  &.hidden {
-    transform: translateY(30px);
-    opacity: 0;
-  }
+@mixin revealOnScroll($distance, $time) {
+  opacity: 0;
+  transform: translateY($distance);
+  transition: opacity $time ease, transform $time ease;
   &.shown {
     transform: translateY(0);
     opacity: 1;
@@ -98,6 +92,19 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity $ms ease, transform $ms ease;
+  &.shown {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@mixin slideUpAnimationsMenu {
+  animation: slideUp 300ms ease;
+  transition: opacity 300ms ease, transform 300ms ease;
+  &.hidden {
+    transform: translateY(30px);
+    opacity: 0;
+  }
   &.shown {
     transform: translateY(0);
     opacity: 1;

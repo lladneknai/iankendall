@@ -1,3 +1,6 @@
+import { lorem } from "@/util/text";
+import RevealOnScroll from "@/components/RevealOnScroll";
+
 /**
  * ABOUT PAGE
  * ----------
@@ -10,13 +13,24 @@ export default function About() {
       <div id="AboutHero" className="hero">
         <div className="hero-content">
           <h1>About Me</h1>
+          {/* <marquee>Ian time, baby</marquee> */}
         </div>
       </div>
 
       <div className="page-content">
-        {/* 
-          TODO: build out page
-        */}
+        <RevealOnScroll className="section" distance="200px" duration="750ms">
+          <h1>Section 1</h1>
+          <p>{lorem()}</p>
+          <p>{lorem()}</p>
+          <p>{lorem()}</p>
+        </RevealOnScroll>
+
+        <RevealOnScroll className="section" distance="100px" duration="750ms">
+          <h1>Section 2</h1>
+          <p>{lorem()}</p>
+          <p>{lorem()}</p>
+          <p>{lorem()}</p>
+        </RevealOnScroll>
       </div>
     </div>
   );

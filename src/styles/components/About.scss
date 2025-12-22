@@ -32,6 +32,13 @@
     position: relative;
   }
 
+  .section {
+    // @include revealOnScroll(150px, 750ms);
+    background: #ff01;
+    height: 50vh;
+    margin-bottom: 10vh;
+  }
+
   //
   // TODO: forgot to move this into the <Footer />. Do that when About work is done.
   //

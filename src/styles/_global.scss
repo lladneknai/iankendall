@@ -75,6 +75,7 @@ html {
   justify-content: flex-start;
   min-height: 100vh;
 }
+
 .hero {
   align-items: center;
   background-color: $dark;
@@ -87,6 +88,7 @@ html {
   justify-content: flex-end;
   width: 100%;
 }
+
 .hero-content {
   color: $light;
   display: flex;
@@ -99,6 +101,7 @@ html {
     margin-bottom: 0;
   }
 }
+
 .page-content {
   display: flex;
   flex-direction: column;
@@ -114,8 +117,24 @@ html {
     pointer-events: none; // Prevent interaction during fade
   }
 }
+
 .page-content-restricted {
   max-width: 800px;
+}
+
+.reveal-on-scroll {
+  --reveal-distance: 30px;
+  --reveal-duration: 300ms;
+
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition: opacity var(--reveal-duration) ease,
+    transform var(--reveal-duration) ease;
+
+  &.shown {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cms-html {

@@ -1,3 +1,4 @@
+import { MutableRefObject, ReactNode, RefObject } from "react";
 import { KeyboardReactInterface } from "react-simple-keyboard";
 import type {
   About,
@@ -15,7 +16,6 @@ import type {
   TypewriterFlowProps,
   UpdateFieldFn,
 } from "./shared";
-import { MutableRefObject, RefObject } from "react";
 
 /**
  * PROP TYPES
@@ -176,6 +176,14 @@ export interface ProjectSelectProps {
   projects: Project[];
   projectsOrganized: ProjectsOrganized;
   selectProjectMobile: (key: string) => void;
+}
+
+export interface RevealOnScrollProps {
+  children: ReactNode;
+  className?: string;
+  distance?: string;
+  duration?: string;
+  threshold?: number;
 }
 
 export interface SoundEffectsToggleProps {
