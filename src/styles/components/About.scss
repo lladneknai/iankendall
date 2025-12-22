@@ -1,9 +1,6 @@
 @use "../shared.scss" as *;
 
 #About {
-  // background-color: $light;
-  // background-image: url(/img/bg/paper.png);
-
   .hero {
     background-image: url(/img/bg/landscape-2.jpg);
     height: max(600px, 50vh);
@@ -21,7 +18,7 @@
   }
 
   .page-content {
-    color: $mint;
+    color: $light;
 
     h1,
     h2,
@@ -33,12 +30,11 @@
     }
 
     position: relative;
-    .edit-btn-container {
-      position: absolute;
-      right: 1rem;
-      top: 1rem;
-    }
   }
+
+  //
+  // TODO: forgot to move this into the <Footer />. Do that when About work is done.
+  //
 
   .action-row {
     display: flex;
