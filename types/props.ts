@@ -1,5 +1,6 @@
 import { MutableRefObject, ReactNode, RefObject } from "react";
 import { KeyboardReactInterface } from "react-simple-keyboard";
+import { EmblaOptionsType } from "embla-carousel";
 import type {
   About,
   Project,
@@ -34,6 +35,17 @@ export interface CandleProps {
   bottom?: string;
   height?: string;
   width?: string;
+}
+
+export interface CarouselProps {
+  autoplay?: boolean;
+  arrows?: boolean;
+  children: ReactNode[];
+  options?: EmblaOptionsType;
+  reverse?: boolean;
+  slideHeight?: string;
+  slideWidth?: string;
+  spacing?: string;
 }
 
 export type CheckboxProps<T extends Record<string, any>> = FormFieldProps<T>;

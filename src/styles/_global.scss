@@ -118,8 +118,9 @@ html {
   }
 }
 
+// Restrict to roughly 90 chars per line on desktop
 .page-content-restricted {
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .reveal-on-scroll {
@@ -185,4 +186,169 @@ html {
 }
 .bg-coral {
   background: $coral;
+}
+
+//
+// CAROUSEL STUFF
+//
+
+.embla {
+  max-width: 48rem;
+  // margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+
+  min-width: calc(var(--slide-size) + calc(var(--slide-spacing) * 2));
+
+  .horizontal {
+    &.embla__controls {
+      flex-direction: column;
+    }
+    .embla__button__svg {
+      transform: rotate(90deg);
+    }
+    .embla__button--prev {
+      margin-bottom: 1.5rem;
+    }
+    .embla__button--next {
+      margin-top: 1.5rem;
+    }
+  }
+
+  // VERTICAL: controls are BELOW the carousel
+  .vertical {
+    .embla__button--prev {
+      margin-right: 1.5rem;
+    }
+    .embla__button--next {
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+.embla__viewport {
+  overflow: hidden;
+  flex: 1;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+.embla__slide__number {
+  border-radius: 1.8rem;
+  font-size: 4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--slide-height);
+  width: 100%;
+  user-select: none;
+}
+
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.embla__button {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: $light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.embla__buttons__horizontal {
+  // background: #f0f;
+  .embla__button--prev {
+    margin: 1rem 0 0.5rem !important;
+  }
+  .embla__button--next {
+    margin: 0 !important;
+  }
+}
+
+.embla__button:disabled {
+  color: $light-5;
+}
+
+.embla__button__svg {
+  width: 50%;
+  height: 50%;
+}
+
+.embla__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+}
+
+.embla__dot {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.embla__dot:after {
+  box-shadow: inset 0 0 0 0.15rem $light-3;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  content: "";
+}
+
+.embla__dot--selected:after {
+  background: $louise;
+  box-shadow: inset 0 0 0 0.15rem $light-4;
+}
+
+.carousel-slide {
+  background: #f0f2;
+  background-size: cover;
+  background-position: center;
+  height: var(--slide-height);
+  width: 100%;
 }
