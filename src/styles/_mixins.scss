@@ -34,6 +34,13 @@
   transition: height 0.1s ease-out, right 0.1s ease-out, top 0.1s ease-out;
 }
 
+//
+// BREAKPOINTS
+// Global screen sizes for media queries.
+//
+// SIZES: tiny, mobile, tablet, desktop, xl, 2xl, 3xl
+// EXCLUDERS: non-mobile, non-desktop, non-xl
+//
 @mixin bp($breakpoint) {
   @if $breakpoint == mobile {
     @media (max-width: $max-width-mobile) {
@@ -63,6 +70,14 @@
     @media (min-width: $min-width-xl) {
       @content;
     }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: $min-width-2xl) {
+      @content;
+    }
+  } @else if $breakpoint == 3xl {
+    @media (min-width: $min-width-3xl) {
+      @content;
+    }
   } @else if $breakpoint == non-xl {
     @media (max-width: $max-width-desktop) {
       @content;
@@ -74,16 +89,6 @@
   animation: fadeIn 400ms ease;
   &.exiting {
     animation: fadeOut 300ms ease forwards;
-  }
-}
-
-@mixin revealOnScroll($distance, $time) {
-  opacity: 0;
-  transform: translateY($distance);
-  transition: opacity $time ease, transform $time ease;
-  &.shown {
-    transform: translateY(0);
-    opacity: 1;
   }
 }
 

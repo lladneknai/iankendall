@@ -8,7 +8,8 @@ _TODO.txt
 data/
 node_modules/
 node_modules.amptrc
-public/sourcecode/
+public/img/misc/
 public/mp3/src/
+public/sourcecode/
 src/config/typing-dev.ts
 static/

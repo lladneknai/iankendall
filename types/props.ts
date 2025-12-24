@@ -38,14 +38,30 @@ export interface CandleProps {
 }
 
 export interface CarouselProps {
-  autoplay?: boolean;
   arrows?: boolean;
+  autoplay?: boolean;
+  autoplayActive?: boolean;
+  caption?: ReactNode | string;
   children: ReactNode[];
+  hideControls?: boolean;
+  onSelectChange?: (index: number) => void;
   options?: EmblaOptionsType;
   reverse?: boolean;
+  selectedIndex?: number;
   slideHeight?: string;
   slideWidth?: string;
   spacing?: string;
+}
+
+export interface CarouselControlsProps {
+  arrows?: boolean;
+  isPlaying?: boolean;
+  onDotClick: (index: number) => void;
+  onNext: () => void;
+  onPlayToggle?: () => void;
+  onPrev: () => void;
+  selectedIndex: number;
+  totalSlides: number;
 }
 
 export type CheckboxProps<T extends Record<string, any>> = FormFieldProps<T>;

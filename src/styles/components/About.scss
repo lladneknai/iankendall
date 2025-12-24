@@ -2,7 +2,7 @@
 
 #About {
   .hero {
-    background-image: url(/img/about/louise.jpg);
+    background-image: url(/img/bg/louise.jpg);
     background-position: bottom;
     height: 100vh;
     justify-content: flex-start;
@@ -16,54 +16,28 @@
       justify-content: center;
       padding: 3rem 0;
       text-align: center;
+
       h1 {
-        font-size: 4rem;
-        margin: min(10vh, 7rem) 0 max(2.5vh, 2rem);
-      }
-      .scroll-link-container {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        // background: #f0f2;
-        opacity: 0;
-        animation: fadeIn 1500ms ease 750ms forwards,
-          scrollLinkPulse 1.5s ease-in-out 1250ms infinite;
-        button.scroll-link {
-          color: $dark;
-          font-family: $sans-serif;
-          font-size: 1.25rem;
-          padding: 0;
+        font-size: 3rem;
+        margin: min(10vh, 7rem) 0 0.25em;
+        @include bp(xl) {
+          font-size: 4rem;
+          margin-top: min(3vh, 6vw);
         }
-        svg {
-          color: $dark;
-          font-size: 1.5rem;
-          position: relative;
-          top: 0.75rem;
-          transition: all 500ms;
-        }
-        &:hover {
-          animation-play-state: paused;
-          opacity: 1 !important;
-          button.scroll-link {
-            color: $dark !important;
-          }
-          svg {
-            font-size: 2rem;
-            top: 1rem;
-          }
+        @include bp(2xl) {
+          font-size: 5rem;
+          // margin-top: 5vh;
         }
       }
 
-      @keyframes scrollLinkPulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.6;
-        }
+      p,
+      .navigate-btn {
+        font-size: 1.1rem;
+        font-weight: 500;
+        font-family: $sans-serif;
       }
     }
+
     .hero-fade-top {
       background: linear-gradient(to bottom, #fffd 0%, #fffa 25%, #fff0 100%);
       height: 120px;
@@ -71,15 +45,105 @@
       top: 0;
       width: 100%;
     }
-    .hero-fade-bottom {
-      background: linear-gradient(to bottom, #0000 0%, $dark 99%);
+
+    .hero-caption {
       bottom: 0;
-      height: 200px;
+      left: 0;
+      max-width: 1920px;
+      position: absolute;
+      width: 100%;
+      p {
+        color: #1c1d21;
+        font-family: Archivo, Arial, sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 2.5rem;
+        transform: rotate(270deg);
+        transform-origin: bottom left;
+        @include bp(2xl) {
+          font-size: 1.25rem;
+          margin: 4vh;
+        }
+      }
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .navigate-btn-abs-bottom {
+      bottom: 5vh;
+      z-index: 10;
+      .navigate-button {
+        .navigate-btn,
+        svg {
+          color: $dark;
+        }
+      }
+    }
+
+    .hero-fade-bottom {
+      background: linear-gradient(to bottom, #0000 0%, $dark 90%);
+      bottom: 0;
+      height: 10vh;
       position: absolute;
       width: 100%;
     }
   }
 
+  .navigate-button {
+    align-items: center;
+    animation: fadeIn 1500ms ease 750ms forwards,
+      opacityPulse 1.5s ease-in-out 1250ms infinite;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+
+    .navigate-btn {
+      color: $light-3;
+      font-family: $sans-serif;
+      font-size: 1rem;
+      padding: 0;
+    }
+    svg {
+      color: $light-3;
+      font-size: 1.15rem;
+      position: relative;
+      transition: all 500ms;
+    }
+    .svg-container {
+      height: 1.5rem;
+    }
+    &.up {
+      svg {
+        top: 0.4rem;
+      }
+    }
+    &:hover {
+      animation-play-state: paused;
+      opacity: 1 !important;
+      .navigate-btn {
+        opacity: 1 !important;
+      }
+      svg {
+        font-size: 1.5rem;
+      }
+      &.up {
+        svg {
+          top: 0rem;
+        }
+      }
+    }
+  }
+
+  .navigate-btn-abs-bottom {
+    bottom: 1.5rem;
+    position: absolute;
+  }
+
+  //
+  // ABOUT PAGE CONTENT
+  //
   .page-content {
     color: $light;
 
@@ -96,31 +160,113 @@
   }
 
   .about-section {
-    @include flex(row, 5rem);
+    @include flex(row, 3rem);
 
     align-items: center;
+    height: 100vh;
     justify-content: center;
-    padding: 15vh 0;
+
+    .alt,
+    strong {
+      color: $louise;
+      font-weight: 600;
+      svg {
+        margin-left: 0.25rem;
+      }
+    }
+    a.alt:hover {
+      @include lighten($louise, 10%);
+    }
 
     .section-content {
       @include flex(column, 0);
-      h3 {
-        font-size: 2.75rem;
+      max-width: max(30vw, 520px);
+      @include bp(2xl) {
+        max-width: 1000px;
       }
-      p {
-        font-size: 1.25rem;
-      }
-      max-width: 40vw;
-    }
-  }
 
-  .carousel-img {
-    background: #f0f2;
-    background-size: cover;
-    background-position: center;
-    height: 25vh;
-    width: calc(25vh * (9 / 16));
-    display: flex;
+      h3 {
+        color: $light;
+        font-size: 2.25rem;
+        margin-bottom: 0.75em;
+        @include bp(2xl) {
+          font-size: 3rem;
+        }
+      }
+      p,
+      ul {
+        font-family: $sans-serif;
+        letter-spacing: 0.025rem;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        margin-bottom: 0.5em;
+        svg {
+          font-size: 0.75em;
+        }
+        @include bp(2xl) {
+          font-size: 1.4rem;
+        }
+      }
+      li {
+        font-family: $sans-serif;
+        @include bp(2xl) {
+          font-size: 1.4rem;
+        }
+      }
+    }
+
+    .carousel-caption-container {
+      bottom: 0;
+      right: -3.25rem;
+      position: absolute;
+      overflow: visible;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    .carousel-caption {
+      color: $light-2;
+      font-family: $sans-serif;
+      margin: 0;
+      transform: rotate(270deg);
+      transform-origin: top;
+
+      .fig,
+      svg {
+        color: $louise;
+        margin-right: 0.25rem;
+      }
+      svg {
+        font-size: 0.9em;
+      }
+
+      @include bp(2xl) {
+        font-size: 1.1rem;
+        .fig,
+        svg {
+          margin-right: 0.5rem;
+        }
+        svg {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+      .carousel-caption-container {
+        left: 5px;
+      }
+      .carousel-caption {
+        transform: rotate(270deg);
+        transform-origin: top left;
+      }
+    }
+
+    &.about-4 {
+      flex-direction: column;
+      gap: 2rem;
+    }
   }
 
   //
