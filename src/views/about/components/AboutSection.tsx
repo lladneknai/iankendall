@@ -36,6 +36,8 @@ export default function AboutSection({
     })
     .map((path) => path.replace("/public", ""));
 
+  const sectionAttrs = `${reverse ? " reverse" : ""}${wide ? " wide" : ""}`;
+
   return (
     <div id={`AboutSection${index}`}>
       <RevealOnScroll
@@ -44,7 +46,7 @@ export default function AboutSection({
         duration="750ms"
         threshold={0.3}
       >
-        <section className={`about-section${reverse ? " reverse" : ""}`}>
+        <section className={`about-section ${sectionAttrs}`}>
           <RevealOnScroll
             className="section-content"
             distance="25vh"

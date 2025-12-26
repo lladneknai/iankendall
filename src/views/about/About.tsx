@@ -6,12 +6,14 @@ import {
   faBookBookmark,
   faGlobeAmericas,
   faArrowUpRightFromSquare,
+  faTableList,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHand } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AboutSection from "./components/AboutSection";
 import NavigateButton from "./components/NavigateButton";
-// import AboutSection4 from "./components/AboutSection4";
+import { getTechIcon } from "../projects/components/ProjectContent/components/Tech/lib/util";
+import { handleSmoothScroll } from "@/util/dom";
 
 /**
  * ABOUT PAGE
@@ -26,23 +28,62 @@ export default function About() {
         <div className="hero-fade-top" />
 
         <div className="hero-content">
-          <h1>About Me</h1>
-          <p>Here&rsquo;s what I&rsquo;m about.</p>
+          <div>
+            <h1>About Me</h1>
+            <p>Here&rsquo;s what I&rsquo;m about.</p>
+            {/* <NavigateButton
+              direction="down"
+              scrollTo="AboutSection1"
+              text="Learn what I'm about."
+            /> */}
+          </div>
+
+          <div className="hero-caption">
+            <p>
+              <FontAwesomeIcon icon={faMapPin} />
+              Lake Louise, Alberta
+            </p>
+          </div>
         </div>
 
         <div className="navigate-btn-abs-bottom">
           <NavigateButton
             direction="down"
             scrollTo="AboutSection1"
-            text="Learn about me"
+            text="Get started"
           />
         </div>
 
-        <div className="hero-caption">
-          <p>
-            <FontAwesomeIcon icon={faMapPin} />
-            Lake Louise, Alberta
+        <div className="hero-toc">
+          <p className="contents">
+            <span className="fig">
+              <FontAwesomeIcon icon={faTableList} />
+              Fig.00 |
+            </span>{" "}
+            Contents
           </p>
+          <ol>
+            <li onClick={() => handleSmoothScroll("AboutSection1")}>
+              <FontAwesomeIcon icon={faHand} />
+              Intro
+            </li>
+            <li onClick={() => handleSmoothScroll("AboutSection2")}>
+              <FontAwesomeIcon icon={faCode} />
+              Build
+            </li>
+            <li onClick={() => handleSmoothScroll("AboutSection3")}>
+              <FontAwesomeIcon icon={faGlobeAmericas} />
+              Travel
+            </li>
+            <li onClick={() => handleSmoothScroll("AboutSection4")}>
+              <FontAwesomeIcon icon={faBookBookmark} />
+              Learn
+            </li>
+            <li onClick={() => handleSmoothScroll("AboutSection5")}>
+              <FontAwesomeIcon icon={faMountain} />
+              Outside
+            </li>
+          </ol>
         </div>
 
         <div className="hero-fade-bottom" />
@@ -61,7 +102,7 @@ export default function About() {
                 </strong>
               </h3>
               <p>Glad to meet you. How&rsquo;s it going?</p>
-              <p>Here are some pictures to prove I&rsquo;m a real person.</p>
+              <p>Here are some pictures proving I&rsquo;m a real person.</p>
               <p>
                 Want to get in touch? I&rsquo;d like that.{" "}
                 <Link className="alt" to="/contact">
@@ -72,7 +113,7 @@ export default function About() {
             </>
           }
           figIcon={faHand}
-          figLabel="Introduction"
+          figLabel="Intro"
           index={1}
           reverse
         />
@@ -85,17 +126,40 @@ export default function About() {
                 I like to <strong>build things.</strong>
               </h3>
               <p>
-                I love what I do &ndash; creating scalable web features that are
-                used by real people.
-              </p>
-              <p>
-                Throughout my career, I&rsquo;ve built some cool things. Check
-                them out on my{" "}
+                I&rsquo;ve shipped some cool products.{" "}
                 <Link className="alt" to="/projects">
-                  Projects page
+                  Check &lsquo;em out
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                 </Link>
               </p>
+              <p>
+                I love what I do &ndash; creating scalable web features that are
+                used by real people. I&rsquo;m big on user empathy.
+              </p>
+              <p>
+                I love to learn new things, but I have extensive experience
+                using this stuff:
+              </p>
+
+              <div className="about-tech-list">
+                {["react", "ts", "css", "scss", "sql", "aws", "bash"].map(
+                  (t) => {
+                    const { icon, isFa } = getTechIcon(t, "#7aa7c6");
+                    return (
+                      <div className="about-tech-item" key={t}>
+                        {isFa ? (
+                          <FontAwesomeIcon
+                            icon={icon}
+                            style={{ color: "#7aa7c6" }}
+                          />
+                        ) : (
+                          <>{icon}</>
+                        )}
+                      </div>
+                    );
+                  }
+                )}
+              </div>
             </>
           }
           figIcon={faCode}
@@ -140,7 +204,7 @@ export default function About() {
               <p>If I&rsquo;m not expanding...</p>
               <ul>
                 <li>The height of my ambition</li>
-                <li>The deptch of my knowledge</li>
+                <li>The depth of my knowledge</li>
                 <li>The breath of my experience</li>
               </ul>
               <p style={{ textAlign: "right" }}>
@@ -163,7 +227,7 @@ export default function About() {
                 {/* <FontAwesomeIcon icon={faMountain} /> */}
               </h3>
               <p>
-                Some people like to relax. I prefer a
+                Some people like to chill. I prefer a
                 <span className="alt"> challenge</span>.
               </p>
               <p>
@@ -183,7 +247,7 @@ export default function About() {
         />
 
         {/* KEEP THIS ONE IN THE REPO - IT HAS THE DYNAMIC CAROUSEL */}
-        {/* <AboutSection4 /> */}
+        {/* <LinkedCarousel /> */}
       </div>
     </div>
   );

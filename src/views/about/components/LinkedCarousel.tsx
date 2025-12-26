@@ -1,13 +1,13 @@
 import { useState } from "react";
-import Carousel, { CarouselControls } from "@components/Carousel";
 import RevealOnScroll from "@components/RevealOnScroll";
+import Carousel, { CarouselControls } from "@components/Carousel";
 import NavigateButton from "./NavigateButton";
 
 /**
  * CURRENTLY NOT IN USE
  * - Demonstrates linked carousels - may be very useful in the future. KEEP IT!
  */
-export default function AboutSection4() {
+export default function LinkedCarousel() {
   const path = "/img/about/";
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);

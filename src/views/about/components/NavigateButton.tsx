@@ -1,3 +1,4 @@
+import { handleSmoothScroll } from "@util/dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,13 +11,11 @@ export default function NavigateButton({
   scrollTo: string;
   text: string;
 }) {
-  const handleScrollClick = () => {
-    console.log("scrolling TO:", scrollTo);
-    document.getElementById(scrollTo)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <div className={`navigate-button ${direction}`} onClick={handleScrollClick}>
+    <div
+      className={`navigate-button ${direction}`}
+      onClick={() => handleSmoothScroll(scrollTo)}
+    >
       {direction === "up" && (
         <div className="svg-container">
           <FontAwesomeIcon icon={faChevronUp} />
