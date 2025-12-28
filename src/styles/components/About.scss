@@ -1,22 +1,219 @@
 @use "../shared.scss" as *;
 
 #About {
+  background-blend-mode: lighten;
+  background-image: url(/img/bg/topography.svg);
+  @include alpha-prop(background-color, $dark, -0.15);
+
   .hero {
-    background-image: url(/img/bg/landscape-2.jpg);
-    height: max(600px, 50vh);
+    background-image: url(/img/bg/louise.jpg);
+    background-position: bottom;
+    height: 100vh;
     justify-content: flex-start;
+    position: relative;
+
+    @include bp(non-desktop) {
+      height: calc(var(--vh, 1vh) * 100);
+    }
+
     .hero-content {
+      align-items: center;
       color: $dark;
-      justify-content: center;
-      padding: 3rem 0;
-      text-align: center;
+      height: 100%;
+      justify-content: space-between;
+      padding: 0 0 1.5rem;
+      position: relative;
+      z-index: 1;
+
+      .hero-content--top {
+        margin-top: min(10vh, 7rem);
+        @include bp(xl) {
+          margin-top: min(8vh, 6vw);
+        }
+        @include bp(mobile) {
+          margin-top: 5rem;
+        }
+      }
+
+      .hero-content--bottom {
+        align-items: flex-end;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+
       h1 {
-        font-size: 3.5rem;
+        font-size: 3rem;
+        margin: 0 0 0.25em;
+        @include bp(xl) {
+          font-size: 3.5rem;
+        }
+        @include bp(2xl) {
+          font-size: 5rem;
+          // margin-top: 5vh;
+        }
+      }
+
+      p,
+      svg,
+      .navigate-btn {
+        color: $dark;
+        font-size: 1.1rem;
+        font-weight: 500;
+        font-family: $sans-serif;
+        @include bp(2xl) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .hero-caption {
+      p,
+      svg {
+        @include alpha-prop(color, $dark, -0.3);
+      }
+      p {
+        font-family: Archivo, Arial, sans-serif;
+        font-size: 1.1rem;
+        font-weight: 500;
         margin: 0;
+        @include bp(2xl) {
+          font-size: 1.1rem;
+        }
+      }
+      svg {
+        margin-right: 0.5rem;
+      }
+      @include bp(mobile) {
+        display: none;
+      }
+    }
+
+    .hero-toc {
+      @include flex(row, 0.5rem);
+      align-items: flex-end;
+
+      .contents {
+        line-height: 1;
+        margin: 0rem 1.5rem 1rem 0;
+        transform: rotate(270deg);
+        transform-origin: bottom;
+        width: 2rem;
+        white-space: nowrap;
+      }
+      p {
+        font-size: 1rem;
+        font-family: $sans-serif;
+      }
+      svg,
+      .fig,
+      li::marker {
+        @include alpha-prop(color, $dark, -0.3);
+      }
+      li {
+        color: #1c1d21;
+        cursor: pointer;
+        font-family: $sans-serif;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .hero-fade-top {
+      background: linear-gradient(to bottom, #fffd 0%, #fffa 25%, #fff0 100%);
+      height: 120px;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .navigate-btn-abs-bottom {
+      bottom: 8vh;
+      z-index: 10;
+      .navigate-button {
+        .navigate-btn,
+        svg {
+          color: $dark;
+        }
+      }
+    }
+
+    // TODO: this doesn't work with new dynamic vh calc
+    .hero-fade-bottom {
+      background: linear-gradient(to bottom, #0000 0%, $dark 90%);
+      bottom: 0;
+      height: calc(calc(var(--vh, 1vh) * 100) / 10);
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  .navigate-button {
+    align-items: center;
+    animation: fadeIn 1500ms ease 750ms forwards,
+      opacityPulse 1.5s ease-in-out 1250ms infinite;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+
+    .navigate-btn {
+      color: $light-3;
+      font-family: $sans-serif;
+      font-size: 1rem;
+      padding: 0;
+    }
+    svg {
+      color: $light-3;
+      font-size: 1.15rem;
+      position: relative;
+      transition: all 500ms;
+    }
+    .svg-container {
+      height: 1.5rem;
+    }
+    &.up {
+      svg {
+        top: 0.4rem;
+      }
+    }
+    &:hover {
+      animation-play-state: paused;
+      opacity: 1 !important;
+      .navigate-btn {
+        opacity: 1 !important;
+      }
+      svg {
+        font-size: 1.5rem;
+      }
+      &.up {
+        svg {
+          top: 0rem;
+        }
       }
     }
   }
 
+  .navigate-btn-abs-bottom {
+    bottom: 1.5rem;
+    position: absolute;
+    @include bp(mobile) {
+      &:not(.last) {
+        display: none;
+      }
+    }
+  }
+
+  //
+  // ABOUT PAGE CONTENT
+  //
   .page-content {
     color: $light;
 
@@ -26,10 +223,230 @@
     h4,
     h5,
     h6 {
-      color: $mint;
+      color: $louise;
     }
 
     position: relative;
+  }
+
+  .about-section {
+    @include flex(row, 3rem);
+
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    overflow: hidden;
+
+    &.reverse {
+      flex-direction: row-reverse;
+      .carousel-caption-container {
+        left: 5px;
+      }
+      .carousel-caption {
+        transform: rotate(270deg);
+        transform-origin: top left;
+      }
+    }
+
+    @include bp(non-desktop) {
+      height: calc(var(--vh, 1vh) * 100);
+      gap: 2rem;
+      padding-top: 1rem;
+      br {
+        display: none;
+      }
+      text-align: left;
+      flex-direction: column-reverse;
+      &.reverse {
+        flex-direction: column-reverse;
+      }
+      p {
+        line-height: 1;
+      }
+    }
+
+    .alt,
+    strong {
+      color: $louise;
+      font-weight: 500;
+      svg {
+        margin-left: 0.25rem;
+      }
+    }
+    a.alt:hover {
+      @include lighten($louise, 10%);
+    }
+
+    h3 {
+      color: $light;
+      font-size: 2.25rem;
+      margin-bottom: 0.75em;
+
+      @include bp(mobile) {
+        font-size: 1.75rem;
+        margin-bottom: 0.5em;
+      }
+
+      @include bp(2xl) {
+        font-size: 3rem;
+      }
+    }
+
+    p,
+    ul {
+      font-family: $sans-serif;
+      letter-spacing: 0.025rem;
+      font-size: 1.05rem;
+      line-height: 1.4;
+      margin-bottom: 0.5em;
+      svg {
+        font-size: 0.75em;
+      }
+
+      @include bp(mobile) {
+        font-size: 1rem;
+      }
+      @include bp(2xl) {
+        font-size: 1.4rem;
+      }
+    }
+
+    &.wide {
+      @include bp(2xl) {
+        .section-content,
+        .section-header {
+          max-width: 650px;
+        }
+      }
+    }
+
+    .section-content,
+    .section-header {
+      @include flex(column, 0);
+      max-width: max(30vw, 520px);
+      min-width: 25vw;
+
+      @include bp(mobile) {
+        width: 80vw;
+      }
+      @include bp(2xl) {
+        max-width: 800px;
+      }
+
+      li {
+        font-family: $sans-serif;
+        list-style-type: none;
+        margin-bottom: 0.25em;
+        padding-left: 0.25em;
+        position: relative;
+        @include bp(2xl) {
+          font-size: 1.4rem;
+        }
+        &::before {
+          background: $louise;
+          border-radius: 50%;
+          box-shadow: inset 0 0 0 2px $light-4;
+          content: "";
+          height: 0.75em;
+          left: -1em;
+          position: absolute;
+          top: 0.3em;
+          width: 0.75em;
+        }
+      }
+    }
+
+    .carousel-caption-container {
+      bottom: 0;
+      right: -3.25rem;
+      position: absolute;
+      overflow: visible;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    .carousel-caption {
+      color: $light-2;
+      font-family: $sans-serif;
+      margin: 0;
+      transform: rotate(270deg);
+      transform-origin: top;
+
+      .fig,
+      svg {
+        color: $louise;
+        margin-right: 0.25rem;
+      }
+      svg {
+        font-size: 0.9em;
+      }
+
+      @include bp(2xl) {
+        font-size: 1.1rem;
+        .fig,
+        svg {
+          margin-right: 0.5rem;
+        }
+        svg {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &.about-4 {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+
+  // TODO: would love to get rid of this selector
+  .section {
+    .about-tech-list {
+      @include flex(row, 0);
+      justify-content: space-between;
+      margin-right: 1rem;
+      margin-top: 2rem;
+      transition: opacity 150ms ease-in-out;
+      @include bp(mobile) {
+        margin-top: 1rem;
+      }
+    }
+
+    .about-tech-item {
+      opacity: 0;
+      transition: opacity 200ms;
+      svg {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+
+    // Trigger transitions when wrapper is shown
+    &.shown {
+      .about-tech-item {
+        opacity: 1;
+      }
+    }
+
+    // Map transitions for tech icons
+    @for $i from 1 through 10 {
+      .about-tech-item:nth-child(#{$i}) {
+        transition-delay: calc(($i - 1) * 100ms + 500ms);
+      }
+    }
+
+    @include bp(2xl) {
+      .about-tech-list {
+        justify-content: flex-start;
+        gap: 2rem;
+      }
+      .about-tech-item {
+        svg {
+          height: 1.75rem;
+          width: 1.75rem;
+        }
+      }
+    }
   }
 
   //
@@ -80,14 +497,8 @@
       svg.goto {
         opacity: 1;
         transition: all 250ms;
-        transition-delay: 250ms;
+        transition-delay: 1250ms;
       }
     }
-  }
-
-  img {
-    width: 100%;
-    /* border-radius: 350px; */
-    /* width: 350px; */
   }
 }

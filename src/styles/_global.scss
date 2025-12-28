@@ -43,6 +43,9 @@ html {
 .gap-2 {
   gap: 2rem;
 }
+.gap-3 {
+  gap: 3rem;
+}
 .no-marg {
   margin: 0;
 }
@@ -75,6 +78,7 @@ html {
   justify-content: flex-start;
   min-height: 100vh;
 }
+
 .hero {
   align-items: center;
   background-color: $dark;
@@ -87,6 +91,7 @@ html {
   justify-content: flex-end;
   width: 100%;
 }
+
 .hero-content {
   color: $light;
   display: flex;
@@ -99,6 +104,7 @@ html {
     margin-bottom: 0;
   }
 }
+
 .page-content {
   display: flex;
   flex-direction: column;
@@ -114,8 +120,32 @@ html {
     pointer-events: none; // Prevent interaction during fade
   }
 }
+
+// Restrict to roughly 90 chars per line on desktop
 .page-content-restricted {
-  max-width: 800px;
+  max-width: 900px;
+}
+
+.reveal-on-scroll {
+  --reveal-distance: 30px;
+  --reveal-duration: 300ms;
+
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition: opacity var(--reveal-duration) ease,
+    transform var(--reveal-duration) ease;
+
+  &.horizontal {
+    transform: translateX(var(--reveal-distance));
+  }
+
+  &.shown {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.horizontal.shown {
+    transform: translateX(0);
+  }
 }
 
 .cms-html {
@@ -166,4 +196,202 @@ html {
 }
 .bg-coral {
   background: $coral;
+}
+
+//
+// CAROUSEL STUFF
+//
+
+.embla {
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+
+  max-width: 48rem;
+  min-width: calc(var(--slide-size) + calc(var(--slide-spacing) * 2));
+  position: relative;
+
+  .horizontal {
+    &.embla__controls {
+      flex-direction: column;
+    }
+    .embla__button__svg {
+      transform: rotate(90deg);
+    }
+    .embla__button--prev {
+      margin-bottom: 1.5rem;
+    }
+    .embla__button--next {
+      margin-top: 1.5rem;
+    }
+  }
+
+  // VERTICAL: controls are BELOW the carousel
+  .vertical {
+    .embla__button--prev {
+      margin-right: 1.5rem;
+    }
+    .embla__button--next {
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+.embla__viewport-wrapper {
+  position: relative;
+  flex: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: -1.5rem;
+    width: 100%;
+    height: 100%;
+    border: 2px solid $light-2;
+    pointer-events: none;
+    top: -1.5rem;
+  }
+  &.reverse {
+    &::before {
+      right: auto;
+      left: -1.5rem;
+    }
+  }
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+.embla__slide__number {
+  border-radius: 1.8rem;
+  font-size: 4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--slide-height);
+  width: 100%;
+  user-select: none;
+}
+
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.embla__button {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: $light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__buttons__horizontal {
+  .embla__button--prev {
+    margin: 1rem 0 0.5rem !important;
+  }
+  .embla__button--next {
+    margin: 0 !important;
+  }
+}
+
+.embla__button:disabled {
+  color: $light-5;
+}
+
+.embla__button__svg {
+  width: 50%;
+  height: 50%;
+}
+
+.embla__controls {
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+}
+
+.embla__dot {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #0000;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  &:after {
+    box-shadow: inset 0 0 0 2px $light-2;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    content: "";
+    transition: background-color 250ms;
+  }
+  &:hover {
+    &:after {
+      @include alpha-prop(background-color, $louise, -0.5);
+      // background-color: $louise;
+    }
+  }
+}
+
+.embla__dot--selected:after {
+  background: $louise !important; // override hover
+  box-shadow: inset 0 0 0 2px $light-4;
+}
+
+.carousel-slide {
+  background: #f0f2;
+  background-size: cover;
+  background-position: center;
+  height: var(--slide-height);
+  width: 100%;
+}
+
+.synced-carousels {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
 }

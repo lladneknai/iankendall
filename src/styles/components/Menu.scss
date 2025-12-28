@@ -455,7 +455,6 @@
       }
 
       button:not(.btn) {
-        // button:not(.btn) {
         background: none;
         border: 0;
         color: #3339;
@@ -475,7 +474,7 @@
       }
     }
     .subItem-detail {
-      @include slideUpAnimations;
+      @include slideUpAnimationsMenu;
       align-items: center;
       display: flex;
       flex-direction: column;

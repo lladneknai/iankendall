@@ -34,6 +34,13 @@
   transition: height 0.1s ease-out, right 0.1s ease-out, top 0.1s ease-out;
 }
 
+//
+// BREAKPOINTS
+// Global screen sizes for media queries.
+//
+// SIZES: tiny, mobile, tablet, desktop, xl, 2xl, 3xl
+// EXCLUDERS: non-mobile, non-desktop, non-xl
+//
 @mixin bp($breakpoint) {
   @if $breakpoint == mobile {
     @media (max-width: $max-width-mobile) {
@@ -63,6 +70,14 @@
     @media (min-width: $min-width-xl) {
       @content;
     }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: $min-width-2xl) {
+      @content;
+    }
+  } @else if $breakpoint == 3xl {
+    @media (min-width: $min-width-3xl) {
+      @content;
+    }
   } @else if $breakpoint == non-xl {
     @media (max-width: $max-width-desktop) {
       @content;
@@ -77,27 +92,24 @@
   }
 }
 
-//
-// TODO: MAKE THIS GLOBAL
-//
-@mixin slideUpAnimations {
-  animation: slideUp 300ms ease;
-  transition: opacity 300ms ease, transform 300ms ease;
-  &.hidden {
-    transform: translateY(30px);
-    opacity: 0;
-  }
+@mixin slideUpAnimationsHome($ms) {
+  animation: slideUp $ms ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity $ms ease, transform $ms ease;
   &.shown {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
-@mixin slideUpAnimationsHome($ms) {
-  animation: slideUp $ms ease;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity $ms ease, transform $ms ease;
+@mixin slideUpAnimationsMenu {
+  animation: slideUp 300ms ease;
+  transition: opacity 300ms ease, transform 300ms ease;
+  &.hidden {
+    transform: translateY(30px);
+    opacity: 0;
+  }
   &.shown {
     transform: translateY(0);
     opacity: 1;

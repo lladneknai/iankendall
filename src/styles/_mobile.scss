@@ -18,27 +18,27 @@
     font-size: 1.05rem;
   }
   p {
-    margin-top: 0.5rem;
+    // margin-top: 0.5rem;
   }
   // GPU acceleration hints for smooth mobile transitions
   .page-content {
     will-change: opacity;
     transform: translateZ(0);
   }
-  .page {
-    .hero {
-      background-color: $aqua;
-      height: $hero-height-mobile;
-    }
-    .hero-content {
-      padding: 5rem 1rem 1rem;
-      width: calc(100% - 2rem);
-    }
-    .page-content {
-      padding: 1rem;
-      width: calc(100% - 2rem);
-    }
-  }
+  // .page {
+  //   .hero {
+  //     background-color: $aqua;
+  //     height: $hero-height-mobile;
+  //   }
+  //   .hero-content {
+  //     padding: 5rem 1rem 1rem;
+  //     width: calc(100% - 2rem);
+  //   }
+  //   .page-content {
+  //     padding: 1rem;
+  //     width: calc(100% - 2rem);
+  //   }
+  // }
 }
 
 // ============================
@@ -261,13 +261,14 @@
   h3 {
     margin-bottom: 0;
   }
-  p {
-    color: $light;
-    margin-bottom: 1rem;
-    line-height: 1.25rem;
-    max-width: 250px;
-    text-align: center;
-  }
+  // TODO: WHAT DAFUQ. NO WAY THIS SHOULD BE HERE. BETTING IT FUX UP SUMN ELSE
+  // p {
+  //   color: $light;
+  //   margin-bottom: 1rem;
+  //   line-height: 1.25rem;
+  //   max-width: 250px;
+  //   text-align: center;
+  // }
 }
 
 @include bp(mobile) {
@@ -408,26 +409,26 @@
 }
 
 @include bp(mobile) {
-  #About {
-    .hero {
-      height: 30vh;
-    }
-    .hero-content {
-      align-items: flex-end;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 0 0.5rem 0.5rem;
-      h1 {
-        margin: 0;
-      }
-    }
-    .social-icon svg.goto {
-      display: none;
-    }
-    .action-row {
-      flex-direction: column;
-    }
-  }
+  // #About {
+  //   .hero {
+  //     height: 30vh;
+  //   }
+  //   .hero-content {
+  //     align-items: flex-end;
+  //     flex-direction: row;
+  //     justify-content: space-between;
+  //     padding: 0 0.5rem 0.5rem;
+  //     h1 {
+  //       margin: 0;
+  //     }
+  //   }
+  //   .social-icon svg.goto {
+  //     display: none;
+  //   }
+  //   .action-row {
+  //     flex-direction: column;
+  //   }
+  // }
 }
 
 //
