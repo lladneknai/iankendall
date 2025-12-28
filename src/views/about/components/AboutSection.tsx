@@ -67,8 +67,12 @@ export default function AboutSection({
             }
             options={{ axis: "x", loop: true }}
             reverse={reverse}
-            slideHeight="60vh"
-            slideWidth={wide ? "calc(min(70vh, 50vw))" : "calc(min(50vh, 30vw)"}
+            // slideHeight="60vh"
+            slideHeight="calc(min(60vh, 80vw))"
+            slideWidth={
+              wide ? "calc(min(70vh, 80vw))" : "calc(min(50vh, 80vw))"
+              // wide ? "calc(min(70vh, 50vw))" : "calc(min(50vh, 30vw))"
+            }
           >
             {images.map((src, i) => (
               <div

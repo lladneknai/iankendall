@@ -28,63 +28,66 @@ export default function About() {
         <div className="hero-fade-top" />
 
         <div className="hero-content">
-          <div>
+          <div className="hero-content--top">
             <h1>About Me</h1>
-            <p>Here&rsquo;s what I&rsquo;m about.</p>
-            {/* <NavigateButton
+            {/* <p>Here&rsquo;s what I&rsquo;m about.</p> */}
+            <NavigateButton
               direction="down"
               scrollTo="AboutSection1"
               text="Learn what I'm about."
-            /> */}
+            />
           </div>
 
-          <div className="hero-caption">
-            <p>
-              <FontAwesomeIcon icon={faMapPin} />
-              Lake Louise, Alberta
-            </p>
+          <div className="hero-content--bottom">
+            <div className="hero-toc">
+              <p className="contents">
+                <span className="fig">
+                  <FontAwesomeIcon icon={faTableList} />
+                  Fig.00 |
+                </span>{" "}
+                Contents
+              </p>
+              <ol>
+                <li onClick={() => handleSmoothScroll("AboutSection1")}>
+                  <FontAwesomeIcon icon={faHand} />
+                  Intro
+                </li>
+                <li onClick={() => handleSmoothScroll("AboutSection2")}>
+                  <FontAwesomeIcon icon={faCode} />
+                  Build
+                </li>
+                <li onClick={() => handleSmoothScroll("AboutSection3")}>
+                  <FontAwesomeIcon icon={faGlobeAmericas} />
+                  Travel
+                </li>
+                <li onClick={() => handleSmoothScroll("AboutSection4")}>
+                  <FontAwesomeIcon icon={faBookBookmark} />
+                  Learn
+                </li>
+                <li onClick={() => handleSmoothScroll("AboutSection5")}>
+                  <FontAwesomeIcon icon={faMountain} />
+                  Outside
+                </li>
+              </ol>
+            </div>
+
+            <div className="hero-caption">
+              <p>
+                <FontAwesomeIcon icon={faMapPin} />
+                Lake Louise, Alberta
+              </p>
+            </div>
           </div>
         </div>
 
+        {/* 
         <div className="navigate-btn-abs-bottom">
           <NavigateButton
             direction="down"
             scrollTo="AboutSection1"
             text="Get started"
           />
-        </div>
-
-        <div className="hero-toc">
-          <p className="contents">
-            <span className="fig">
-              <FontAwesomeIcon icon={faTableList} />
-              Fig.00 |
-            </span>{" "}
-            Contents
-          </p>
-          <ol>
-            <li onClick={() => handleSmoothScroll("AboutSection1")}>
-              <FontAwesomeIcon icon={faHand} />
-              Intro
-            </li>
-            <li onClick={() => handleSmoothScroll("AboutSection2")}>
-              <FontAwesomeIcon icon={faCode} />
-              Build
-            </li>
-            <li onClick={() => handleSmoothScroll("AboutSection3")}>
-              <FontAwesomeIcon icon={faGlobeAmericas} />
-              Travel
-            </li>
-            <li onClick={() => handleSmoothScroll("AboutSection4")}>
-              <FontAwesomeIcon icon={faBookBookmark} />
-              Learn
-            </li>
-            <li onClick={() => handleSmoothScroll("AboutSection5")}>
-              <FontAwesomeIcon icon={faMountain} />
-              Outside
-            </li>
-          </ol>
-        </div>
+        </div> */}
 
         <div className="hero-fade-bottom" />
       </div>
