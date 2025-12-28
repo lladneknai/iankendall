@@ -21,14 +21,14 @@
       color: $dark;
       height: 100%;
       justify-content: space-between;
-      padding: 3rem 0;
+      padding: 0 0 1.5rem;
       position: relative;
       z-index: 1;
 
       .hero-content--top {
         margin-top: min(10vh, 7rem);
         @include bp(xl) {
-          margin-top: min(3vh, 6vw);
+          margin-top: min(8vh, 6vw);
         }
         @include bp(mobile) {
           margin-top: 5rem;
@@ -46,7 +46,7 @@
         font-size: 3rem;
         margin: 0 0 0.25em;
         @include bp(xl) {
-          font-size: 4rem;
+          font-size: 3.5rem;
         }
         @include bp(2xl) {
           font-size: 5rem;
@@ -116,7 +116,7 @@
         font-family: $sans-serif;
         font-size: 1.1rem;
         font-weight: 500;
-        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
         &:hover {
           text-decoration: underline;
         }
@@ -324,6 +324,7 @@
     .section-header {
       @include flex(column, 0);
       max-width: max(30vw, 520px);
+      min-width: 25vw;
 
       @include bp(mobile) {
         width: 80vw;
@@ -346,11 +347,11 @@
           border-radius: 50%;
           box-shadow: inset 0 0 0 2px $light-4;
           content: "";
-          height: 0.75rem;
+          height: 0.75em;
           left: -1em;
           position: absolute;
-          top: 0.6rem;
-          width: 0.75rem;
+          top: 0.3em;
+          width: 0.75em;
         }
       }
     }
@@ -430,7 +431,7 @@
     // Map transitions for tech icons
     @for $i from 1 through 10 {
       .about-tech-item:nth-child(#{$i}) {
-        transition-delay: calc(($i - 1) * 150ms + 500ms);
+        transition-delay: calc(($i - 1) * 100ms + 500ms);
       }
     }
 

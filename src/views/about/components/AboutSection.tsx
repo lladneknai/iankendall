@@ -44,7 +44,7 @@ export default function AboutSection({
     : "calc(min(60dvh, 80dvw))";
 
   const slideWidth = wide
-    ? "calc(min(60dvh, 80dvw))"
+    ? "calc(min(78dvh, 80dvw))"
     : "calc(min(50dvh, 80dvw))";
 
   return (
