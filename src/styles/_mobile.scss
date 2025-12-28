@@ -25,20 +25,20 @@
     will-change: opacity;
     transform: translateZ(0);
   }
-  .page {
-    .hero {
-      background-color: $aqua;
-      height: $hero-height-mobile;
-    }
-    .hero-content {
-      padding: 5rem 1rem 1rem;
-      width: calc(100% - 2rem);
-    }
-    .page-content {
-      padding: 1rem;
-      width: calc(100% - 2rem);
-    }
-  }
+  // .page {
+  //   .hero {
+  //     background-color: $aqua;
+  //     height: $hero-height-mobile;
+  //   }
+  //   .hero-content {
+  //     padding: 5rem 1rem 1rem;
+  //     width: calc(100% - 2rem);
+  //   }
+  //   .page-content {
+  //     padding: 1rem;
+  //     width: calc(100% - 2rem);
+  //   }
+  // }
 }
 
 // ============================

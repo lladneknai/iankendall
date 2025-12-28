@@ -135,9 +135,16 @@ html {
   transition: opacity var(--reveal-duration) ease,
     transform var(--reveal-duration) ease;
 
+  &.horizontal {
+    transform: translateX(var(--reveal-distance));
+  }
+
   &.shown {
     opacity: 1;
     transform: translateY(0);
+  }
+  &.horizontal.shown {
+    transform: translateX(0);
   }
 }
 

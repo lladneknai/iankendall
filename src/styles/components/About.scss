@@ -1,13 +1,20 @@
 @use "../shared.scss" as *;
 
 #About {
+  background-blend-mode: lighten;
+  background-image: url(/img/bg/topography.svg);
+  @include alpha-prop(background-color, $dark, -0.15);
+
   .hero {
     background-image: url(/img/bg/louise.jpg);
     background-position: bottom;
     height: 100vh;
     justify-content: flex-start;
-    // background-image: url(/img/bg/landscape-2.jpg);
-    // height: max(600px, 50vh);
+    position: relative;
+
+    @include bp(non-desktop) {
+      height: calc(var(--vh, 1vh) * 100);
+    }
 
     .hero-content {
       align-items: center;
@@ -22,6 +29,9 @@
         margin-top: min(10vh, 7rem);
         @include bp(xl) {
           margin-top: min(3vh, 6vw);
+        }
+        @include bp(mobile) {
+          margin-top: 5rem;
         }
       }
 
@@ -135,10 +145,11 @@
       }
     }
 
+    // TODO: this doesn't work with new dynamic vh calc
     .hero-fade-bottom {
       background: linear-gradient(to bottom, #0000 0%, $dark 90%);
       bottom: 0;
-      height: 10vh;
+      height: calc(calc(var(--vh, 1vh) * 100) / 10);
       position: absolute;
       width: 100%;
     }
@@ -193,6 +204,11 @@
   .navigate-btn-abs-bottom {
     bottom: 1.5rem;
     position: absolute;
+    @include bp(mobile) {
+      &:not(.last) {
+        display: none;
+      }
+    }
   }
 
   //
@@ -219,6 +235,7 @@
     align-items: center;
     height: 100vh;
     justify-content: center;
+    overflow: hidden;
 
     &.reverse {
       flex-direction: row-reverse;
@@ -231,11 +248,17 @@
       }
     }
 
-    @include bp(mobile) {
+    @include bp(non-desktop) {
+      height: calc(var(--vh, 1vh) * 100);
+      gap: 2rem;
+      padding-top: 1rem;
+      br {
+        display: none;
+      }
       text-align: left;
-      flex-direction: column;
+      flex-direction: column-reverse;
       &.reverse {
-        flex-direction: column;
+        flex-direction: column-reverse;
       }
       p {
         line-height: 1;
@@ -258,6 +281,12 @@
       color: $light;
       font-size: 2.25rem;
       margin-bottom: 0.75em;
+
+      @include bp(mobile) {
+        font-size: 1.75rem;
+        margin-bottom: 0.5em;
+      }
+
       @include bp(2xl) {
         font-size: 3rem;
       }
@@ -273,6 +302,10 @@
       svg {
         font-size: 0.75em;
       }
+
+      @include bp(mobile) {
+        font-size: 1rem;
+      }
       @include bp(2xl) {
         font-size: 1.4rem;
       }
@@ -280,16 +313,21 @@
 
     &.wide {
       @include bp(2xl) {
-        .section-content {
+        .section-content,
+        .section-header {
           max-width: 650px;
         }
       }
     }
 
-    .section-content {
+    .section-content,
+    .section-header {
       @include flex(column, 0);
       max-width: max(30vw, 520px);
 
+      @include bp(mobile) {
+        width: 80vw;
+      }
       @include bp(2xl) {
         max-width: 800px;
       }
@@ -358,19 +396,44 @@
       flex-direction: column;
       gap: 2rem;
     }
+  }
 
+  // TODO: would love to get rid of this selector
+  .section {
     .about-tech-list {
       @include flex(row, 0);
       justify-content: space-between;
       margin-right: 1rem;
       margin-top: 2rem;
+      transition: opacity 150ms ease-in-out;
+      @include bp(mobile) {
+        margin-top: 1rem;
+      }
     }
+
     .about-tech-item {
+      opacity: 0;
+      transition: opacity 200ms;
       svg {
         height: 1.5rem;
         width: 1.5rem;
       }
     }
+
+    // Trigger transitions when wrapper is shown
+    &.shown {
+      .about-tech-item {
+        opacity: 1;
+      }
+    }
+
+    // Map transitions for tech icons
+    @for $i from 1 through 10 {
+      .about-tech-item:nth-child(#{$i}) {
+        transition-delay: calc(($i - 1) * 150ms + 500ms);
+      }
+    }
+
     @include bp(2xl) {
       .about-tech-list {
         justify-content: flex-start;
@@ -433,7 +496,7 @@
       svg.goto {
         opacity: 1;
         transition: all 250ms;
-        transition-delay: 250ms;
+        transition-delay: 1250ms;
       }
     }
   }

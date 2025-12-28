@@ -38,6 +38,15 @@ export default function AboutSection({
 
   const sectionAttrs = `${reverse ? " reverse" : ""}${wide ? " wide" : ""}`;
 
+  // Set height and width for carousel slides
+  const slideHeight = wide
+    ? "calc(min(45dvh, 75dvw))"
+    : "calc(min(60dvh, 80dvw))";
+
+  const slideWidth = wide
+    ? "calc(min(60dvh, 80dvw))"
+    : "calc(min(50dvh, 80dvw))";
+
   return (
     <div id={`AboutSection${index}`}>
       <RevealOnScroll
@@ -47,14 +56,24 @@ export default function AboutSection({
         threshold={0.3}
       >
         <section className={`about-section ${sectionAttrs}`}>
-          <RevealOnScroll
-            className="section-content"
-            distance="25vh"
-            duration="750ms"
-            threshold={0.3}
-          >
-            {content}
-          </RevealOnScroll>
+          <div className="section-content">
+            <RevealOnScroll
+              className="horizontal"
+              distance={reverse ? "-25vw" : "25vw"}
+              duration="750ms"
+              threshold={0.5}
+            >
+              {content.header}
+            </RevealOnScroll>
+            <RevealOnScroll
+              className="horizontal"
+              distance={reverse ? "-25vw" : "25vw"}
+              duration="750ms"
+              threshold={0.7}
+            >
+              {content.content}
+            </RevealOnScroll>
+          </div>
 
           <Carousel
             arrows={false}
@@ -67,12 +86,8 @@ export default function AboutSection({
             }
             options={{ axis: "x", loop: true }}
             reverse={reverse}
-            // slideHeight="60vh"
-            slideHeight="calc(min(60vh, 80vw))"
-            slideWidth={
-              wide ? "calc(min(70vh, 80vw))" : "calc(min(50vh, 80vw))"
-              // wide ? "calc(min(70vh, 50vw))" : "calc(min(50vh, 30vw))"
-            }
+            slideHeight={slideHeight}
+            slideWidth={slideWidth}
           >
             {images.map((src, i) => (
               <div
@@ -86,7 +101,7 @@ export default function AboutSection({
             ))}
           </Carousel>
 
-          <div className="navigate-btn-abs-bottom">
+          <div className={`navigate-btn-abs-bottom${isLast ? " last" : ""}`}>
             {isLast ? (
               <NavigateButton
                 direction="up"
