@@ -1,4 +1,5 @@
 _TODO.txt
+_HOWTO.txt
 .ampt
 .ampt*rc
 .ampt/
@@ -11,5 +12,6 @@ node_modules.amptrc
 public/img/misc/
 public/mp3/src/
 public/sourcecode/
+public/sourcecode-ref.txt
 src/config/typing-dev.ts
 static/
