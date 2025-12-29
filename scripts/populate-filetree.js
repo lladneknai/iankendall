@@ -29,7 +29,7 @@ const filePaths = [];
 // INCLUDE these files and directories
 const includeList = [
   "api",
-  "lib",
+  "scripts",
   "src",
   "types",
   "index.html",
@@ -51,6 +51,7 @@ const excludeList = [
   "tsconfig.app.json",
   "tsconfig.node.json",
   "tsconfig.test.json",
+  "vite-env.d.ts",
   "vite.config.ts",
   "vitest.config.ts",
   "vitest.setup.ts",
