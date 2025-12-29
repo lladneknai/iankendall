@@ -5,14 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboard } from "@fortawesome/free-regular-svg-icons";
 
 // Import ALL about section images at build time
-const allImageModules = import.meta.glob(
-  "/public/img/about/about-*-*.{jpg,gif}",
-  {
-    eager: true,
-    query: "?url",
-    import: "default",
-  }
-);
+const allImageModules = import.meta.glob("/public/img/about/about-*-*.jpg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
 export default function AboutSection({
   content,
@@ -95,7 +92,7 @@ export default function AboutSection({
                 key={`about_${index}_img_${i}`}
                 style={{
                   backgroundImage: `url(${src})`,
-                  backgroundPosition: wide ? "top left" : "center",
+                  // backgroundPosition: wide ? "top left" : "center",
                 }}
               />
             ))}
