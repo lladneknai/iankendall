@@ -57,5 +57,17 @@ export default function useApp() {
     if (browser?.name === "Safari") {
       setSoundEnabled(false);
     }
+
+    // Set VH variable
+    // Fix mobile viewport height - capture once on load to prevent jumps when address bar hides
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+    setVH();
+    //
+    // Recalculate on resize (orientation change, etc) - NOT on scroll
+    // TODO: THIS SHOULD BE IN, BUT DOESN'T WORK ON MOBILE.
+    // window.addEventListener('resize', setVH);
   }, []);
 }

@@ -1,4 +1,6 @@
+import { MutableRefObject, ReactNode, RefObject } from "react";
 import { KeyboardReactInterface } from "react-simple-keyboard";
+import { EmblaOptionsType } from "embla-carousel";
 import type {
   About,
   Project,
@@ -15,7 +17,6 @@ import type {
   TypewriterFlowProps,
   UpdateFieldFn,
 } from "./shared";
-import { MutableRefObject, RefObject } from "react";
 
 /**
  * PROP TYPES
@@ -34,6 +35,33 @@ export interface CandleProps {
   bottom?: string;
   height?: string;
   width?: string;
+}
+
+export interface CarouselProps {
+  arrows?: boolean;
+  autoplay?: boolean;
+  autoplayActive?: boolean;
+  caption?: ReactNode | string;
+  children: ReactNode[];
+  hideControls?: boolean;
+  onSelectChange?: (index: number) => void;
+  options?: EmblaOptionsType;
+  reverse?: boolean;
+  selectedIndex?: number;
+  slideHeight?: string;
+  slideWidth?: string;
+  spacing?: string;
+}
+
+export interface CarouselControlsProps {
+  arrows?: boolean;
+  isPlaying?: boolean;
+  onDotClick: (index: number) => void;
+  onNext: () => void;
+  onPlayToggle?: () => void;
+  onPrev: () => void;
+  selectedIndex: number;
+  totalSlides: number;
 }
 
 export type CheckboxProps<T extends Record<string, any>> = FormFieldProps<T>;
@@ -176,6 +204,14 @@ export interface ProjectSelectProps {
   projects: Project[];
   projectsOrganized: ProjectsOrganized;
   selectProjectMobile: (key: string) => void;
+}
+
+export interface RevealOnScrollProps {
+  children: ReactNode;
+  className?: string;
+  distance?: string;
+  duration?: string;
+  threshold?: number;
 }
 
 export interface SoundEffectsToggleProps {

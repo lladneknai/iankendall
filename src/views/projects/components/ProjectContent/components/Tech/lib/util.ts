@@ -8,6 +8,7 @@ import {
   faAws,
   faFigma,
 } from "@fortawesome/free-brands-svg-icons";
+import { faTerminal } from "@fortawesome/free-solid-svg-icons";
 import {
   mongoIcon,
   muiIcon,
@@ -29,6 +30,7 @@ export function getTechIcon(key: string, stroke: string = "#ffefd5") {
     php: faPhp,
     aws: faAws,
     figma: faFigma,
+    bash: faTerminal,
   };
   const customIconMap: Record<string, any> = {
     ts: tsIcon(stroke),

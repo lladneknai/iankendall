@@ -10,7 +10,10 @@ $color-lightness-3: 45%;
 $primary-color: $sienna;
 
 #Projects {
-  background: $dark-1;
+  background-blend-mode: lighten;
+  background-image: url(/img/bg/circuit-board.svg);
+  @include alpha-prop(background-color, $dark, -0.1);
+
   color: $light;
   font-family: $serif;
   position: relative;
