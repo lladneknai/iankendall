@@ -202,13 +202,24 @@ html {
 // CAROUSEL STUFF
 //
 
+$carousel_final_max_width: 60vw;
+$carousel_final_max_height: 70vh;
+
 .embla {
   --slide-height: 19rem;
   --slide-spacing: 1rem;
   --slide-size: 100%;
-
-  max-width: 48rem;
   min-width: calc(var(--slide-size) + calc(var(--slide-spacing) * 2));
+
+  @include bp(2xl) {
+    min-width: calc(
+      min(
+        calc(var(--slide-size) + calc(var(--slide-spacing) * 2)),
+        $carousel_final_max_width
+      )
+    );
+  }
+
   position: relative;
 
   .horizontal {
@@ -238,8 +249,8 @@ html {
 }
 
 .embla__viewport-wrapper {
-  position: relative;
   flex: 1;
+  position: relative;
 
   &::before {
     content: "";
@@ -338,7 +349,7 @@ html {
   justify-content: flex-start;
   display: flex;
   flex-wrap: wrap;
-  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+  // margin-left: -0.33rem;
 }
 
 .embla__dot {

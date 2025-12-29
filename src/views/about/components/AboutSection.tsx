@@ -40,8 +40,10 @@ export default function AboutSection({
     ? "calc(min(45dvh, 75dvw))"
     : "calc(min(60dvh, 80dvw))";
 
+  // prettier-ignore
   const slideWidth = wide
-    ? "calc(min(78dvh, 80dvw))"
+    // ? "calc(min(78dvh, 80dvw))"
+    ?  "calc(min(66dvh, 80dvw))"
     : "calc(min(50dvh, 80dvw))";
 
   return (
