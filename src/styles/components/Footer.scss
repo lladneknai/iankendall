@@ -1,0 +1,182 @@
+@use "../shared.scss" as *;
+
+#Footer {
+  border-top: 2px solid;
+  @include alpha-prop(border-color, $light, -0.8);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+  white-space: nowrap;
+
+  @include bp(mobile) {
+    padding: 1.5rem;
+  }
+  @include bp(desktop) {
+    padding: 2rem;
+  }
+  @include bp(2xl) {
+    padding: 2rem;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1920px;
+    width: 100%;
+
+    @include bp(xl) {
+      justify-content: space-between;
+      flex-direction: row;
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+
+    @include bp(desktop) {
+      justify-content: center;
+    }
+
+    @include bp(xl) {
+      gap: 1rem;
+    }
+    @include bp(2xl) {
+      gap: 3rem;
+    }
+  }
+
+  .footer-content,
+  .footer-links {
+    @include bp(non-desktop) {
+      flex-direction: column;
+      gap: 2rem;
+      p {
+        font-size: 1rem;
+      }
+    }
+    & > *:not(:last-child) {
+      @include bp(xl) {
+        border-right: 2px solid;
+        @include alpha-prop(border-color, $light, -0.9);
+      }
+      @include bp(2xl) {
+        padding-right: 1.5rem;
+      }
+    }
+  }
+
+  p,
+  svg {
+    color: $light-4;
+    font-family: $sans-serif;
+    font-size: 0.85rem;
+    font-weight: 200;
+    letter-spacing: 0.04em;
+    margin: 0;
+    @include bp(2xl) {
+      font-size: 1rem;
+    }
+  }
+
+  .footer-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 13rem;
+
+    @include bp(xl) {
+      flex-direction: row;
+    }
+    @include bp(2xl) {
+      gap: 0.5rem;
+    }
+
+    &.copyright {
+      flex-direction: column;
+      @include bp(xl) {
+        flex-direction: row-reverse;
+      }
+    }
+    h5 {
+      color: $light-1;
+      font-size: 1rem;
+      margin: 0;
+      @include bp(mobile) {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+      }
+      @include bp(xl) {
+        display: none;
+      }
+    }
+  }
+
+  .item {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    overflow: hidden;
+    text-decoration: none;
+    z-index: 1;
+
+    @include bp(2xl) {
+      gap: 0.75rem;
+    }
+
+    svg.goto {
+      opacity: 0;
+      height: 0.5rem;
+      position: relative;
+      transition: all 125ms;
+      &.external {
+        left: -0.25rem;
+        top: -0.5rem;
+      }
+    }
+
+    &:hover {
+      p,
+      svg {
+        color: $light-1;
+        transition: color 250ms;
+      }
+
+      svg.goto {
+        opacity: 1;
+        transition: all 250ms;
+      }
+    }
+
+    @include bp(xl) {
+      &.hoverable {
+        cursor: help;
+      }
+
+      &.showable {
+        overflow: hidden;
+        padding-right: 0.75rem;
+
+        p {
+          position: relative;
+          transition: all 500ms;
+          z-index: 0;
+        }
+
+        &.hidden p {
+          opacity: 0;
+          right: -100%;
+        }
+
+        &.shown p {
+          opacity: 1;
+          right: 0;
+        }
+      }
+    }
+  }
+}
