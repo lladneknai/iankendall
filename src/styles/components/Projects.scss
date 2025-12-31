@@ -151,6 +151,7 @@ $primary-color: $sienna;
     }
     flex-grow: 1;
     img {
+      margin: 0.5rem auto 1rem;
       border-radius: 13px;
       max-width: 100%;
     }
@@ -191,6 +192,12 @@ $primary-color: $sienna;
           &:hover {
             @include alpha-prop(background-color, $light, -0.95);
           }
+        }
+
+        .MuiTreeItem-label,
+        .MuiTreeItem2-label {
+          font-size: 0.9rem;
+          font-family: $sans-serif;
         }
 
         .Mui-selected {

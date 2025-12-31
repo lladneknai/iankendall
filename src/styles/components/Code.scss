@@ -80,7 +80,8 @@ $window-height-inner: $window-height - $window-header-height;
         margin-left: 5px;
       }
     }
-    .MuiTreeItem-label {
+    .MuiTreeItem-label,
+    .MuiTreeItem2-label {
       font-size: 0.9rem;
       font-family: $sans-serif;
     }

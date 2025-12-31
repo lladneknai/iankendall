@@ -1,5 +1,4 @@
 import { ActionsProps } from "@shared";
-import LoadingBar from "../LoadingBar";
 
 /**
  * CONTENT EDITOR | action buttons (save or cancel)
@@ -12,7 +11,6 @@ export default function Actions({
 }: ActionsProps) {
   return (
     <div className="col gap-1">
-      <LoadingBar isLoading={isUploading || isSaving} />
       <div className="row gap-1">
         <button
           onClick={handleSave}

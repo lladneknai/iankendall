@@ -209,9 +209,9 @@
   }
 
   .divider {
-    border: 2px dashed #ffefd5;
-    height: 0px;
-    margin: auto;
-    width: 200px;
+    border: 1px solid;
+    @include alpha-prop(border-color, $light, -0.75);
+    height: 0;
+    margin: 2rem auto;
   }
 }
