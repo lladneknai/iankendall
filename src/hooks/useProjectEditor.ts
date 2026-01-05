@@ -20,13 +20,9 @@ export default function useProjectEditor({
   const [data, setData] = useState(project);
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [currentEditor, setCurrentEditor] = useState<"description" | "content">(
-    "content",
-  );
 
   // WYSIWYG / File Upload refs
-  const contentQuillRef = useRef<any>(null);
-  const descriptionQuillRef = useRef<any>(null);
+  const quillRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Use the hidden file inputs to upload images
@@ -51,8 +47,6 @@ export default function useProjectEditor({
       const data = await response.json();
 
       // Insert image into the current Quill editor
-      const quillRef =
-        currentEditor === "description" ? descriptionQuillRef : contentQuillRef;
       if (quillRef.current) {
         const quill = quillRef.current.getEditor();
         const range = quill.getSelection(true);
@@ -109,37 +103,8 @@ export default function useProjectEditor({
 
   // Return vars organized by type
   return {
-    methods: { handleImageUpload, handleSave, setCurrentEditor, updateField },
-    refs: { contentQuillRef, descriptionQuillRef, fileInputRef },
+    methods: { handleImageUpload, handleSave, updateField },
+    refs: { quillRef, fileInputRef },
     state: { data, isSaving, isUploading },
   };
 }
-
-/*
-    // Custom image handler for Quill
-    const imageHandler = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
-    // Quill editor modules with image button and custom handler
-    const modules = {
-        toolbar: {
-            container: [
-                [{ header: [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                [{ align: [] }],
-                ['link', 'image'],
-                ['clean'],
-            ],
-            handlers: {
-                image: imageHandler,
-            },
-        },
-    };
-
-    const formats = ['header', 'bold', 'italic', 'underline', 'strike', 'list', 'align', 'link', 'image'];
-
-*/

@@ -24,7 +24,6 @@ export interface Project {
   active: boolean;
   company: string;
   content: string;
-  description: string;
   key: string;
   links: ProjectLink[];
   name: string;

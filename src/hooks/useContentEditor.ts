@@ -16,12 +16,8 @@ export default function useContentEditor({
   const [data, setData] = useState<About>(inData);
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [currentEditor, setCurrentEditor] = useState<"description" | "content">(
-    "content"
-  );
 
-  const contentQuillRef = useRef<ReactQuill>(null);
-  const descriptionQuillRef = useRef<ReactQuill>(null);
+  const quillRef = useRef<ReactQuill>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Use the hidden file inputs to upload images
@@ -46,8 +42,6 @@ export default function useContentEditor({
       const data = await response.json();
 
       // Insert image into the current Quill editor
-      const quillRef =
-        currentEditor === "description" ? descriptionQuillRef : contentQuillRef;
       if (quillRef.current) {
         const quill = quillRef.current.getEditor();
         const range = quill.getSelection(true);
@@ -99,8 +93,8 @@ export default function useContentEditor({
 
   // Return vars organized by type
   return {
-    methods: { handleImageUpload, handleSave, setCurrentEditor, updateField },
-    refs: { contentQuillRef, descriptionQuillRef, fileInputRef },
+    methods: { handleImageUpload, handleSave, updateField },
+    refs: { quillRef, fileInputRef },
     state: { data, isSaving, isUploading },
   };
 }

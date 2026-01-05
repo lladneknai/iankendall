@@ -30,7 +30,6 @@ export default function useProjects() {
       active: true,
       company: "",
       content: "",
-      description: "",
       key: "",
       links: [],
       name: "",

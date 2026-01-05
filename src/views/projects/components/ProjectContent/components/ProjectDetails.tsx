@@ -4,18 +4,10 @@ import Links from "./Links";
 import Tech from "./Tech";
 
 export default function ProjectDetails({
-  project: { company, content, description, links, tech },
+  project: { company, content, links, tech },
 }: ProjectProps) {
   return (
     <div id="ProjectDetails">
-      <div>
-        <h4>Summary</h4>
-        <div
-          className="cms-html"
-          dangerouslySetInnerHTML={{ __html: description }}
-        />
-      </div>
-
       <div className="non-xl-only">
         <Tech tech={tech} />
       </div>

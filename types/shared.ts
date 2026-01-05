@@ -32,8 +32,6 @@ export interface PaperStyles {
   top: number;
 }
 
-export type SetEditorFn = (editor: "description" | "content") => void;
-
 export type SoundEffectName = "clunk" | "ding" | "keystroke";
 
 export interface TypewriterFlowProps {
@@ -46,7 +44,7 @@ export interface TypewriterFlowProps {
   typeBlock: (block: string) => void;
 }
 
-export type UpdateFieldFn = (key: string, value: any) => void;
+export type UpdateFieldFn = (key: any, value: any) => void;
 
 export interface UserAgent {
   browser: string;

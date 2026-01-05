@@ -33,7 +33,6 @@ const ProjectContent = ({
   const {
     company,
     content,
-    // description,
     links,
     tech,
   } = project;
@@ -46,11 +45,6 @@ const ProjectContent = ({
       />
       <div className="content">
         <div className="details">
-          {/* <div
-            className="cms-html"
-            dangerouslySetInnerHTML={{ __html: description }}
-          /> */}
-
           <div
             className="cms-html"
             dangerouslySetInnerHTML={{ __html: content }}

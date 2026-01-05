@@ -12,7 +12,6 @@ import type {
   FormFieldProps,
   MouseHoverHandlers,
   PaperStyles,
-  SetEditorFn,
   SoundEffectName,
   TypewriterFlowProps,
   UpdateFieldFn,
@@ -278,8 +277,7 @@ export interface WysiWygProps {
   editorRef: React.RefObject<any>;
   fileInputRef: React.RefObject<HTMLInputElement>;
   label: string;
-  name: "description" | "content";
-  setCurrentEditor: SetEditorFn;
+  name: string;
   updateField: UpdateFieldFn;
   value: string;
 }

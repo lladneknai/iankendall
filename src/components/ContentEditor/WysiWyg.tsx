@@ -24,7 +24,6 @@ export default function WysiWyg({
   fileInputRef,
   label,
   name,
-  setCurrentEditor,
   updateField,
   value,
 }: WysiWygProps) {
@@ -37,7 +36,6 @@ export default function WysiWyg({
           theme="snow"
           value={value}
           onChange={(val) => updateField(name, val)}
-          onFocus={() => setCurrentEditor(name)}
           modules={{
             toolbar: {
               container: [
@@ -54,7 +52,9 @@ export default function WysiWyg({
                     fileInputRef.current.click();
                   }
                 },
-                divider: function (this: { quill: ReturnType<ReactQuill["getEditor"]> }) {
+                divider: function (this: {
+                  quill: ReturnType<ReactQuill["getEditor"]>;
+                }) {
                   const quill = this.quill;
                   if (!quill) return;
                   const range = quill.getSelection(true);

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { ProjectEditorProps } from "@shared";
 import useProjectEditor from "@hooks/useProjectEditor";
+import LoadingBar from "@components/LoadingBar";
 import Tech from "@components/ContentEditor/Tech";
 import Links from "@components/ContentEditor/Links";
 import Actions from "@components/ContentEditor/Actions";
@@ -9,7 +10,6 @@ import WysiWyg from "@components/ContentEditor/WysiWyg";
 import Checkbox from "@components/ContentEditor/Checkbox";
 import FileInput from "@components/ContentEditor/FileInput";
 import TextField from "@components/ContentEditor/TextField";
-import LoadingBar from "@/components/LoadingBar";
 
 /**
  * PROJECT EDITOR
@@ -25,8 +25,8 @@ const ProjectEditor = ({
   setIsEditing,
 }: ProjectEditorProps) => {
   const {
-    methods: { handleImageUpload, handleSave, setCurrentEditor, updateField },
-    refs: { descriptionQuillRef, fileInputRef, contentQuillRef },
+    methods: { handleImageUpload, handleSave, updateField },
+    refs: { fileInputRef, quillRef },
     state: { data, isSaving, isUploading },
   } = useProjectEditor({ project, onSave });
 
@@ -55,25 +55,15 @@ const ProjectEditor = ({
         <TextField data={data} name="name" updateField={updateField} />
         <TextField data={data} name="key" updateField={updateField} />
         {/* 
-          WYSIWYG EDITORS
-          Write HTML for description and content.
+          WYSIWYG EDITOR
+          Write HTML for project content.
           This may include images handled by the hidden FileInput.
         */}
         <WysiWyg
-          editorRef={descriptionQuillRef}
-          fileInputRef={fileInputRef}
-          label="Description"
-          name="description"
-          setCurrentEditor={setCurrentEditor}
-          updateField={updateField}
-          value={data.description}
-        />
-        <WysiWyg
-          editorRef={contentQuillRef}
+          editorRef={quillRef}
           fileInputRef={fileInputRef}
           label="Content"
           name="content"
-          setCurrentEditor={setCurrentEditor}
           updateField={updateField}
           value={data.content}
         />
