@@ -9,6 +9,7 @@ import WysiWyg from "@components/ContentEditor/WysiWyg";
 import Checkbox from "@components/ContentEditor/Checkbox";
 import FileInput from "@components/ContentEditor/FileInput";
 import TextField from "@components/ContentEditor/TextField";
+import LoadingBar from "@/components/LoadingBar";
 
 /**
  * PROJECT EDITOR
@@ -44,7 +45,8 @@ const ProjectEditor = ({
           isUploading={isUploading}
         />
       </div>
-      <div className="col gap-2">
+      <LoadingBar isLoading={isUploading || isSaving} />
+      <div className="body">
         {/* 
           BASIC TEXT EDITORS
           Assign a key and syntactic name for this project.

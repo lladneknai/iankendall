@@ -106,7 +106,7 @@ export default function Carousel({
   return (
     <div className="embla" style={style}>
       <div
-        className={orientation === "vertical" ? "col gap-1" : "row gap-3"}
+        className={orientation === "vertical" ? "col gap-1" : "row gap-2"}
         style={reverse ? { flexDirection: "row-reverse" } : {}}
       >
         {caption && reverse && (

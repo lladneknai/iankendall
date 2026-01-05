@@ -1,9 +1,10 @@
 import { wait } from "@/util/promises";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MenuButtonProps } from "@shared";
 
 export default function MenuButton({ handleMenuToggle, isOpen }: MenuButtonProps) {
   const [buttonText, setButtonText] = useState("Menu");
+  const hasInteracted = useRef(false);
 
   // Build the text slowly with timeouts
   // TODO: could this be done with CSS?
@@ -18,11 +19,25 @@ export default function MenuButton({ handleMenuToggle, isOpen }: MenuButtonProps
   }
 
   useEffect(() => {
-    buildString(isOpen ? "Close" : "Menu");
+    const nextText = isOpen ? "Close" : "Menu";
+    
+    // If user hasn't interacted yet, just set the text immediately
+    if (!hasInteracted.current) {
+      setButtonText(nextText);
+      return;
+    }
+    
+    // After first interaction, always animate
+    buildString(nextText);
   }, [isOpen]);
 
+  const handleClick = () => {
+    hasInteracted.current = true;
+    handleMenuToggle();
+  };
+
   return (
-    <button id="NavbarMenuBtn" onClick={handleMenuToggle} type="button">
+    <button id="NavbarMenuBtn" onClick={handleClick} type="button">
       <div id="NavbarMenuBtnText">{buttonText}</div>
       <div id="NavbarMenuIcon" className={isOpen ? "open" : ""}>
         <span />

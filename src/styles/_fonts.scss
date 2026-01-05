@@ -1,6 +1,15 @@
 //
 // FONTS
 //
+// Archivo Light (200)
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/Archivo-ExtraLight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
 // Archivo Regular (400)
 @font-face {
   font-family: "Archivo";

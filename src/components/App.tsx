@@ -1,8 +1,9 @@
 import "@styles/index.scss";
-import { Outlet } from "react-router";
+import { Outlet, ScrollRestoration } from "react-router";
 import useApp from "@hooks/useApp";
 import Menu from "@components/Menu";
 import { useAppStore } from "@store/appStore";
+import Footer from "./Footer";
 import AppLoading from "./AppLoading";
 import CodeBrowser from "./CodeBrowser";
 
@@ -24,17 +25,20 @@ function App() {
 
   return (
     <>
+      {/* Scroll to top on route change */}
+      <ScrollRestoration />
+
       {/* Appwide menu */}
       <Menu />
 
-      {/* 
-        Floating source code browser
-        Visible everywhere except Code page
-      */}
+      {/* Floating source code browser - visible everywhere except Code page */}
       <CodeBrowser isWindow={true} />
 
       {/* content from /routes  */}
       <Outlet />
+
+      {/* Appwide cooter */}
+      <Footer />
     </>
   );
 }

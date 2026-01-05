@@ -49,6 +49,7 @@ $window-height-inner: $window-height - $window-header-height;
     width: 300px;
     h4 {
       font-size: 1.1rem;
+      font-weight: 500;
       margin-left: 7px;
       @include lighten($mint, 25%);
     }
@@ -79,7 +80,8 @@ $window-height-inner: $window-height - $window-header-height;
         margin-left: 5px;
       }
     }
-    .MuiTreeItem-label {
+    .MuiTreeItem-label,
+    .MuiTreeItem2-label {
       font-size: 0.9rem;
       font-family: $sans-serif;
     }

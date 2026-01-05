@@ -73,7 +73,7 @@ export default function ProjectFileTree({
           label: {
             style: {
               // color: isFolder ? folderColor : undefined,
-              fontWeight: isFolder ? 600 : undefined,
+              fontWeight: isFolder ? 500 : undefined,
             },
           },
         }}

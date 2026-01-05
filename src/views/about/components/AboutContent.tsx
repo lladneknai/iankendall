@@ -95,7 +95,7 @@ const content = [
           <li>The depth of my knowledge</li>
           <li>The breath of my experience</li>
         </ul>
-        <p style={{ textAlign: "right" }}>...I&rsquo;m wasting my time.</p>
+        <p>...I&rsquo;m wasting my time.</p>
       </>
     ),
   },
