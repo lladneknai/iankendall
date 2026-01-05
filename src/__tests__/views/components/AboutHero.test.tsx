@@ -92,4 +92,3 @@ describe("AboutHero", () => {
     expect(listItems?.length).toBe(5);
   });
 });
-

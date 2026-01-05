@@ -259,4 +259,3 @@ describe("AboutSection", () => {
     expect(reveals.length).toBeGreaterThan(0);
   });
 });
-

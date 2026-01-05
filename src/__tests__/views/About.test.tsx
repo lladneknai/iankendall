@@ -158,4 +158,3 @@ describe("About Page", () => {
     expect(captionText).toMatch(/Outside/i);
   });
 });
-

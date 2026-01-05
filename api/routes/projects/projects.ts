@@ -10,4 +10,3 @@ projectsRouter.get("/", asyncHandler(GetProjectsUC));
 projectsRouter.post("/", validateBody, asyncHandler(SaveProjectUC));
 
 export default projectsRouter;
-

@@ -32,4 +32,3 @@ export default function useRevealOnScroll(threshold = 0.2) {
 
   return { ref, isRevealed };
 }
-

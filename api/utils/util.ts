@@ -21,4 +21,3 @@ export function isEmpty(obj) {
 export function isImageFiletype(filename: string): boolean {
   return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(filename);
 }
-

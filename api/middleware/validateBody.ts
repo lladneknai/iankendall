@@ -10,7 +10,3 @@ export function validateBody(req: Request, res: Response, next: NextFunction) {
   }
   next();
 }
-
-
-
-

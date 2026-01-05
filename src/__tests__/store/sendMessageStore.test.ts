@@ -8,12 +8,9 @@ vi.mock("@/util/promises", () => ({
 }));
 
 vi.mock("@/store/codeStore", () => ({
-  useCodeStore: Object.assign(
-    () => ({ open: false, setOpen: vi.fn() }),
-    {
-      getState: () => ({ open: false, setOpen: vi.fn() }),
-    }
-  ),
+  useCodeStore: Object.assign(() => ({ open: false, setOpen: vi.fn() }), {
+    getState: () => ({ open: false, setOpen: vi.fn() }),
+  }),
 }));
 
 vi.mock("@/util/typewriter", () => ({
@@ -118,5 +115,3 @@ describe("useSendMessageStore", () => {
     });
   });
 });
-
-

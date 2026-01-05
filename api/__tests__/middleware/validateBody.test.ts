@@ -73,5 +73,3 @@ describe("validateBody middleware", () => {
     expect(next).not.toHaveBeenCalled();
   });
 });
-
-
