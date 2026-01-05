@@ -45,5 +45,3 @@ describe("Desk Config", () => {
     });
   });
 });
-
-

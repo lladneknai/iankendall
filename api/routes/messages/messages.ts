@@ -8,4 +8,3 @@ const messagesRouter = Router();
 messagesRouter.post("/send-message", validateBody, asyncHandler(SendMessageUC));
 
 export default messagesRouter;
-
