@@ -16,7 +16,7 @@ export default function Code() {
         </div>
       </div>
 
-      <div className={`page-content`}>
+      <div className={`content`}>
         <CodeBrowser isWindow={false} />
       </div>
     </div>

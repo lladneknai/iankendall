@@ -19,7 +19,7 @@ export default function About() {
   return (
     <div id="About" className="page">
       <AboutHero />
-      <div id="AboutContent" className="page-content">
+      <div id="AboutContent" className="content">
         <AboutSection
           content={content[0]}
           figIcon={faHand}

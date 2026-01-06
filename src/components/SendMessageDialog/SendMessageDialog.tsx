@@ -22,7 +22,7 @@ export default function SendMessageDialog() {
 
   return (
     <div id="SendMessageDialog" className={!isSendingMessage ? "hidden" : ""}>
-      <div className="content">
+      <div className="dialog-content">
         {false ? ( // flip to 'true' to test out any part of the flow
           <MessageSendError
             handleFinish={dialogState.handleFinish}

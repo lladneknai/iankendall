@@ -42,7 +42,7 @@ export default function ErrorBoundary() {
           <h6>In other words, that's an error.</h6>
         </div>
       </div>
-      <div className="page-content">
+      <div className="content">
         <pre style={{ padding: "2rem", color: "papayawhip" }}>
           {errorData.data}
         </pre>

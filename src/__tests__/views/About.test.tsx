@@ -67,7 +67,7 @@ describe("About Page", () => {
     const { container } = renderAbout();
     const content = container.querySelector("#AboutContent");
     expect(content).toBeInTheDocument();
-    expect(content).toHaveClass("page-content");
+    expect(content).toHaveClass("content");
   });
 
   it("renders all 5 about sections", () => {

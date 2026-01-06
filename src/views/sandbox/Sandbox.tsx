@@ -15,7 +15,7 @@ export default function Sandbox() {
           <h6>Hero paragraph telling you stuff.</h6>
         </div>
       </div>
-      <div className="page-content">
+      <div className="content">
         <h1>Heading Number 1</h1>
         <h2>Heading Number 2</h2>
         <h3>Heading Number 3</h3>

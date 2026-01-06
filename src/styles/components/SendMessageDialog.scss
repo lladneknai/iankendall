@@ -17,7 +17,7 @@ $content-height: 315px; // have to declare this for transitions...
   position: relative;
   width: calc(100vw - 8px);
   transition: height 500ms;
-  .content {
+  .dialog-content {
     @include flex(column, $content-gap);
     align-items: center;
     border-radius: 0.5rem;
@@ -50,7 +50,7 @@ $content-height: 315px; // have to declare this for transitions...
   &.hidden {
     height: 10px;
     transition: height $drawer-transition-speed;
-    .content {
+    .dialog-content {
       height: 0;
       padding: 0;
       opacity: 0;
@@ -154,7 +154,7 @@ $content-height: 315px; // have to declare this for transitions...
   }
 
   // LIGHT THEME (KEEP?)
-  .content.light {
+  .dialog-content.light {
     @include flex(column, 0.25rem);
     @include alpha-prop(background-color, $light, -0.1);
     align-items: center;

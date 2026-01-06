@@ -15,7 +15,7 @@ $window-height-inner: $window-height - $window-header-height;
     @include alpha-prop(background-color, $dark, -0.33);
     background-image: url(/img/bg/code.jpg);
   }
-  .page-content {
+  .content {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
