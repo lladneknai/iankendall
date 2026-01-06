@@ -20,7 +20,9 @@ export function requireDev(req: Request, res: Response, next: NextFunction) {
   const isDev = process.env.NODE_ENV === "development";
 
   if (!isDev) {
-    console.warn(`[AUTH] Blocked POST request to ${req.path} in non-dev environment`);
+    console.warn(
+      `[AUTH] Blocked POST request to ${req.path} in non-dev environment`
+    );
     return res.status(403).json({
       error: "Forbidden",
       message: "This endpoint is only available in development mode",

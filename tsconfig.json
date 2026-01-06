@@ -36,6 +36,7 @@
     /* Testing - include vitest globals for test files */
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "types", "vitest.setup.ts"],
+  "include": ["src", "types/**/*", "vitest.setup.ts"],
+  "exclude": ["types/**/*.d.ts", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

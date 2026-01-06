@@ -15,3 +15,4 @@ public/sourcecode/
 public/sourcecode-ref.txt
 src/config/typing-dev.ts
 static/
+*.tsbuildinfo

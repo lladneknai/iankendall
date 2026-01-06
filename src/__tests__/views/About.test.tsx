@@ -5,7 +5,7 @@ import About from "@/views/about/About";
 
 /**
  * About Page Tests
- * 
+ *
  * Tests the main About page component which displays:
  * - Hero section with navigation and table of contents
  * - 5 distinct sections with carousels and content:
@@ -34,7 +34,7 @@ vi.mock("@components/RevealOnScroll", () => ({
 }));
 
 // Mock import.meta.glob for AboutSection images
-vi.mock("/public/img/about/about-*-*.{jpg,gif}", () => ({}));
+vi.mock("/img/about/about-*-*.{jpg,gif}", () => ({}));
 
 const renderAbout = () => {
   return render(
@@ -149,7 +149,7 @@ describe("About Page", () => {
   it("renders all section labels", () => {
     const { container } = renderAbout();
     const captionText = container.textContent || "";
-    
+
     // Check that all labels appear in captions
     expect(captionText).toMatch(/Intro/i);
     expect(captionText).toMatch(/Build/i);

@@ -5,6 +5,8 @@ import ReactQuill from "react-quill-new";
 /**
  * USE CONTENT EDITOR | logic for AboutContentEditor
  *
+ * TODO: currently dead code - see @useProjectEditor instead
+ *
  * - Handles CRUD ops for the CMS
  * - WYSIWYG editors use react-quill lib to write HTML
  * - Image uploaders use hidden inputs, activated via WYSIWYG toolbar
