@@ -8,7 +8,7 @@ export default function Links({ links }: { links: ProjectLink[] }) {
     return null;
   }
   return (
-    <div>
+    <>
       <h4>Links</h4>
       <ul>
         {links.map((link) => (
@@ -24,6 +24,6 @@ export default function Links({ links }: { links: ProjectLink[] }) {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

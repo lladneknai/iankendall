@@ -1,65 +1,91 @@
-import LoadingBar from "@components/LoadingBar";
 import useProjects from "@hooks/useProjects";
-import ProjectSelect from "./components/ProjectSelect";
-import ProjectContent from "./components/ProjectContent";
-import ProjectFileTree from "./components/ProjectFileTree";
+import ContentLeft from "./components/ContentLeft";
+import ContentRight from "./components/ContentRight";
+import ProjectEditor from "./components/ProjectEditor";
+import ProjectError from "./components/ProjectError";
+import ProjectHero from "./components/ProjectHero";
+import SelectProjectPanel from "./components/SelectProjectPanel";
 
 /**
  * PROJECTS ROUTE
  * --------------
- * - A showcase of projects I've worked on throughout my career
- * - Data-driven via AMPT cloud storage and custom CMS (see ProjectEditor)
- *
- * - Components:
- *  - ProjectNav      | choose a project -> DESKTOP ONLY
- *  - ProjectSelect   | choose a project -> MOBILE ONLY
- *  - ProjectContent  | details of the selected project
+ * - /projects = List view of all projects
+ * - /projects/:key = Detail view of specific project
  */
 const Projects = () => {
   const {
-    methods: { onSave, setId, selectProjectMobile, setIsEditing },
+    methods: {
+      onSave,
+      selectProject,
+      setIsEditing,
+      setIsFiltering,
+      setIsTreeVisible,
+    },
     state: {
+      currentProject,
       error,
-      id,
       isEditing,
+      isFiltering,
       isLoading,
-      project,
-      projects,
+      isListView,
+      isTreeShown,
+      projectList,
       projectsOrganized,
+      selectedKey,
     },
   } = useProjects();
 
   return (
     <div id="Projects" className="page">
-      <div className="hero">
-        <div className="hero-content">
-          <h1>Projects</h1>
-          {/* Hot reload */}
-          <h6>Select a project to learn more.</h6>
-          <ProjectSelect
-            id={id}
-            projects={projects}
-            projectsOrganized={projectsOrganized}
-            selectProjectMobile={selectProjectMobile}
-          />
-        </div>
-        <LoadingBar isLoading={isLoading} />
-      </div>
+      <ProjectHero
+        isTreeShown={isTreeShown}
+        isListView={isListView}
+        isLoading={isLoading}
+        projectList={projectList}
+        projectsOrganized={projectsOrganized}
+        selectedKey={selectedKey}
+        selectProject={selectProject}
+        setIsTreeVisible={setIsTreeVisible}
+      />
 
       <div className={`page-content${isLoading ? " loading" : ""}`}>
-        {error && <h1>Error Loading Projects. Try again.</h1>}
-        {!error && (
+        {error ? (
+          <ProjectError error={error} />
+        ) : /****************
+              PROJECT EDITOR
+             ****************/
+        isEditing && currentProject ? (
+          <ProjectEditor
+            onSave={onSave}
+            project={currentProject}
+            setIsEditing={setIsEditing}
+          />
+        ) : (
+          /**********************
+            STANDARD PAGE CONTENT    
+           ***********************/
           <>
-            <ProjectFileTree
-              id={id}
+            <ContentLeft
+              isListView={isListView}
+              isLoading={isLoading}
+              project={currentProject}
               projectsOrganized={projectsOrganized}
-              setId={setId}
+              selectProject={selectProject}
             />
-            <ProjectContent
-              isEditing={isEditing}
-              onSave={onSave}
-              project={project}
-              setIsEditing={setIsEditing}
+            <ContentRight
+              isFiltering={isFiltering}
+              isListView={isListView}
+              isLoading={isLoading}
+              project={currentProject}
+            />
+            <SelectProjectPanel
+              isFiltering={isFiltering}
+              isTreeShown={isTreeShown}
+              projectsOrganized={projectsOrganized}
+              selectedKey={selectedKey}
+              selectProject={selectProject}
+              setIsFiltering={setIsFiltering}
+              setIsTreeVisible={setIsTreeVisible}
             />
           </>
         )}

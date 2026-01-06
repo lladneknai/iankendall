@@ -23,12 +23,38 @@ $primary-color: $sienna;
     // background-color: #0008;
     @include alpha-prop(background-color, $dark, -0.33);
     background-image: url(/img/bg/code.jpg);
-    h1 {
-      @include lighten($primary-color, $color-lightness);
+
+    .hero-action {
+      display: flex;
+      height: 30px; // TODO
+
+      button {
+        align-items: center;
+        background: transparent;
+        border: none;
+        color: $light-1;
+        cursor: pointer;
+        display: flex;
+        font-family: $sans-serif;
+        gap: 0.5rem;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
-    h6,
-    label {
-      @include lighten($primary-color, $color-lightness-2);
+
+    h1 {
+      a {
+        @include lighten($primary-color, $color-lightness);
+        text-decoration: none;
+        transition: color 240ms;
+        &:hover {
+          @include lighten($primary-color, $color-lightness-2);
+        }
+      }
+    }
+    h6 {
+      color: $light-1;
     }
   }
 
@@ -42,6 +68,36 @@ $primary-color: $sienna;
       h6 {
         display: none;
       }
+      .hero-action {
+        display: none;
+      }
+    }
+  }
+
+  // SHARED ELEMENTS
+  select {
+    border: 1px solid;
+    border-radius: 0.33rem;
+    color: $light;
+    font-size: 0.9rem;
+    @include alpha-prop(background-color, $dark, -0.5);
+    @include lighten-prop(border-color, $garnet, $color-lightness-2);
+    font-family: $serif;
+    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+    width: 100%;
+
+    // Custom arrow
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffefd5' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &:focus,
+    &:focus-within {
+      outline: none;
+      border: 1px solid $sienna;
     }
   }
 
@@ -50,8 +106,12 @@ $primary-color: $sienna;
   // =================
   $page-content-spacing: 2rem;
   .page-content {
-    @include flex(row, calc($page-content-spacing));
-    padding: 1.5rem 1.5rem 1.5rem 0;
+    @include flex(column, calc($page-content-spacing));
+    position: relative;
+
+    @include bp(desktop) {
+      flex-direction: row;
+    }
 
     h3:first-of-type {
       margin-top: 0;
@@ -66,8 +126,65 @@ $primary-color: $sienna;
       @include lighten($primary-color, $color-lightness);
       font-weight: 600;
     }
+
+    // Tech - shared
+    .tech {
+      @include flex(row, 1rem);
+      margin: 0.5rem 0 1rem;
+      padding-left: 0;
+
+      li {
+        list-style: none;
+        margin: 0;
+      }
+
+      @include bp(non-desktop) {
+        margin-bottom: 1rem;
+      }
+    }
   }
 
+  // ==========================
+  //  PAGE CONTENT | LEFT SIDE
+  // ==========================
+  .content {
+    flex-grow: 1;
+  }
+
+  // ===========================
+  //  PAGE CONTENT | RIGHT SIDE
+  // ===========================
+  .sidebar {
+    @include flex(column, 0);
+    flex-shrink: 0;
+
+    // ONLY ON DESKTOP does this GET a width
+    // ON MOBILE, it FLOWS vertically right after `content`
+    @include bp(desktop) {
+      width: 350px;
+    }
+
+    .company-img {
+      margin-bottom: 0.5rem;
+      height: 2rem;
+      width: fit-content;
+      @include bp(non-desktop) {
+        width: 200px;
+      }
+    }
+    .company-info {
+      margin-bottom: 1.25rem;
+    }
+
+    // @include bp(non-desktop) {
+    // display: none;
+    // }
+  }
+
+  // ------------------------------------------
+  // START HERE - THIS SELECTOR IS NOT USED -
+  // SO ALL OF THIS IS DEAD... RIGHT?
+  //-------------------------------------------
   #ProjectContent {
     flex-grow: 1;
     // @include flex(column, $page-content-spacing);
@@ -85,7 +202,7 @@ $primary-color: $sienna;
       @include flex(row, $page-content-spacing);
     }
 
-    ul {
+    ul:not(.tech) {
       @include flex(column, 0.5rem);
       padding: 0 0 0 0.5rem;
     }
@@ -96,14 +213,33 @@ $primary-color: $sienna;
       list-style: none;
     }
 
-    p.company {
+    .company {
       align-items: center;
-      @include flex(row, calc($page-content-spacing / 4));
+      font-family: $sans-serif;
+      font-weight: 500;
+      font-size: 1.1rem;
       padding-left: 0.5rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+
+      @include lighten($primary-color, $color-lightness);
+      @include flex(row, calc($page-content-spacing / 4));
+
       img {
         height: 1rem;
-        // width: 1rem;
       }
+    }
+    .company-img {
+      margin-bottom: 0.5rem;
+      height: 2rem;
+      width: fit-content;
+      @include bp(non-desktop) {
+        width: 200px;
+      }
+    }
+    .company-info {
+      margin-bottom: 1.25rem;
     }
 
     .disc {
@@ -129,16 +265,9 @@ $primary-color: $sienna;
       }
     }
 
-    .tech {
-      @include flex(row, 1rem);
-      margin: 0.5rem 0 0;
-      // margin: 0.5rem 0 1rem;
-      padding-left: 0;
-      li {
-        margin: 0;
-      }
-      @include bp(non-xl) {
-        margin-bottom: 1rem;
+    @include bp(non-xl) {
+      .tech {
+        margin-bottom: 1.25rem;
       }
     }
   }
@@ -150,34 +279,128 @@ $primary-color: $sienna;
       padding-bottom: 5rem;
     }
     flex-grow: 1;
-    img {
-      margin: 0.5rem auto 1rem;
-      border-radius: 13px;
-      max-width: 100%;
+  }
+
+  @include bp(non-desktop) {
+    .details-mobile {
+      display: flex;
+      flex-direction: column;
     }
   }
 
-  #ProjectDetailsSidebar {
-    @include flex(column, 1rem);
-    flex-shrink: 0;
-    width: 350px;
-
-    @include bp(non-xl) {
+  @include bp(desktop) {
+    .details-mobile {
       display: none;
     }
+  }
+
+  #EditProject {
+    position: absolute;
+    top: -55px;
+    right: 1rem;
   }
 
   // =========================
   //   SUBNAV | DESKTOP ONLY
   // =========================
+  $ProjectNav-width: 325px;
+  $ProjectNav-left-shown: -1.5rem;
+  $ProjectNav-left-hidden: calc(calc($ProjectNav-width * -1) - 4.5rem);
+
   #ProjectNav {
-    flex-shrink: 0;
-    min-width: 325px; // note: you might have to change this if you add a longer name
-    padding-top: 8px; // align w/header baseline (TODO: I still don't love this design)
-    width: fit-content;
+    @include flex(column, 0.5rem);
+
+    background: $dark-1;
+    box-shadow: 8px 0px 1rem -0.25rem rgba(0, 0, 0, 0.75);
+    height: max(calc(100vh - 261px), calc(100% - 2rem));
+    overflow: hidden;
+    padding: 0.5rem 0.75rem 1.5rem 100vw;
+    position: absolute;
+    top: 0;
+    transition: left 250ms, opacity 250ms;
+    white-space: nowrap;
+    width: $ProjectNav-width;
+
+    &.shown {
+      left: calc(-100vw + 1.5rem);
+      opacity: 1;
+      transition-delay: opacity 250ms;
+    }
+    &.hidden {
+      left: calc(-100vw - 325px - 3rem);
+      opacity: 0;
+    }
 
     @include bp(non-desktop) {
       display: none;
+    }
+
+    a,
+    button {
+      letter-spacing: 0.025em;
+      @include lighten($primary-color, $color-lightness);
+      font-family: $sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    a {
+      width: fit-content;
+      &:not(:hover) {
+        text-decoration: none;
+      }
+    }
+
+    button {
+      align-items: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      gap: 0.25rem;
+
+      svg {
+        transition: color 125ms;
+      }
+
+      &.project-filter-button {
+        padding: 0.5rem 0.5rem 0.5rem 0;
+        width: fit-content;
+        svg {
+          @include lighten($primary-color, $color-lightness);
+          position: relative;
+          top: -2px;
+        }
+      }
+
+      &.hide-projects {
+        @include lighten($primary-color, $color-lightness);
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        width: 1rem;
+      }
+    }
+
+    a,
+    button {
+      &:hover {
+        color: $light-2;
+        // text-decoration: underline;
+        svg {
+          color: $light-2;
+        }
+      }
+    }
+
+    .project-filter-container {
+      height: 10rem;
+      overflow: hidden;
+      transition: height 250ms;
+
+      &.hidden {
+        height: 2rem;
+      }
     }
 
     .MuiRichTreeView-root {
@@ -223,34 +446,79 @@ $primary-color: $sienna;
       margin: 0.5rem 0 0.75rem;
       display: block;
     }
+    // PUT OTRO STYLES HERE
     select {
-      border: 1px solid;
       border-radius: 0.75rem;
-      color: $light;
-      @include alpha-prop(background-color, $dark, -0.5);
-      @include lighten-prop(border-color, $garnet, $color-lightness-2);
-      font-family: $serif;
       font-size: 1.25rem;
-      padding: 0.25rem 0.25rem 0.25rem 0.5rem;
       padding-right: 2rem;
-      width: 100%;
 
       @include bp(bp-tiny) {
         font-size: 1rem;
       }
+    }
+  }
+  // ===============
+  // PROJECT FILTERS
+  // ===============
+  #ProjectFilters {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-family: $sans-serif;
+      @include lighten($primary-color, $color-lightness);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    select {
+      margin-bottom: 0.75rem;
+    }
+  }
 
-      // Custom arrow
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffefd5' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.75rem center;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
+  // =================
+  // LIST VIEW STYLES
+  // =================
+  #ProjectList {
+    @include flex(column, 1rem);
 
-      &:focus,
-      &:focus-within {
-        outline: none;
-        border: 1px solid $sienna;
+    .project-group {
+      @include flex(column, 1rem);
+    }
+
+    .project-card {
+      border: 1px solid;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      padding: 1rem;
+      position: relative;
+      transition: background-color 250ms, border-color 250ms;
+
+      @include flex(column, 0.25rem);
+      @include lighten-prop(border-color, $garnet, $color-lightness-2);
+
+      .view-project {
+        font-size: 0.9em;
+        opacity: 0;
+        position: absolute;
+        right: 1rem;
+        top: 1.25rem;
+        transition: opacity 250ms;
+
+        @include bp(non-desktop) {
+          display: none;
+        }
+
+        svg {
+          font-size: 0.8em;
+          margin-left: 0.25em;
+        }
+      }
+
+      &:hover {
+        @include alpha-prop(background-color, $light, -0.95);
+        @include alpha-prop(border-color, $light, -0.5);
+        .view-project {
+          opacity: 1;
+        }
       }
     }
   }

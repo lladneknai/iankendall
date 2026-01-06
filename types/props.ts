@@ -5,6 +5,7 @@ import type {
   About,
   Project,
   KeyboardLayout,
+  ProjectListItem,
   ProjectsOrganized,
 } from "./entities";
 import type {
@@ -192,6 +193,25 @@ export interface ProjectHeaderProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface SelectProjectPanelProps {
+  isFiltering: boolean;
+  isTreeShown: boolean;
+  projectsOrganized: ProjectsOrganized;
+  selectedKey?: string;
+  selectProject: (key: string) => void;
+  setIsFiltering: (value: boolean) => void;
+  setIsTreeVisible: (value: boolean) => void;
+}
+
+export interface ProjectFiltersProps {
+  // Uses store directly - no props needed
+}
+
+export interface ProjectListProps {
+  projectsOrganized: ProjectsOrganized;
+  selectProject: (key: string) => void;
+}
+
 export interface ProjectNavProps {
   id: string;
   projectsOrganized: ProjectsOrganized;
@@ -199,10 +219,10 @@ export interface ProjectNavProps {
 }
 
 export interface ProjectSelectProps {
-  id: string;
-  projects: Project[];
+  selectedKey?: string;
+  projectList: ProjectListItem[];
   projectsOrganized: ProjectsOrganized;
-  selectProjectMobile: (key: string) => void;
+  selectProject: (key: string) => void;
 }
 
 export interface RevealOnScrollProps {

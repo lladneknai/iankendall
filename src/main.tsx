@@ -25,6 +25,7 @@ const router = createBrowserRouter([
       { path: "/code", element: <Code /> },
       { path: "/contact", element: <Contact /> },
       { path: "/projects", element: <Projects /> },
+      { path: "/projects/:key", element: <Projects /> },
       { path: "/sandbox", element: <Sandbox /> },
     ],
     errorElement: <ErrorBoundary />,

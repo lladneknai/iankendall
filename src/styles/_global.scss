@@ -149,6 +149,11 @@ html {
 }
 
 .cms-html {
+  // Remove top margin from the very first child element
+  > *:first-child {
+    margin-top: 0;
+  }
+
   h4,
   h5,
   h6 {
@@ -159,6 +164,11 @@ html {
   ul {
     padding-left: 1.5rem;
     margin-bottom: 0.75rem;
+  }
+
+  img {
+    max-width: calc(100vw - 3rem);
+    width: 100%;
   }
 
   // Style Quill UI elements to match the disc bullets used in Company/Links
@@ -176,24 +186,6 @@ html {
   ul li,
   ol li {
     list-style-type: none;
-  }
-}
-
-@include bp(non-xl) {
-  .xl-only {
-    display: none;
-  }
-  .non-xl-only {
-    display: flex;
-  }
-}
-
-@include bp(xl) {
-  .non-xl-only {
-    display: none;
-  }
-  .xl-only {
-    display: flex;
   }
 }
 

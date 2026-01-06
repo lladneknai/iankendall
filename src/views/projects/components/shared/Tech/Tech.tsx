@@ -1,13 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getTechIcon } from "./lib/util";
 
-export default function Tech({ tech }: { tech: string[] }) {
+export default function Tech({
+  skipHeader = false,
+  tech,
+}: {
+  skipHeader?: boolean;
+  tech: string[];
+}) {
   if (!tech || tech.length === 0) {
     return null;
   }
   return (
-    <div>
-      <h4>Tech</h4>
+    <>
+      {!skipHeader && <h4>Tech</h4>}
       <ul className="tech">
         {tech.map((t) => {
           const { icon, isFa } = getTechIcon(t);
@@ -18,6 +24,6 @@ export default function Tech({ tech }: { tech: string[] }) {
           );
         })}
       </ul>
-    </div>
+    </>
   );
 }

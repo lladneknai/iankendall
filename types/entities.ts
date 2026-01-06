@@ -24,6 +24,7 @@ export interface Project {
   active: boolean;
   company: string;
   content: string;
+  description: string;
   key: string;
   links: ProjectLink[];
   name: string;
@@ -31,9 +32,19 @@ export interface Project {
   updatedAt?: string;
 }
 
+// Lightweight project type for list views (excludes heavy 'content' field)
+export interface ProjectListItem {
+  company: string;
+  description: string;
+  key: string;
+  links: ProjectLink[];
+  name: string;
+  tech: string[];
+}
+
 export interface ProjectsOrganized {
-  built: Project[];
-  eightHundred: Project[];
-  foxfuel: Project[];
-  phosphorus: Project[];
+  built: ProjectListItem[];
+  eightHundred: ProjectListItem[];
+  foxfuel: ProjectListItem[];
+  phosphorus: ProjectListItem[];
 }

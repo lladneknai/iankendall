@@ -12,9 +12,6 @@
   @include bp(mobile) {
     padding: 1.5rem;
   }
-  @include bp(desktop) {
-    padding: 2rem;
-  }
   @include bp(2xl) {
     padding: 2rem;
   }

@@ -1,4 +1,4 @@
-import type { About, Project } from "./entities";
+import type { About, Project, ProjectListItem } from "./entities";
 
 /**
  * API CONTRACT TYPES
@@ -12,9 +12,22 @@ export interface AboutSaveResponse {
   status: "ok";
 }
 
-export interface ProjectsResponse {
+// List of projects with limited fields
+export interface ProjectsListResponse {
   count: number;
-  projects: Project[];
+  projects: ProjectListItem[];
+  _debug?: {
+    totalDuration: string;
+    dataFetchDuration: string;
+    itemsReturned: number;
+    afterActiveFilter: number;
+    timestamp: string;
+  };
+}
+
+// Single project with full details
+export interface ProjectResponse {
+  project: Project;
 }
 
 export interface ProjectSaveResponse {

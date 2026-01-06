@@ -54,6 +54,7 @@ const ProjectEditor = ({
         <Checkbox data={data} name="active" updateField={updateField} />
         <TextField data={data} name="name" updateField={updateField} />
         <TextField data={data} name="key" updateField={updateField} />
+        <TextField data={data} name="description" updateField={updateField} />
         {/* 
           WYSIWYG EDITOR
           Write HTML for project content.

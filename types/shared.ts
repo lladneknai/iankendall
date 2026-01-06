@@ -6,6 +6,11 @@ import { ReactNode } from "react";
  * - Declared here to avoid dependency ordering issues and increase legibility
  */
 
+export interface ProjectFilters {
+  companies: string[];
+  tech: string[];
+}
+
 export interface ChildrenProps {
   children: ReactNode;
 }

@@ -6,14 +6,16 @@ import { getCompanyData } from "./lib/util";
 export default function Company({ company }: { company: string }) {
   const { headcount, links, name, logo, role, teamSize } =
     getCompanyData(company);
+
   return (
-    <div>
-      <h4>Company</h4>
-      <p className="company">
-        <img src={logo} />
-        {name}
-      </p>
-      <ul>
+    <>
+      <img alt={name} className="company-img" src={logo} />
+      {/* <h4>Company</h4> */}
+      {/* <p className="company">
+      <img src={logo} />
+      {name}
+      </p> */}
+      <ul className="company-info">
         <li>
           <div className="disc" />
           <strong>Role:</strong>
@@ -42,6 +44,6 @@ export default function Company({ company }: { company: string }) {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

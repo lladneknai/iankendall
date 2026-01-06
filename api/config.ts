@@ -13,3 +13,10 @@ export const EMAIL_SUBJECT = "New message from iankendall.me";
 
 // Dev
 export const DEV_MOCK_DELAY_MS = 2000;
+
+// Environment
+export const isDevelopment = () => {
+  return (
+    process.env.NODE_ENV === "development" || process.env.AMPT_ENV === "dev"
+  );
+};
