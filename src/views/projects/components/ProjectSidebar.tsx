@@ -14,9 +14,7 @@ export default function ProjectSidebar({
 }) {
   return (
     <div className="content--sidebar">
-      {isLoading ? (
-        <LoadingBar isLoading />
-      ) : currentProject ? (
+      {currentProject ? (
         <>
           <Company company={currentProject.company} />
           <Tech tech={currentProject.tech} />
@@ -25,6 +23,7 @@ export default function ProjectSidebar({
       ) : (
         <>
           <h4>Filters</h4>
+          <LoadingBar isLoading={isLoading} />
           <ProjectFilters />
         </>
       )}

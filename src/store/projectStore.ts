@@ -8,7 +8,7 @@ import { create } from "zustand";
  */
 
 export interface ProjectFilters {
-  companies: string[];
+  company: string;
   tech: string[];
 }
 
@@ -16,7 +16,7 @@ interface ProjectState {
   filters: ProjectFilters;
   isWithinProjectsFlow: boolean; // Track if user is within /projects/* routes
 
-  setCompanyFilters: (companies: string[]) => void;
+  setCompanyFilter: (company: string) => void;
   setTechFilters: (tech: string[]) => void;
   setFilters: (filters: Partial<ProjectFilters>) => void;
   clearFilters: () => void;
@@ -26,7 +26,7 @@ interface ProjectState {
 }
 
 const initialFilters: ProjectFilters = {
-  companies: [],
+  company: "",
   tech: [],
 };
 
@@ -34,9 +34,9 @@ export const useProjectStore = create<ProjectState>((set) => ({
   filters: initialFilters,
   isWithinProjectsFlow: false,
 
-  setCompanyFilters: (companies: string[]) =>
+  setCompanyFilter: (company: string) =>
     set((state) => ({
-      filters: { ...state.filters, companies },
+      filters: { ...state.filters, company },
     })),
 
   setTechFilters: (tech: string[]) =>

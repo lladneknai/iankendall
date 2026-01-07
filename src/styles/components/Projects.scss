@@ -38,6 +38,19 @@ $color-alt2: color.adjust($primary-color, $lightness: 30%);
     font-weight: 600;
   }
 
+  .disc {
+    background-color: transparent;
+    border: 2px solid $light;
+    border-radius: 10px;
+    display: inline-block;
+    flex-shrink: 0;
+    height: 0.25rem;
+    margin-right: 0.5rem;
+    position: relative;
+    top: -2px;
+    width: 0.25rem;
+  }
+
   select {
     border: 1px solid;
     border-color: $color-alt;
@@ -134,11 +147,10 @@ $color-alt2: color.adjust($primary-color, $lightness: 30%);
   // ==============
   //  PAGE CONTENT
   // ==============
-  $content-spacing: 2rem;
-
   .content {
-    @include flex(column, calc($content-spacing));
+    @include flex(column, 2.5rem);
     position: relative;
+    padding-bottom: 5rem;
 
     @include bp(desktop) {
       flex-direction: row;
@@ -165,19 +177,6 @@ $color-alt2: color.adjust($primary-color, $lightness: 30%);
           &:visited {
             color: $light-5;
           }
-        }
-
-        .disc {
-          background-color: transparent;
-          border: 2px solid $light;
-          border-radius: 10px;
-          display: inline-block;
-          flex-shrink: 0;
-          height: 0.25rem;
-          margin-right: 0.5rem;
-          position: relative;
-          top: -2px;
-          width: 0.25rem;
         }
 
         .goto {
@@ -254,14 +253,72 @@ $color-alt2: color.adjust($primary-color, $lightness: 30%);
   // LIST VIEW STYLES
   // =================
   #ProjectList {
-    @include flex(column, 1rem);
+    @include flex(column, 3rem);
+    position: relative;
 
     .project-group {
       @include flex(column, 1rem);
+      max-width: 1200px;
+      padding-left: 3rem;
+      position: relative;
+    }
+
+    .project-group--years {
+      background: linear-gradient(
+        to right,
+        #0000 0%,
+        $dark 5%,
+        $dark 95%,
+        #0000 100%
+      );
+      border-radius: 1rem;
+      color: $light-2;
+      font-family: $sans-serif;
+      left: 0;
+      padding: 0.25rem 0.5rem;
+      position: absolute;
+      top: calc(50% + 5rem);
+      transform: rotate(270deg);
+      transform-origin: 0 0;
+    }
+
+    .project-group--timeline {
+      background: linear-gradient(
+        to bottom,
+        #0000 0px,
+        $light-2 0.5%,
+        $light-2 99.5%,
+        #0000 100%
+      );
+      height: 100%;
+      left: 14px;
+      position: absolute;
+      width: 2px;
+    }
+
+    .project-group--label {
+      align-items: center;
+      @include flex(row, 0.5rem);
+
+      p {
+        color: $light-1;
+        font-family: $sans-serif;
+        letter-spacing: 0.025rem;
+        margin: 0;
+
+        strong {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .project-group--content {
+      @include flex(column, 1rem);
+      flex-grow: 1;
     }
 
     .project-card {
-      border: 1px solid;
+      border: 2px solid;
       border-radius: 0.5rem;
       cursor: pointer;
       padding: 1rem;
@@ -305,16 +362,97 @@ $color-alt2: color.adjust($primary-color, $lightness: 30%);
   #ProjectFilters {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+
+    .disc.checked {
+      background-color: $light;
+    }
+
+    input[type="radio"] {
+      appearance: none;
+      opacity: 0;
+      pointer-events: none;
+    }
 
     label {
+      color: $light-2;
+      cursor: pointer;
       font-family: $sans-serif;
-      color: $color-alt;
       font-weight: 500;
       margin-bottom: 0.25rem;
+      transition: color 125ms;
+
+      &:hover {
+        color: $light-1;
+      }
     }
 
     select {
       margin-bottom: 0.75rem;
+    }
+
+    .filter-group {
+      legend {
+        @include flex(row, 0);
+        justify-content: space-between;
+      }
+      button {
+        background: #0000;
+        border: 0;
+        color: $light-2;
+        cursor: pointer;
+        font-family: $sans-serif;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .filter-options {
+      @include flex(column, 0.25rem);
+    }
+
+    .tech-field {
+      @include flex(row, 0.25rem);
+      align-items: center;
+      width: fit-content;
+
+      input[type="checkbox"] {
+        border-color: $light-5;
+        &:hover {
+          background-color: $light-8;
+        }
+
+        &:checked {
+          background: $color-alt;
+        }
+      }
+
+      .tech-field--icon {
+        color: $light;
+        display: flex;
+        justify-content: center;
+        transform: scale(0.9);
+        width: 2rem;
+      }
+    }
+
+    .radio-field {
+      .disc {
+        height: 1rem;
+        top: 5px;
+        width: 1rem;
+        border-color: $light-4;
+      }
+
+      &:hover {
+        .disc {
+          background-color: $light-8;
+        }
+        .disc.checked {
+          background-color: $light-1;
+        }
+      }
     }
   }
 
@@ -441,8 +579,8 @@ $color-alt2: color.adjust($primary-color, $lightness: 30%);
     }
 
     .project-filter-container {
-      height: 10rem;
-      overflow: hidden;
+      height: min(20rem, 50vh);
+      overflow: scroll;
       transition: height 250ms;
 
       &.hidden {

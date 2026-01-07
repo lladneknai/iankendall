@@ -18,8 +18,8 @@ const fetcher = async (url: string) => {
 function buildQueryString(filters: ProjectFilters): string {
   const params = new URLSearchParams();
 
-  if (filters.companies.length > 0) {
-    params.append("company", filters.companies.join(","));
+  if (filters.company.length > 0) {
+    params.append("company", filters.company);
   }
 
   if (filters.tech.length > 0) {

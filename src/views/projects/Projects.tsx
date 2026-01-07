@@ -27,6 +27,7 @@ const Projects = () => {
       isEditing,
       isFiltering,
       isLoading,
+      isLoadingList,
       isListView,
       isTreeShown,
       projectList,
@@ -50,7 +51,7 @@ const Projects = () => {
         setIsTreeVisible={setIsTreeVisible}
       />
 
-      <div className={`content${isLoading ? " loading" : ""}`}>
+      <div className="content">
         {error ? (
           <ProjectError error={error} />
         ) : /****************
@@ -72,6 +73,7 @@ const Projects = () => {
               isFiltering={isFiltering}
               isListView={isListView}
               isLoading={isLoading}
+              isLoadingList={isLoadingList}
               projectsOrganized={projectsOrganized}
               selectProject={selectProject}
             />

@@ -191,8 +191,8 @@
     border: 2px solid $dark-4;
     border-radius: 4px;
     cursor: pointer;
-    height: 1.75rem;
-    width: 1.75rem;
+    height: 1.25rem;
+    width: 1.25rem;
   }
 
   input[type="checkbox"]:checked {
@@ -203,7 +203,7 @@
   input[type="checkbox"]:checked::before {
     color: $light;
     content: "✔";
-    font-size: 1.25rem;
+    font-size: 0.8rem;
     left: 4px;
     position: absolute;
   }
