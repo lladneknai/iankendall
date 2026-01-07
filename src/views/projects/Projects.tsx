@@ -1,9 +1,9 @@
 import useProjects from "@hooks/useProjects";
-import ContentLeft from "./components/ContentLeft";
-import ContentRight from "./components/ContentRight";
-import ProjectEditor from "./components/ProjectEditor";
-import ProjectError from "./components/ProjectError";
 import ProjectHero from "./components/ProjectHero";
+import ProjectError from "./components/ProjectError";
+import ProjectEditor from "./components/ProjectEditor";
+import ProjectContent from "./components/ProjectContent";
+import ProjectSidebar from "./components/ProjectSidebar";
 import SelectProjectPanel from "./components/SelectProjectPanel";
 
 /**
@@ -38,17 +38,19 @@ const Projects = () => {
   return (
     <div id="Projects" className="page">
       <ProjectHero
-        isTreeShown={isTreeShown}
+        isEditing={isEditing}
         isListView={isListView}
         isLoading={isLoading}
+        isTreeShown={isTreeShown}
         projectList={projectList}
         projectsOrganized={projectsOrganized}
         selectedKey={selectedKey}
         selectProject={selectProject}
+        setIsEditing={setIsEditing}
         setIsTreeVisible={setIsTreeVisible}
       />
 
-      <div className={`page-content${isLoading ? " loading" : ""}`}>
+      <div className={`content${isLoading ? " loading" : ""}`}>
         {error ? (
           <ProjectError error={error} />
         ) : /****************
@@ -65,18 +67,17 @@ const Projects = () => {
             STANDARD PAGE CONTENT    
            ***********************/
           <>
-            <ContentLeft
-              isListView={isListView}
-              isLoading={isLoading}
-              project={currentProject}
-              projectsOrganized={projectsOrganized}
-              selectProject={selectProject}
-            />
-            <ContentRight
+            <ProjectContent
+              currentProject={currentProject}
               isFiltering={isFiltering}
               isListView={isListView}
               isLoading={isLoading}
-              project={currentProject}
+              projectsOrganized={projectsOrganized}
+              selectProject={selectProject}
+            />
+            <ProjectSidebar
+              currentProject={currentProject}
+              isLoading={isLoading}
             />
             <SelectProjectPanel
               isFiltering={isFiltering}

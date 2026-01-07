@@ -15,14 +15,13 @@ export default function SelectProjectPanel({
   setIsFiltering,
   setIsTreeVisible,
 }: SelectProjectPanelProps) {
-  console.log({ projectsOrganized });
   const { handleTreeItemSelection, treeItems } = useSelectProjectPanel({
     projectsOrganized,
     selectProject,
   });
 
   return (
-    <div id="ProjectNav" className={isTreeShown ? "shown" : "hidden"}>
+    <div id="SelectProjectPanel" className={isTreeShown ? "shown" : "hidden"}>
       <PanelHeader
         isFiltering={isFiltering}
         setIsFiltering={setIsFiltering}

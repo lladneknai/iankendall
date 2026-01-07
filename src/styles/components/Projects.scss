@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../shared.scss" as *;
 
 // ========================
@@ -6,82 +7,44 @@
 
 $color-lightness: 15%;
 $color-lightness-2: 30%;
-$color-lightness-3: 45%;
 $primary-color: $sienna;
+$color-alt: color.adjust($primary-color, $lightness: 15%);
+$color-alt2: color.adjust($primary-color, $lightness: 30%);
 
 #Projects {
-  background-blend-mode: lighten;
-  background-image: url(/img/bg/circuit-board.svg);
-  @include alpha-prop(background-color, $dark, -0.1);
-
   color: $light;
   font-family: $serif;
   position: relative;
 
-  .hero {
-    background-blend-mode: multiply;
-    // background-color: #0008;
-    @include alpha-prop(background-color, $dark, -0.33);
-    background-image: url(/img/bg/code.jpg);
+  // Page BG: circuit board pattern (darkened)
+  background-blend-mode: lighten;
+  background-image: url(/img/bg/circuit-board.svg);
+  @include alpha-prop(background-color, $dark, -0.1);
 
-    .hero-action {
-      display: flex;
-      height: 30px; // TODO
-
-      button {
-        align-items: center;
-        background: transparent;
-        border: none;
-        color: $light-1;
-        cursor: pointer;
-        display: flex;
-        font-family: $sans-serif;
-        gap: 0.5rem;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-
-    h1 {
-      a {
-        @include lighten($primary-color, $color-lightness);
-        text-decoration: none;
-        transition: color 240ms;
-        &:hover {
-          @include lighten($primary-color, $color-lightness-2);
-        }
-      }
-    }
-    h6 {
-      color: $light-1;
-    }
+  @include bp(mobile) {
+    background-image: none;
   }
 
-  @include bp(non-desktop) {
-    .hero {
-      .hero-content {
-        h1 {
-          margin-bottom: 0;
-        }
-      }
-      h6 {
-        display: none;
-      }
-      .hero-action {
-        display: none;
-      }
-    }
+  // =================
+  //  SHARED ELEMENTS
+  // =================
+  h4 {
+    text-transform: uppercase;
   }
 
-  // SHARED ELEMENTS
+  h4,
+  h6 {
+    color: $color-alt;
+    font-weight: 600;
+  }
+
   select {
     border: 1px solid;
+    border-color: $color-alt;
     border-radius: 0.33rem;
     color: $light;
     font-size: 0.9rem;
     @include alpha-prop(background-color, $dark, -0.5);
-    @include lighten-prop(border-color, $garnet, $color-lightness-2);
     font-family: $serif;
     padding: 0.25rem 0.25rem 0.25rem 0.5rem;
     width: 100%;
@@ -101,12 +64,80 @@ $primary-color: $sienna;
     }
   }
 
-  // =================
-  //   PAGE CONTENT
-  // =================
-  $page-content-spacing: 2rem;
-  .page-content {
-    @include flex(column, calc($page-content-spacing));
+  // ===========
+  //  PAGE HERO
+  // ===========
+  .hero {
+    background-blend-mode: multiply;
+    background-image: url(/img/bg/code.jpg);
+    @include alpha-prop(background-color, $dark, -0.33);
+
+    .hero-action {
+      display: flex;
+      height: 30px;
+
+      p,
+      button {
+        color: $light-1;
+        font-family: $sans-serif;
+      }
+
+      p {
+        margin: 0;
+        line-height: 30px;
+      }
+
+      button {
+        align-items: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        gap: 0.5rem;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    h1 {
+      a {
+        color: $color-alt;
+        text-decoration: none;
+        transition: color 240ms;
+        &:hover {
+          color: $color-alt2;
+        }
+      }
+    }
+
+    #EditProjectBtn {
+      position: absolute;
+      right: 1.25rem;
+    }
+
+    @include bp(non-desktop) {
+      .hero-content {
+        h1 {
+          margin-bottom: 0;
+        }
+      }
+      p {
+        display: none;
+      }
+      .hero-action {
+        display: none;
+      }
+    }
+  }
+
+  // ==============
+  //  PAGE CONTENT
+  // ==============
+  $content-spacing: 2rem;
+
+  .content {
+    @include flex(column, calc($content-spacing));
     position: relative;
 
     @include bp(desktop) {
@@ -117,29 +148,51 @@ $primary-color: $sienna;
       margin-top: 0;
     }
 
-    h4 {
-      text-transform: uppercase;
-    }
-
-    h4,
-    h6 {
-      @include lighten($primary-color, $color-lightness);
-      font-weight: 600;
-    }
-
-    // Tech - shared
-    .tech {
-      @include flex(row, 1rem);
-      margin: 0.5rem 0 1rem;
-      padding-left: 0;
+    ul {
+      padding-left: 0.5rem;
 
       li {
+        align-items: baseline;
+        display: flex;
+        gap: 0.25rem;
         list-style: none;
-        margin: 0;
-      }
 
-      @include bp(non-desktop) {
-        margin-bottom: 1rem;
+        a {
+          color: $light-1;
+          &:hover {
+            color: $light-3;
+          }
+          &:visited {
+            color: $light-5;
+          }
+        }
+
+        .disc {
+          background-color: transparent;
+          border: 2px solid $light;
+          border-radius: 10px;
+          display: inline-block;
+          flex-shrink: 0;
+          height: 0.25rem;
+          margin-right: 0.5rem;
+          position: relative;
+          top: -2px;
+          width: 0.25rem;
+        }
+
+        .goto {
+          font-size: 0.75em;
+        }
+
+        .link {
+          align-items: center;
+          display: flex;
+          gap: 0.5rem;
+        }
+      }
+      &.tech {
+        @include flex(row, 1rem);
+        padding-left: 0;
       }
     }
   }
@@ -147,14 +200,26 @@ $primary-color: $sienna;
   // ==========================
   //  PAGE CONTENT | LEFT SIDE
   // ==========================
-  .content {
+  .content--main {
     flex-grow: 1;
+
+    // Hide the name on mobile (use native select instead)
+    .header {
+      @include bp(non-desktop) {
+        display: none;
+      }
+    }
+
+    ul:not(.tech) {
+      @include flex(column, 0.5rem);
+      padding: 0 0 0 0.5rem;
+    }
   }
 
   // ===========================
   //  PAGE CONTENT | RIGHT SIDE
   // ===========================
-  .sidebar {
+  .content--sidebar {
     @include flex(column, 0);
     flex-shrink: 0;
 
@@ -164,313 +229,24 @@ $primary-color: $sienna;
       width: 350px;
     }
 
-    .company-img {
-      margin-bottom: 0.5rem;
-      height: 2rem;
-      width: fit-content;
+    ul.tech {
+      margin: 0.5rem 0 1rem;
+
       @include bp(non-desktop) {
-        width: 200px;
-      }
-    }
-    .company-info {
-      margin-bottom: 1.25rem;
-    }
-
-    // @include bp(non-desktop) {
-    // display: none;
-    // }
-  }
-
-  // ------------------------------------------
-  // START HERE - THIS SELECTOR IS NOT USED -
-  // SO ALL OF THIS IS DEAD... RIGHT?
-  //-------------------------------------------
-  #ProjectContent {
-    flex-grow: 1;
-    // @include flex(column, $page-content-spacing);
-    @include flex(column, 0);
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      @include bp(non-desktop) {
-        display: none;
-      }
-    }
-
-    .content {
-      @include flex(row, $page-content-spacing);
-    }
-
-    ul:not(.tech) {
-      @include flex(column, 0.5rem);
-      padding: 0 0 0 0.5rem;
-    }
-
-    li {
-      @include flex(row, 0.5rem);
-      align-items: center;
-      list-style: none;
-    }
-
-    .company {
-      align-items: center;
-      font-family: $sans-serif;
-      font-weight: 500;
-      font-size: 1.1rem;
-      padding-left: 0.5rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-
-      @include lighten($primary-color, $color-lightness);
-      @include flex(row, calc($page-content-spacing / 4));
-
-      img {
-        height: 1rem;
-      }
-    }
-    .company-img {
-      margin-bottom: 0.5rem;
-      height: 2rem;
-      width: fit-content;
-      @include bp(non-desktop) {
-        width: 200px;
-      }
-    }
-    .company-info {
-      margin-bottom: 1.25rem;
-    }
-
-    .disc {
-      background-color: transparent;
-      border: 2px solid $light;
-      border-radius: 10px;
-      height: 0.25rem;
-      width: 0.25rem;
-    }
-
-    .goto {
-      font-size: 0.75em;
-    }
-
-    .link {
-      align-items: center;
-      color: $light;
-      display: flex;
-      gap: 5px;
-      &:visited {
-        color: $light;
-        /* color: #c3b59e; */
-      }
-    }
-
-    @include bp(non-xl) {
-      .tech {
         margin-bottom: 1.25rem;
       }
     }
-  }
 
-  .details {
-    padding-bottom: 10rem;
-    @include flex(column, 1rem);
-    @include bp(non-desktop) {
-      padding-bottom: 5rem;
-    }
-    flex-grow: 1;
-  }
-
-  @include bp(non-desktop) {
-    .details-mobile {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-
-  @include bp(desktop) {
-    .details-mobile {
-      display: none;
-    }
-  }
-
-  #EditProject {
-    position: absolute;
-    top: -55px;
-    right: 1rem;
-  }
-
-  // =========================
-  //   SUBNAV | DESKTOP ONLY
-  // =========================
-  $ProjectNav-width: 325px;
-  $ProjectNav-left-shown: -1.5rem;
-  $ProjectNav-left-hidden: calc(calc($ProjectNav-width * -1) - 4.5rem);
-
-  #ProjectNav {
-    @include flex(column, 0.5rem);
-
-    background: $dark-1;
-    box-shadow: 8px 0px 1rem -0.25rem rgba(0, 0, 0, 0.75);
-    height: max(calc(100vh - 261px), calc(100% - 2rem));
-    overflow: hidden;
-    padding: 0.5rem 0.75rem 1.5rem 100vw;
-    position: absolute;
-    top: 0;
-    transition: left 250ms, opacity 250ms;
-    white-space: nowrap;
-    width: $ProjectNav-width;
-
-    &.shown {
-      left: calc(-100vw + 1.5rem);
-      opacity: 1;
-      transition-delay: opacity 250ms;
-    }
-    &.hidden {
-      left: calc(-100vw - 325px - 3rem);
-      opacity: 0;
-    }
-
-    @include bp(non-desktop) {
-      display: none;
-    }
-
-    a,
-    button {
-      letter-spacing: 0.025em;
-      @include lighten($primary-color, $color-lightness);
-      font-family: $sans-serif;
-      font-weight: 500;
-      text-transform: uppercase;
-    }
-
-    a {
+    .company-img {
+      margin-bottom: 0.5rem;
+      height: 2rem;
       width: fit-content;
-      &:not(:hover) {
-        text-decoration: none;
+      @include bp(non-desktop) {
+        width: 200px;
       }
     }
-
-    button {
-      align-items: center;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      gap: 0.25rem;
-
-      svg {
-        transition: color 125ms;
-      }
-
-      &.project-filter-button {
-        padding: 0.5rem 0.5rem 0.5rem 0;
-        width: fit-content;
-        svg {
-          @include lighten($primary-color, $color-lightness);
-          position: relative;
-          top: -2px;
-        }
-      }
-
-      &.hide-projects {
-        @include lighten($primary-color, $color-lightness);
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        width: 1rem;
-      }
-    }
-
-    a,
-    button {
-      &:hover {
-        color: $light-2;
-        // text-decoration: underline;
-        svg {
-          color: $light-2;
-        }
-      }
-    }
-
-    .project-filter-container {
-      height: 10rem;
-      overflow: hidden;
-      transition: height 250ms;
-
-      &.hidden {
-        height: 2rem;
-      }
-    }
-
-    .MuiRichTreeView-root {
-      .MuiCollapse-root {
-        .MuiTreeItem-content {
-          border-radius: 0.5rem;
-        }
-
-        .MuiTreeItem-root {
-          border-radius: 0.5rem;
-          transition: background-color 125ms;
-          &:hover {
-            @include alpha-prop(background-color, $light, -0.95);
-          }
-        }
-
-        .MuiTreeItem-label,
-        .MuiTreeItem2-label {
-          font-size: 0.9rem;
-          font-family: $sans-serif;
-        }
-
-        .Mui-selected {
-          @include alpha-prop(background-color, $light, -0.925);
-          &:hover {
-            @include alpha-prop(background-color, $light, -0.925);
-          }
-        }
-      }
-    }
-  }
-
-  // ================================
-  //   PROJECT SELECT | MOBILE ONLY
-  // ================================
-  #ProjectSelect {
-    @include bp(desktop) {
-      display: none;
-    }
-
-    label {
-      font-family: $sans-serif;
-      margin: 0.5rem 0 0.75rem;
-      display: block;
-    }
-    // PUT OTRO STYLES HERE
-    select {
-      border-radius: 0.75rem;
-      font-size: 1.25rem;
-      padding-right: 2rem;
-
-      @include bp(bp-tiny) {
-        font-size: 1rem;
-      }
-    }
-  }
-  // ===============
-  // PROJECT FILTERS
-  // ===============
-  #ProjectFilters {
-    display: flex;
-    flex-direction: column;
-    label {
-      font-family: $sans-serif;
-      @include lighten($primary-color, $color-lightness);
-      font-weight: 500;
-      margin-bottom: 0.25rem;
-    }
-    select {
-      margin-bottom: 0.75rem;
+    .company-info {
+      margin-bottom: 1.25rem;
     }
   }
 
@@ -518,6 +294,187 @@ $primary-color: $sienna;
         @include alpha-prop(border-color, $light, -0.5);
         .view-project {
           opacity: 1;
+        }
+      }
+    }
+  }
+
+  // =================
+  //  PROJECT FILTERS
+  // =================
+  #ProjectFilters {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-family: $sans-serif;
+      color: $color-alt;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    select {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  // ================================
+  //   PROJECT SELECT | MOBILE ONLY
+  // ================================
+  #ProjectSelect {
+    @include bp(desktop) {
+      display: none;
+    }
+
+    label {
+      font-family: $sans-serif;
+      margin: 0.5rem 0 0.75rem;
+      display: block;
+    }
+
+    select {
+      border-radius: 0.75rem;
+      font-size: 1.25rem;
+      padding-right: 2rem;
+
+      @include bp(bp-tiny) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // ======================================
+  //   SELECT PROJECT PANEL | DESKTOP ONLY
+  // ======================================
+  $SelectProjectPanel-width: 325px;
+  $SelectProjectPanel-left-shown: -1.5rem;
+  $SelectProjectPanel-left-hidden: calc(
+    calc($SelectProjectPanel-width * -1) - 4.5rem
+  );
+
+  #SelectProjectPanel {
+    @include flex(column, 0.5rem);
+
+    background: $dark-1;
+    box-shadow: 8px 0px 1rem -0.25rem rgba(0, 0, 0, 0.75);
+    height: max(calc(100vh - 261px), calc(100% - 2rem));
+    overflow: hidden;
+    padding: 0.5rem 0.75rem 1.5rem 100vw;
+    position: absolute;
+    top: 0;
+    transition: left 250ms, opacity 250ms;
+    white-space: nowrap;
+    width: $SelectProjectPanel-width;
+
+    &.shown {
+      left: calc(-100vw + 1.5rem);
+      opacity: 1;
+      transition-delay: opacity 250ms;
+    }
+    &.hidden {
+      left: calc(-100vw - 325px - 3rem);
+      opacity: 0;
+    }
+
+    @include bp(non-desktop) {
+      display: none;
+    }
+
+    a,
+    button {
+      letter-spacing: 0.025em;
+      color: $color-alt;
+      font-family: $sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+
+      &:hover {
+        color: $light-2;
+        svg {
+          color: $light-2;
+        }
+      }
+    }
+
+    a {
+      width: fit-content;
+      &:not(:hover) {
+        text-decoration: none;
+      }
+    }
+
+    button {
+      align-items: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      gap: 0.25rem;
+
+      svg {
+        transition: color 125ms;
+      }
+
+      &.project-filter-button {
+        padding: 0.5rem 0.5rem 0.5rem 0;
+        width: fit-content;
+        svg {
+          color: $color-alt;
+          position: relative;
+          top: -2px;
+        }
+      }
+
+      &.hide-projects {
+        color: $color-alt;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        width: 1rem;
+      }
+    }
+
+    ul {
+      li {
+        flex-direction: column;
+      }
+    }
+
+    .project-filter-container {
+      height: 10rem;
+      overflow: hidden;
+      transition: height 250ms;
+
+      &.hidden {
+        height: 2rem;
+      }
+    }
+
+    .MuiRichTreeView-root {
+      .MuiCollapse-root {
+        .MuiTreeItem-content {
+          border-radius: 0.5rem;
+        }
+
+        .MuiTreeItem-root {
+          border-radius: 0.5rem;
+          transition: background-color 125ms;
+          &:hover {
+            @include alpha-prop(background-color, $light, -0.95);
+          }
+        }
+
+        .MuiTreeItem-label,
+        .MuiTreeItem2-label {
+          font-size: 0.9rem;
+          font-family: $sans-serif;
+        }
+
+        .Mui-selected {
+          @include alpha-prop(background-color, $light, -0.925);
+          &:hover {
+            @include alpha-prop(background-color, $light, -0.925);
+          }
         }
       }
     }

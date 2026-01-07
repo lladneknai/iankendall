@@ -193,16 +193,6 @@ export interface ProjectHeaderProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface SelectProjectPanelProps {
-  isFiltering: boolean;
-  isTreeShown: boolean;
-  projectsOrganized: ProjectsOrganized;
-  selectedKey?: string;
-  selectProject: (key: string) => void;
-  setIsFiltering: (value: boolean) => void;
-  setIsTreeVisible: (value: boolean) => void;
-}
-
 export interface ProjectFiltersProps {
   // Uses store directly - no props needed
 }
@@ -210,12 +200,6 @@ export interface ProjectFiltersProps {
 export interface ProjectListProps {
   projectsOrganized: ProjectsOrganized;
   selectProject: (key: string) => void;
-}
-
-export interface ProjectNavProps {
-  id: string;
-  projectsOrganized: ProjectsOrganized;
-  setId: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ProjectSelectProps {
@@ -231,6 +215,16 @@ export interface RevealOnScrollProps {
   distance?: string;
   duration?: string;
   threshold?: number;
+}
+
+export interface SelectProjectPanelProps {
+  isFiltering: boolean;
+  isTreeShown: boolean;
+  projectsOrganized: ProjectsOrganized;
+  selectedKey?: string;
+  selectProject: (key: string) => void;
+  setIsFiltering: (value: boolean) => void;
+  setIsTreeVisible: (value: boolean) => void;
 }
 
 export interface SoundEffectsToggleProps {

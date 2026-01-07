@@ -5,14 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProjectSelect from "./ProjectSelect";
 
 export default function ProjectHero({
+  isEditing,
   isListView,
   isLoading,
   isTreeShown,
-  setIsTreeVisible,
+  projectList,
   projectsOrganized,
   selectedKey,
   selectProject,
-  projectList,
+  setIsEditing,
+  setIsTreeVisible,
 }: any) {
   return (
     <div className="hero">
@@ -24,7 +26,7 @@ export default function ProjectHero({
         {/* SUBHEADER / ACTION */}
         <div className="hero-action">
           {isListView || isTreeShown ? (
-            <h6>Select a project to learn more.</h6>
+            <p>Select a project to learn more.</p>
           ) : (
             <button onClick={() => setIsTreeVisible(true)} type="button">
               <FontAwesomeIcon icon={faFolderOpen} />
@@ -32,6 +34,18 @@ export default function ProjectHero({
             </button>
           )}
         </div>
+
+        {/* DEV ONLY - EDIT PROJECT */}
+        {!isEditing && (
+          <button
+            id="EditProjectBtn"
+            className="btn btn-edit"
+            onClick={() => setIsEditing(true)}
+            type="button"
+          >
+            Edit Project
+          </button>
+        )}
 
         {/* MOBILE-ONLY SELECT */}
         <ProjectSelect
@@ -42,7 +56,6 @@ export default function ProjectHero({
         />
       </div>
 
-      {/* TODO: move this into the select component? */}
       <LoadingBar isLoading={isLoading} />
     </div>
   );
