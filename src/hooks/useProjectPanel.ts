@@ -3,12 +3,12 @@ import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import type { ProjectsOrganized } from "@shared";
 
 /**
- * USE SELECT PROJECT PANEL
- * ---------------------
+ * USE PROJECT PANEL
+ * -----------------
  * Transforms organized projects into MUI TreeView structure
  * Returns null if projects haven't loaded yet to prevent MUI errors
  */
-export default function useSelectProjectPanel({
+export default function useProjectPanel({
   projectsOrganized,
   selectProject,
 }: {
@@ -60,7 +60,7 @@ export default function useSelectProjectPanel({
           label: proj.name,
         })),
       },
-    ];
+    ].filter((group) => group.children.length > 0);
   }, [projectsOrganized]);
 
   // Handle item selection - only select projects (non-folder items)

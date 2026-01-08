@@ -77,6 +77,14 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   min-height: 100vh;
+
+  // Allow footer to show at min-height on bigger desktops
+  @include bp(xl) {
+    min-height: calc(100vh - 65px);
+  }
+  @include bp(2xl) {
+    min-height: calc(100vh - 101px);
+  }
 }
 
 .hero {

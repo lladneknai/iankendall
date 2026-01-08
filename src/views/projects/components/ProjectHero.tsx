@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import LoadingBar from "@components/LoadingBar";
-import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilter,
+  faFilterCircleXmark,
+  faFolderOpen,
+  faFolder,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ProjectSelect from "./ProjectSelect";
 
 export default function ProjectHero({
   isEditing,
+  isFiltering,
   isListView,
   isLoading,
   isTreeShown,
-  projectList,
-  projectsOrganized,
-  selectedKey,
-  selectProject,
   setIsEditing,
+  setIsFiltering,
   setIsTreeVisible,
 }: any) {
   return (
@@ -25,14 +27,38 @@ export default function ProjectHero({
 
         {/* SUBHEADER / ACTION */}
         <div className="hero-action">
-          {isListView || isTreeShown ? (
-            <p>Select a project to learn more.</p>
-          ) : (
-            <button onClick={() => setIsTreeVisible(true)} type="button">
-              <FontAwesomeIcon icon={faFolderOpen} />
-              View All Projects
+          {isListView && <p>Select a project to learn more.</p>}
+
+          <div
+            className={`hero-action--buttons ${isListView ? "list" : "detail"}`}
+          >
+            <button
+              className={isFiltering ? "active" : ""}
+              onClick={() => {
+                setIsFiltering(!isFiltering);
+                setIsTreeVisible(false);
+              }}
+              type="button"
+            >
+              <FontAwesomeIcon
+                icon={isFiltering ? faFilterCircleXmark : faFilter}
+              />
+              {/* TODO: BUTTON TEXT (REFLECT # TOTAL FILTERS) */}
+              <span className="btn-text">Filters</span>
             </button>
-          )}
+
+            <button
+              className={isTreeShown ? "active" : ""}
+              onClick={() => {
+                setIsTreeVisible(!isTreeShown);
+                setIsFiltering(false);
+              }}
+              type="button"
+            >
+              <FontAwesomeIcon icon={isTreeShown ? faFolderOpen : faFolder} />
+              <span className="btn-text">View All</span>
+            </button>
+          </div>
         </div>
 
         {/* DEV ONLY - EDIT PROJECT */}
@@ -46,14 +72,6 @@ export default function ProjectHero({
             Edit Project
           </button>
         )}
-
-        {/* MOBILE-ONLY SELECT */}
-        <ProjectSelect
-          selectedKey={selectedKey}
-          projectList={projectList}
-          projectsOrganized={projectsOrganized}
-          selectProject={selectProject}
-        />
       </div>
 
       <LoadingBar isLoading={isLoading} />

@@ -1,16 +1,15 @@
 import { Project } from "@shared";
-import LoadingBar from "@components/LoadingBar";
 import Tech from "./shared/Tech";
 import Links from "./shared/Links";
 import Company from "./shared/Company";
 import ProjectFilters from "./shared/ProjectFilters";
 
 export default function ProjectSidebar({
-  isLoading,
+  isLoadingList,
   currentProject,
 }: {
   currentProject: Project | null;
-  isLoading: boolean;
+  isLoadingList: boolean;
 }) {
   return (
     <div className="content--sidebar">
@@ -21,11 +20,13 @@ export default function ProjectSidebar({
           <Links links={currentProject.links} />
         </>
       ) : (
-        <>
-          <h4>Filters</h4>
-          <LoadingBar isLoading={isLoading} />
+        <div
+          className={`content--sidebar-filters${
+            isLoadingList ? " loading" : ""
+          }`}
+        >
           <ProjectFilters />
-        </>
+        </div>
       )}
     </div>
   );

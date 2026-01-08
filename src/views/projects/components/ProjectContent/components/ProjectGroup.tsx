@@ -36,9 +36,13 @@ export default function ProjectGroup({
       <div className="project-group--years">{years}</div>
       <div className="project-group--label">
         <img height={25} src={`/img/icon/${img}`} />
-        <p>
-          <strong style={{ color }}>{title}</strong> | {subtitle}
-        </p>
+        <div className="project-group--text">
+          <p className="shop" style={{ color }}>
+            {title}
+          </p>
+          <p className="pipe">|</p>
+          <p>{subtitle}</p>
+        </div>
       </div>
       <div className="project-group--content">
         {group.map((project) => (

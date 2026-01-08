@@ -1,46 +1,25 @@
-import { useMemo, useState, useCallback, useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import { useMemo, useState, useCallback } from "react";
+import { useParams, useNavigate, useSearchParams } from "react-router";
 import { useProjectsList, useProject } from "./api/useProjectsAPI";
-import { useProjectStore } from "@/store/projectStore";
 import type { ProjectListItem } from "@shared";
 
-/**
- * USE PROJECTS
- * ------------
- * - Uses SWR hooks for caching and data fetching
- * - Manages project list and individual project state
- * - Uses URL params to manage current project selection
- * - Integrates with projectStore for filter state
- */
 export default function useProjects() {
   const { key: urlKey } = useParams<{ key: string }>();
   const navigate = useNavigate();
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
   const [isTreeVisible, setIsTreeVisible] = useState(false);
 
-  // Get filters from store
-  const filters = useProjectStore((state) => state.filters);
-  const enterProjectsFlow = useProjectStore((state) => state.enterProjectsFlow);
-  const exitProjectsFlow = useProjectStore((state) => state.exitProjectsFlow);
-
-  // Track navigation flow - clear filters when entering from outside /projects
-  useEffect(() => {
-    // Mark that we've entered the projects flow
-    enterProjectsFlow();
-
-    // Cleanup: exit projects flow when unmounting AND navigating away from projects
-    return () => {
-      // Check if the next location is NOT a projects route
-      // This will be called before navigation completes
-      const isLeavingProjects = !location.pathname.startsWith("/projects");
-      if (isLeavingProjects) {
-        exitProjectsFlow();
-      }
-    };
-  }, [location.pathname, enterProjectsFlow, exitProjectsFlow]);
+  // Read filters from URL
+  const filters = useMemo(
+    () => ({
+      company: searchParams.get("company") || "",
+      tech: searchParams.get("tech")?.split(",").filter(Boolean) || [],
+    }),
+    [searchParams]
+  );
 
   // Fetch project list with filters (cached via SWR per filter combination)
   const {
@@ -61,23 +40,23 @@ export default function useProjects() {
   // Navigate to a specific project
   const selectProject = useCallback(
     (key: string) => {
-      navigate(`/projects/${key}`);
-      setIsTreeVisible(false); // Always hide tree on click (?)
+      navigate(`/projects/${key}?${searchParams.toString()}`);
+      setIsTreeVisible(false);
     },
-    [navigate]
+    [navigate, searchParams]
   );
 
   // Navigate back to list view
   const backToList = useCallback(() => {
-    navigate("/projects");
-  }, [navigate]);
+    navigate(`/projects?${searchParams.toString()}`);
+  }, [navigate, searchParams]);
 
   // Callback fired after saving a project in the ProjectEditor
   const onSave = useCallback(async () => {
     setIsEditing(false);
-    await refetchList(); // Refresh the list
+    await refetchList();
     if (urlKey) {
-      await refetchProject(); // Refresh current project
+      await refetchProject();
     }
   }, [urlKey, refetchList, refetchProject]);
 
@@ -101,7 +80,7 @@ export default function useProjects() {
 
   const isLoading = isLoadingList || isLoadingProject;
   const isListView = !urlKey;
-  const isTreeShown = isTreeVisible && !isListView;
+  // const isTreeShown = isTreeVisible && !isListView;
   const error = listError || projectError;
 
   return {
@@ -122,7 +101,7 @@ export default function useProjects() {
       isListView,
       isLoading,
       isLoadingList,
-      isTreeShown,
+      isTreeShown: isTreeVisible,
       projectList,
       projectsOrganized,
       selectedKey: urlKey,

@@ -47,28 +47,33 @@ export default function PanelTreeView({
   const folderColor = "rgb(229, 174, 162)";
 
   return (
-    <RichTreeView
-      items={treeItems}
-      selectedItems={selectedKey || ""}
-      onItemSelectionToggle={handleTreeItemSelection}
-      defaultExpandedItems={[
-        "folder-phosphorus",
-        "folder-built",
-        "folder-800",
-        "folder-foxfuel",
-      ]}
-      slots={{
-        item: CustomTreeItem,
-        collapseIcon: () => (
-          <FontAwesomeIcon icon={faFolderOpen} style={{ color: folderColor }} />
-        ),
-        expandIcon: () => (
-          <FontAwesomeIcon icon={faFolder} style={{ color: folderColor }} />
-        ),
-        endIcon: () => (
-          <FontAwesomeIcon icon={faCode} style={{ color: folderColor }} />
-        ),
-      }}
-    />
+    <div className="project-filter-tree">
+      <RichTreeView
+        items={treeItems}
+        selectedItems={selectedKey || ""}
+        onItemSelectionToggle={handleTreeItemSelection}
+        defaultExpandedItems={[
+          "folder-phosphorus",
+          "folder-built",
+          "folder-800",
+          "folder-foxfuel",
+        ]}
+        slots={{
+          item: CustomTreeItem,
+          collapseIcon: () => (
+            <FontAwesomeIcon
+              icon={faFolderOpen}
+              style={{ color: folderColor }}
+            />
+          ),
+          expandIcon: () => (
+            <FontAwesomeIcon icon={faFolder} style={{ color: folderColor }} />
+          ),
+          endIcon: () => (
+            <FontAwesomeIcon icon={faCode} style={{ color: folderColor }} />
+          ),
+        }}
+      />
+    </div>
   );
 }

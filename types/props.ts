@@ -203,10 +203,13 @@ export interface ProjectListProps {
 }
 
 export interface ProjectSelectProps {
+  isListView?: boolean;
+  isTreeVisible: boolean;
   selectedKey?: string;
   projectList: ProjectListItem[];
   projectsOrganized: ProjectsOrganized;
   selectProject: (key: string) => void;
+  setIsTreeVisible: (isVisible: boolean) => void;
 }
 
 export interface RevealOnScrollProps {
@@ -217,7 +220,7 @@ export interface RevealOnScrollProps {
   threshold?: number;
 }
 
-export interface SelectProjectPanelProps {
+export interface ProjectPanelProps {
   isFiltering: boolean;
   isTreeShown: boolean;
   projectsOrganized: ProjectsOrganized;

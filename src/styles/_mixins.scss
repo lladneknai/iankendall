@@ -206,6 +206,11 @@
     font-size: 0.8rem;
     left: 4px;
     position: absolute;
+
+    // TODO: see how to make this work better on mobile
+    @include bp(non-desktop) {
+      content: "√";
+    }
   }
 
   .divider {

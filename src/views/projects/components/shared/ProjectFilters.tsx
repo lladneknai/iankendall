@@ -1,16 +1,16 @@
+import { useSearchParams } from "react-router-dom";
 import { TECH_OPTIONS } from "@config/tech";
 import type { ProjectFiltersProps } from "@shared";
-import { useProjectStore } from "@store/projectStore";
 import { getCompanyData, getCompanyKeys } from "./Company/lib/util";
 import { getTechIcon } from "./Tech/lib/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProjectFilters({}: ProjectFiltersProps) {
-  const company = useProjectStore((state) => state.filters.company);
-  const tech = useProjectStore((state) => state.filters.tech);
-  const setCompanyFilter = useProjectStore((state) => state.setCompanyFilter);
-  const setTechFilters = useProjectStore((state) => state.setTechFilters);
-  const clearFilters = useProjectStore((state) => state.clearFilters);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Read from URL
+  const company = searchParams.get("company") || "";
+  const tech = searchParams.get("tech")?.split(",").filter(Boolean) || [];
 
   const keys = getCompanyKeys();
   const companies = keys.map((k) => ({
@@ -21,38 +21,61 @@ export default function ProjectFilters({}: ProjectFiltersProps) {
   const hasActiveFilters = company.length > 0 || tech.length > 0;
 
   const handleCompanyChange = (companyKey: string) => {
-    setCompanyFilter(companyKey);
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("company", companyKey);
+      return newParams;
+    });
   };
 
   const handleTechChange = (techKey: string) => {
-    const newTech = tech.includes(techKey)
-      ? tech.filter((t) => t !== techKey)
-      : [...tech, techKey];
-    setTechFilters(newTech);
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      const currentTech = prev.get("tech")?.split(",").filter(Boolean) || [];
+
+      const newTech = currentTech.includes(techKey)
+        ? currentTech.filter((t) => t !== techKey)
+        : [...currentTech, techKey];
+
+      if (newTech.length > 0) {
+        newParams.set("tech", newTech.join(","));
+      } else {
+        newParams.delete("tech");
+      }
+
+      return newParams;
+    });
+  };
+
+  const clearFilters = () => {
+    setSearchParams({});
   };
 
   return (
     <div id="ProjectFilters">
       <div className="filter-group">
         <legend>
-          <h6>Tech</h6>
-          {tech.length > 0 && (
+          <h4>Tech</h4>
+          {hasActiveFilters && (
             <button type="button" onClick={clearFilters}>
-              Clear filter{tech.length !== 1 ? "s" : ""} ({tech.length})
-              {/* Clear filter{tech.length !== 1 ? `s ${`(${tech.length})`}` : ""} */}
+              Clear filters
             </button>
           )}
         </legend>
         <div className="filter-options">
           {TECH_OPTIONS.map((t) => {
+            const isChecked = tech.includes(t.key);
             const { icon, isFa } = getTechIcon(t.key);
 
             return (
-              <label key={t.key} className="tech-field">
+              <label
+                key={t.key}
+                className={`tech-field ${isChecked ? "checked" : ""}`}
+              >
                 <input
                   type="checkbox"
                   value={t.key}
-                  checked={tech.includes(t.key)}
+                  checked={isChecked}
                   onChange={() => handleTechChange(t.key)}
                 />
                 <div className="tech-field--icon">
@@ -71,38 +94,46 @@ export default function ProjectFilters({}: ProjectFiltersProps) {
 
       <div className="filter-group">
         <legend>
-          <h6>Company</h6>
-          {company && (
+          <h4>Shop</h4>
+          {hasActiveFilters && (
             <button type="button" onClick={clearFilters}>
-              Clear
+              Clear filters
             </button>
           )}
         </legend>
         <div className="filter-options">
-          {companies.map((c) => (
-            <div key={c.key}>
-              <label className="radio-field">
-                <div className={`disc${company === c.key ? " checked" : ""}`} />
-                <input
-                  key={`${c.key}-${company}`}
-                  type="radio"
-                  name="company" // Same name for all in the group
-                  value={c.key}
-                  checked={company === c.key}
-                  onChange={() => handleCompanyChange(c.key)}
-                />
-                {c.name}
-              </label>
-            </div>
-          ))}
+          {companies.map((c) => {
+            const isChecked = company === c.key;
+
+            return (
+              <div key={c.key}>
+                <label className={`radio-field${isChecked ? " checked" : ""}`}>
+                  <div className={`disc${isChecked ? " checked" : ""}`}>
+                    <div
+                      className={`disc-inner${isChecked ? " checked" : ""}`}
+                    />
+                  </div>
+                  <input
+                    key={`${c.key}-${company}`}
+                    type="radio"
+                    name="company"
+                    value={c.key}
+                    checked={company === c.key}
+                    onChange={() => handleCompanyChange(c.key)}
+                  />
+                  <div
+                    className="radio-field--icon"
+                    id={`radio-field--icon-${c.key}`}
+                  >
+                    <img src={c.icon} />
+                  </div>
+                  {c.name}
+                </label>
+              </div>
+            );
+          })}
         </div>
       </div>
-
-      {hasActiveFilters && (
-        <button className="clear-filters" onClick={clearFilters} type="button">
-          Clear All Filters
-        </button>
-      )}
     </div>
   );
 }

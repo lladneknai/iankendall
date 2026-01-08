@@ -4,7 +4,7 @@ import ProjectError from "./components/ProjectError";
 import ProjectEditor from "./components/ProjectEditor";
 import ProjectContent from "./components/ProjectContent";
 import ProjectSidebar from "./components/ProjectSidebar";
-import SelectProjectPanel from "./components/SelectProjectPanel";
+import ProjectPanel from "./components/ProjectPanel";
 
 /**
  * PROJECTS ROUTE
@@ -40,6 +40,7 @@ const Projects = () => {
     <div id="Projects" className="page">
       <ProjectHero
         isEditing={isEditing}
+        isFiltering={isFiltering}
         isListView={isListView}
         isLoading={isLoading}
         isTreeShown={isTreeShown}
@@ -48,6 +49,7 @@ const Projects = () => {
         selectedKey={selectedKey}
         selectProject={selectProject}
         setIsEditing={setIsEditing}
+        setIsFiltering={setIsFiltering}
         setIsTreeVisible={setIsTreeVisible}
       />
 
@@ -79,9 +81,9 @@ const Projects = () => {
             />
             <ProjectSidebar
               currentProject={currentProject}
-              isLoading={isLoading}
+              isLoadingList={isLoadingList}
             />
-            <SelectProjectPanel
+            <ProjectPanel
               isFiltering={isFiltering}
               isTreeShown={isTreeShown}
               projectsOrganized={projectsOrganized}
