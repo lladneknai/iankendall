@@ -14,6 +14,7 @@ import MobileHome from "./HomeMobile";
  */
 export default function Home() {
   const isMobile = useAppStore((s) => s.isMobile);
+  const isWelcomeComplete = useAppStore((s) => s.isWelcomeComplete);
 
   if (isMobile) {
     return <MobileHome />;
@@ -23,7 +24,11 @@ export default function Home() {
     <>
       <Room>
         <Desk>
-          <Typewriter />
+          <Typewriter
+            // Type out the welcom message if not yet typed.
+            // Once this is done, type their own message WIHOUT prompts.
+            isDesktopHome={!isWelcomeComplete}
+          />
         </Desk>
         {!isMobile && <SendMessageDialog />}
       </Room>

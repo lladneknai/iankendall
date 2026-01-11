@@ -13,9 +13,9 @@ const content = [
     content: (
       <>
         <p>Glad to meet you. How&rsquo;s it going?</p>
-        <p>Here are some pictures proving I&rsquo;m a real person.</p>
+        <p>Here are some pictures to prove I&rsquo;m not a bot.</p>
         <p>
-          Want to get in touch? I&rsquo;d like that.{" "}
+          Want to get in touch? Easy.{" "}
           <Link className="alt" to="/contact">
             Type me a message!
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
@@ -32,29 +32,43 @@ const content = [
     ),
     content: (
       <>
-        <p>
-          I&rsquo;ve shipped some cool products.{" "}
-          <Link className="alt" to="/projects">
-            Check &lsquo;em out
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-          </Link>
-        </p>
-        <p>
-          My elevator pitch is simple: I create sleek web products that are used
-          by real people. I&rsquo;m big on user empathy.
-        </p>
-        <p>I&rsquo;m most comfortable using this stuff:</p>
+        <p>These are some of my favorite tools.</p>
+        <ul>
+          <li>Click on any item to see how I&rsquo;ve used it.</li>
+          <li>
+            To see what I&rsquo;ve built, check out{" "}
+            <Link className="alt" to="/projects">
+              my projects page
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </Link>
+          </li>
+          <li>
+            Or, use a custom file browser to{" "}
+            {/*
+               TODO: would be cool to have the browser open here
+               BUT: I was an architectural idiot - needs to be in a fn comp
+               */}
+            <Link className="alt" to="/code">
+              view my source code
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </Link>
+          </li>
+        </ul>
         <div className="about-tech-list">
           {["react", "ts", "css", "scss", "sql", "aws", "bash"].map((t) => {
             const { icon, isFa } = getTechIcon(t, "#7aa7c6");
             return (
-              <div className="about-tech-item" key={t}>
+              <Link
+                className="about-tech-item"
+                key={t}
+                to={`/projects?tech=${t}`}
+              >
                 {isFa ? (
                   <FontAwesomeIcon icon={icon} style={{ color: "#7aa7c6" }} />
                 ) : (
                   <>{icon}</>
                 )}
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -84,18 +98,22 @@ const content = [
   {
     header: (
       <h3>
-        I like to <strong>learn.</strong>
+        I care about <strong>users.</strong>
       </h3>
     ),
     content: (
       <>
-        <p>If I&rsquo;m not expanding...</p>
-        <ul>
-          <li>The height of my ambition</li>
-          <li>The depth of my knowledge</li>
-          <li>The breath of my experience</li>
-        </ul>
-        <p>...I&rsquo;m wasting my time.</p>
+        <p>
+          My work carries a strong sense of <strong>user empathy.</strong>
+        </p>
+        <p>
+          We&rsquo;ve all been pissed off at a web app. It&rsquo;s a feeling
+          that few prople willingly re-experience.
+        </p>
+        <p>
+          My &ldquo;ministry&rdquo; as a user-empathetic engineer is simple:{" "}
+          <strong>bad user sentiment is bad for business.</strong>
+        </p>
       </>
     ),
   },

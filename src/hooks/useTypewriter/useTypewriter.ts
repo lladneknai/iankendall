@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppStore } from "@store/appStore";
 import { MAX_CHARS, MAX_LINES } from "@config/typing";
 import useTypewriterRefs from "./useTypewriterRefs";
@@ -14,9 +14,11 @@ import useTypewriterKeyEffects from "./useTypewriterKeyEffects";
  */
 export default function useTypewriter({
   isAutoType = false,
+  isDesktopHome = false,
   isMobileContact = false,
 }: {
   isAutoType: boolean;
+  isDesktopHome: boolean;
   isMobileContact: boolean;
 }) {
   // GLOBAL STATE
@@ -59,6 +61,7 @@ export default function useTypewriter({
     },
   } = useTypewriterAutoTyping({
     isAutoType,
+    isDesktopHome,
     isMobileContact,
     handleKeystrokeEffects,
     keyboardInstanceRef,

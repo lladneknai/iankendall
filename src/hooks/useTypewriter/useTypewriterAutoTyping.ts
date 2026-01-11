@@ -5,6 +5,7 @@ import {
   AUTO_COMPLETE_PROMPTS,
   BASE_TYPEWRITER_SPEED,
   CONTACT_INIT_DELAY,
+  DESKTOP_INIT_TEXT,
   MOBILE_INIT_TEXT,
 } from "@/config/typing";
 import { wait } from "@/util/promises";
@@ -20,6 +21,7 @@ import { useAppStore } from "@/store/appStore";
  */
 export default function useTypewriterAutoTyping({
   isAutoType,
+  isDesktopHome,
   isMobileContact,
   handleKeystrokeEffects,
   keyboardInstanceRef,
@@ -31,6 +33,7 @@ export default function useTypewriterAutoTyping({
   const isMobile = useAppStore((s) => s.isMobile);
   const setIsActive = useAppStore((s) => s.setIsActive);
   const isWelcomeComplete = useAppStore((s) => s.isWelcomeComplete);
+  const setIsWelcomeComplete = useAppStore((s) => s.setIsWelcomeComplete);
 
   // AUTO-TYPING STATE
   const [progress, setProgress] = useState(0);
@@ -95,7 +98,8 @@ export default function useTypewriterAutoTyping({
     }
     setIsAutoTyping(false);
 
-    if (isMobile && !isMobileContact) {
+    if (isDesktopHome || (isMobile && !isMobileContact)) {
+      setIsWelcomeComplete(true);
       setIsAutoTypeConcluded(true);
       return;
     }
@@ -168,7 +172,7 @@ export default function useTypewriterAutoTyping({
 
   // Detect changes in text length (indicates user is typing)
   useEffect(() => {
-    if (!isAutoType || (isMobile && !isMobileContact)) {
+    if (!isAutoType || isDesktopHome || (isMobile && !isMobileContact)) {
       return;
     }
     // This is the machine typing, ignore it
@@ -247,63 +251,6 @@ export default function useTypewriterAutoTyping({
     }
   }
 
-  async function initializeAutoTypeMobile() {
-    setIsActive(true);
-    await wait(CONTACT_INIT_DELAY);
-    typeBlock(MOBILE_INIT_TEXT);
-  }
-
-  // Trigger the auto-typing flow
-  useEffect(() => {
-    console.log("[useTypewriterAutoTyping] Init effect triggered", {
-      isAutoType,
-      isMobile,
-      resetKey,
-      textLength: text.length,
-    });
-
-    // Reset all state when resetKey changes (but not on first mount)
-    if (resetKey > 0) {
-      console.log(
-        "[useTypewriterAutoTyping] Resetting state due to resetKey change"
-      );
-      setProgress(0);
-      setIgnoredSuggestions(0);
-      setIsAutoTypeConcluded(false);
-      setIsAutoTyping(false);
-      setSuggestionText("");
-      setSuggestionTextAc("");
-      if (typingTimeoutRef.current) {
-        clearTimeout(typingTimeoutRef.current);
-        typingTimeoutRef.current = null;
-      }
-    }
-
-    if (!isAutoType) {
-      console.log("[useTypewriterAutoTyping]-{NOT TYPING}-> conditions:", {
-        isAutoType,
-      });
-      return;
-    }
-
-    // Only skip if we have text AND we're not resetting
-    if (text.length > 0 && resetKey === 0) {
-      console.log(
-        "[useTypewriterAutoTyping]-{NOT TYPING}-> we have text already."
-      );
-      return;
-    }
-
-    if (isWelcomeComplete && resetKey === 0) {
-      setText(MOBILE_INIT_TEXT);
-      return;
-    } else if (isMobile && !isMobileContact) {
-      initializeAutoTypeMobile();
-    } else {
-      initializeAutoType();
-    }
-  }, [resetKey]);
-
   //
   // RESET ALL AUTOCOMPLETE STATE
   // -----------------------------
@@ -333,12 +280,90 @@ export default function useTypewriterAutoTyping({
   };
 
   //
+  // INITIALIZE WELCOME MESSAGE
+  // --------------------------
+  // On FIRST load, auto-type a welcome message.
+  //
+  async function initializeWelcomeMessage() {
+    setIsActive(true);
+    await wait(CONTACT_INIT_DELAY);
+
+    if (isDesktopHome) {
+      typeBlock(DESKTOP_INIT_TEXT);
+    } else if (isMobileContact) {
+      typeBlock(MOBILE_INIT_TEXT);
+    }
+  }
+
+  //
+  // ONMOUNT BEHAVIOR
+  // ----------------
+  // - Determine what kind of action we're mounting here
+  // - On /contact, we enter the autocomplete flow with suggested
+  // - On the first visit to /home, the typewriter starts auto-typing a hardcoded string
+  // - On subsequent visits to mobile /home, we MANUALLY RE-SET the hardcoded post-welcome string to state
+  // - Otherwise, it just sits there and waits for the user to start typing.
+  //
+  useEffect(() => {
+    console.log("[useTypewriterAutoTyping] Init effect triggered", {
+      isAutoType,
+      isMobile,
+      resetKey,
+      textLength: text.length,
+    });
+
+    // Reset all state when resetKey changes (but not on first mount)
+    if (resetKey > 0) {
+      console.log(
+        "[useTypewriterAutoTyping] Resetting state due to resetKey change"
+      );
+      setProgress(0);
+      setIgnoredSuggestions(0);
+      setIsAutoTypeConcluded(false);
+      setIsAutoTyping(false);
+      setSuggestionText("");
+      setSuggestionTextAc("");
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+        typingTimeoutRef.current = null;
+      }
+    }
+
+    if (!isAutoType && !isDesktopHome) {
+      console.log("[useTypewriterAutoTyping]-{NOT TYPING}-> conditions:", {
+        isAutoType,
+      });
+      return;
+    }
+
+    // Only skip if we have text AND we're not resetting
+    if (text.length > 0 && resetKey === 0) {
+      console.log(
+        "[useTypewriterAutoTyping]-{NOT TYPING}-> we have text already."
+      );
+      return;
+    }
+
+    // TODO: WATCH THIS BLOCK. IT BE TRICKY.
+    if (isWelcomeComplete && resetKey === 0 && !isAutoType && !isDesktopHome) {
+      // When navigating BACK to the homepage AFTER the welcome has concluded,
+      // Simply re-set the text and DON'T animate. That typewriter is read-only.
+      setText(MOBILE_INIT_TEXT);
+      return;
+    } else if (isDesktopHome || (isMobile && !isMobileContact)) {
+      initializeWelcomeMessage();
+    } else {
+      initializeAutoType();
+    }
+  }, [resetKey]);
+
+  //
   // RETURN: how to set the text (just so we can clear it probs)
   // STATE FOR if we are autoTyping, if there is a prompt OR autocomplete, or if done.
   //
   return {
     methods: {
-      initializeAutoTypeMobile,
+      initializeWelcomeMessage,
       resetAutoTypingState,
       setProgress,
       setSuggestionText,

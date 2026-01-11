@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useAppStore } from "@store/appStore";
-import { useAudioStore } from "@store/audioStore";
+import { TypewriterProps } from "@shared";
 import useTypewriter from "@hooks/useTypewriter";
 import useTypingTips from "@hooks/useTypingTips";
+import { useAppStore } from "@store/appStore";
+import { useAudioStore } from "@store/audioStore";
 import { useSendMessageStore } from "@store/sendMessageStore";
-import { TypewriterProps } from "@shared";
 import Base from "./components/Base";
 import Paper from "./components/Paper";
 import Keyboard from "./components/Keyboard";
@@ -26,6 +26,7 @@ import MobileContactDialog from "../MobileContactDialog";
  */
 export default function Typewriter({
   isAutoType = false,
+  isDesktopHome = false,
   isMobileContact = false,
 }: TypewriterProps) {
   const {
@@ -52,7 +53,7 @@ export default function Typewriter({
       suggestionTextAc,
       text,
     },
-  } = useTypewriter({ isAutoType, isMobileContact });
+  } = useTypewriter({ isAutoType, isDesktopHome, isMobileContact });
 
   // Handle tips
   const { handleDismissTip, tipText } = useTypingTips({
@@ -139,7 +140,6 @@ export default function Typewriter({
           progress={progress}
           setProgress={setProgress}
           suggestionText={suggestionText}
-          suggestionTextAc={suggestionTextAc}
           typeBlock={typeBlock}
         />
       )}

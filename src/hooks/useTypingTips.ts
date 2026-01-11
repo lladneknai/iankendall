@@ -24,9 +24,12 @@ export default function useTypingTips({
     atLimit: "You have reached the end of the page.",
     autocomplete: 'Press "CMD+SHIFT" to autocomplete.',
     ding: 'When you hear a "ding", press "Enter" for a line break.',
+
+    // TODO: would be nice to have this GO AWAY on Enter.
     enter: 'Press "Enter" for a new line.',
     prompt: "Type your response to complete the prompt.",
     send: 'Click "Send Message" to email your message.',
+    willSuggest: "Suggestion will appear 3 seconds after typing.",
   };
   type TipKey = keyof typeof TIPS;
   type TipCounts = Record<TipKey, number>;
@@ -43,8 +46,9 @@ export default function useTypingTips({
     autocomplete: 50,
     ding: 3,
     enter: 3,
-    prompt: 1,
+    prompt: 2,
     send: 4,
+    willSuggest: 2,
   };
   const [tipCounts, setTipCounts] = useState<TipCounts>(
     Object.fromEntries(Object.keys(TIPS).map((key) => [key, 0])) as TipCounts
@@ -108,6 +112,7 @@ export default function useTypingTips({
       setTipText("");
       return;
     }
+
     if (isAtLimit) {
       setTip("atLimit");
     } else if (isSuggestionRendered) {
@@ -118,6 +123,8 @@ export default function useTypingTips({
       setTip("send");
     } else if (sholdPressEnter) {
       setTip("enter");
+    } else if (progress > 0) {
+      setTip("willSuggest");
     } else if (shouldBeLinebroken) {
       // This one's a bit buggy for now
       // setTip("ding");

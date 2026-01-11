@@ -97,7 +97,9 @@ $typewriter-actions-top: 10px;
   gap: 0.5rem;
   justify-content: center;
   position: absolute;
+  white-space: nowrap;
   width: 502px;
+
   &:hover {
     p {
       color: $light;
@@ -143,7 +145,7 @@ $typewriter-actions-top: 10px;
     color: $light;
   }
   50% {
-    color: $light-2;
+    color: $light-5;
   }
 }
 

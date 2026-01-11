@@ -13,6 +13,7 @@ import App from "./components/App";
  * Hello there!  ᕕ(⌐■_■)ᕗ ♪♬
  * This is the source code for my site.
  * Use the file tree to view any file in the codebase.
+ * Alternatively, click the "+" button for a fullscreen view.
  */
 const router = createBrowserRouter([
   {

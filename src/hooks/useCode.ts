@@ -9,7 +9,7 @@ export default function useCode() {
   // I tried doing this with rem, but it sucked.
   const MIN_FONT = 5;
   const MAX_FONT = 20;
-  const DEFAULT_FONT = 16;
+  const DEFAULT_FONT = 14;
   const [fontSize, setFontSize] = useState(DEFAULT_FONT);
 
   // Store collapsed / expanded

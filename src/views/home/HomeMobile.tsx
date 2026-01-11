@@ -15,15 +15,14 @@ import { faBars, faCode } from "@fortawesome/free-solid-svg-icons";
  * - The Typewriter types a welcome message once, and that's it.
  */
 export default function HomeMobile() {
-  const [className, setClassName] = useState("content");
+  const [className, setClassName] = useState("content hidden");
   const setIsMenuOpen = useAppStore((s) => s.setIsMenuOpen);
   const isWelcomeComplete = useAppStore((s) => s.isWelcomeComplete);
 
+  // Trigger the content to slide up after the welcome message completes.
   useEffect(() => {
     if (isWelcomeComplete) {
       setClassName("content shown");
-    } else {
-      setClassName("content");
     }
   }, [isWelcomeComplete]);
 
@@ -35,25 +34,25 @@ export default function HomeMobile() {
       <div id="MobileHomeContent">
         <div className={className}>
           <h3>Hiya. I'm Ian.</h3>
-          <p>This is a simple site for you to learn more about me.</p>
+          <p>Welcome to my corner of the Internet.</p>
           <div className="action-buttons">
-            <Link to="/code">
-              <button className="btn mobile-btn">
-                View Code
-                <FontAwesomeIcon icon={faCode} />
-              </button>
-            </Link>
             <Link to="/projects">
               <button className="btn mobile-btn">
                 View Projects
                 <FontAwesomeIcon icon={faFolderOpen} />
               </button>
             </Link>
+            <Link to="/code">
+              <button className="btn mobile-btn">
+                View Code
+                <FontAwesomeIcon icon={faCode} />
+              </button>
+            </Link>
             <button
               className="btn mobile-btn"
               onClick={() => setIsMenuOpen(true)}
             >
-              Open Menu
+              Main Menu
               <FontAwesomeIcon icon={faBars} />
             </button>
           </div>

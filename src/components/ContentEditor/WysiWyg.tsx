@@ -12,6 +12,12 @@ class DividerBlot extends BlockEmbed {
 }
 Quill.register(DividerBlot, true);
 
+// Register monospace font
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Font = Quill.import("formats/font") as any;
+Font.whitelist = ["monospace"];
+Quill.register(Font, true);
+
 /**
  * CONTENT EDITOR | WYSIWYG content editor | write HTML as text
  *
@@ -43,6 +49,7 @@ export default function WysiWyg({
                 ["bold", "italic", "underline"],
                 [{ list: "ordered" }, { list: "bullet" }],
                 [{ align: [] }],
+                [{ font: ["monospace", false] }],
                 ["link", "image", "divider"],
                 // ["clean"], // wot u do
               ],
@@ -63,6 +70,11 @@ export default function WysiWyg({
                 },
               },
             },
+            history: {
+              delay: 2000,
+              maxStack: 500,
+              userOnly: true,
+            },
           }}
           formats={[
             "header",
@@ -72,6 +84,7 @@ export default function WysiWyg({
             "strike",
             "list",
             "align",
+            "font",
             "link",
             "image",
             "divider",

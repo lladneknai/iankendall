@@ -16,6 +16,7 @@ export interface AppState {
   //
   isActive: boolean;
   isAtLimit: boolean;
+  isWelcomeComplete: boolean;
   clearTypewriterResetRequested: () => void;
   requestTypewriterReset: () => void;
   setIsActive: (isActive: boolean) => void;
@@ -37,7 +38,6 @@ export interface AppState {
   // MOBILE / USER AGENT STATE
   //
   isMobile: boolean;
-  isWelcomeComplete: boolean;
   setIsMobile: (isMobile: boolean) => void;
   setIsWelcomeComplete: (isComplete: boolean) => void;
   setUserAgent: (agent: UserAgent) => void;

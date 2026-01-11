@@ -10,7 +10,7 @@
 // - Desk will SHRINK to respect these dimensions
 // - The typewriter will be scaled DOWN when the width or height ENCROACHESE these dimensions
 //
-export const MIN_SAFE_WIDTH = 850;
+export const MIN_SAFE_WIDTH = 750;
 export const MIN_SAFE_HEIGHT = 850;
 
 //

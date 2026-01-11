@@ -30,6 +30,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   // - On load, we pick up the user agent, and use that in decision-making
   //
   isAppInitialized: false,
+  // isMobile: true,
   isMobile: false,
   isWelcomeComplete: false,
   userAgent: {
@@ -37,6 +38,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     os: "",
   } as UserAgent,
   setIsMobile: (isMobile: boolean) => {
+    // set({ isMobile: true });
     set({ isMobile });
   },
   setIsWelcomeComplete: (isWelcomeComplete: boolean) => {

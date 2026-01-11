@@ -50,7 +50,10 @@ export default function useApp() {
 
   useEffect(() => {
     const { browser, device, os } = getUserAgentDetails();
-    setUserAgent({ browser, os });
+    setUserAgent({
+      browser: browser.name || "",
+      os: os.name || "",
+    });
     setIsMobile(device.type === "mobile");
 
     // Safari SUCKS at rendering audio. We might even want to disable the button

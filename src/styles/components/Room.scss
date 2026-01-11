@@ -13,21 +13,26 @@
 
 #Room {
   align-items: center;
-  // background: linear-gradient(to bottom, $bg-4 25%, $bg-2 75%);
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: flex-end;
   overflow: hidden;
   position: relative;
-  //
-  background: linear-gradient(
-    315deg,
-    $sienna 3%,
-    $blush 38%,
-    $tuscan 68%,
-    $garnet 98%
-  );
+
+  // CONFIGURE ANIMATED BACKGROUND
+
+  // GRAYSCALE:
+  background: linear-gradient(315deg, $dark-4 3%, $dark-2 50%, $dark-4 98%);
+
+  // COLORFUL:
+  //  background: linear-gradient(
+  // 315deg,
+  // $sienna 3%,
+  // $blush 38%,
+  // $tuscan 68%,
+  // $garnet 98%
+  // );
 
   // ORIGINAL
   // background: linear-gradient(

@@ -17,11 +17,12 @@ export default function RevealOnScroll({
   // Using an IntersectionObserver and a ref, determine if this element should be revealed
   // If so, reveal it using the `revealOnScroll` SCSS mixin and the `shown` class (see @_mixins.scss)
   //
-  const { ref, isRevealed } = useRevealOnScroll(threshold);
+  const { ref, isRevealed, skipAnimation } = useRevealOnScroll(threshold);
 
   //
   // Render the wrapper element and all children
   // Use duration and distances props as CSS vars
+  // If skipAnimation is true, set duration to 0 to prevent slide-up animation
   //
   return (
     <div
@@ -30,7 +31,7 @@ export default function RevealOnScroll({
       style={
         {
           "--reveal-distance": distance,
-          "--reveal-duration": duration,
+          "--reveal-duration": skipAnimation ? "0ms" : duration,
         } as React.CSSProperties
       }
     >
