@@ -101,6 +101,7 @@ export default function useProjects() {
       isListView,
       isLoading,
       isLoadingList,
+      isLoadingProject,
       isTreeShown: isTreeVisible,
       projectList,
       projectsOrganized,

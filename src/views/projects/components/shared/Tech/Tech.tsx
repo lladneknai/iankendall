@@ -13,7 +13,11 @@ export default function Tech({
   }
   return (
     <>
-      {!skipHeader && <h4>Tech</h4>}
+      {!skipHeader && (
+        <>
+          <h4>Tech</h4>
+        </>
+      )}
       <ul className="tech">
         {tech.map((t) => {
           const { icon, isFa } = getTechIcon(t);

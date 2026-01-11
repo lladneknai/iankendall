@@ -2,7 +2,7 @@ import { ProjectPanelProps } from "@shared";
 import useProjectPanel from "@hooks/useProjectPanel";
 import PanelHeader from "./components/PanelHeader";
 import PanelTreeView from "./components/PanelTreeView";
-import ProjectFilters from "../shared/ProjectFilters";
+import ProjectFilters from "../ProjectFilters";
 
 export default function ProjectPanel({
   isFiltering,
@@ -18,9 +18,6 @@ export default function ProjectPanel({
     selectProject,
   });
 
-  const isFilterMenu = isFiltering;
-  // const isFilterMenu = false;
-
   return (
     <div
       id="ProjectPanel"
@@ -33,7 +30,7 @@ export default function ProjectPanel({
       />
 
       <div className="panel-content">
-        {isFilterMenu ? (
+        {isFiltering ? (
           <ProjectFilters />
         ) : (
           <>

@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
 import LoadingBar from "@components/LoadingBar";
+import { useSearchParams } from "react-router-dom";
 import {
   faFilter,
   faFilterCircleXmark,
-  faFolderOpen,
   faFolder,
+  faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
 export default function ProjectHero({
+  backToList,
+  filters,
   isEditing,
   isFiltering,
   isListView,
@@ -18,12 +21,18 @@ export default function ProjectHero({
   setIsFiltering,
   setIsTreeVisible,
 }: any) {
+  const [_, setSearchParams] = useSearchParams();
+  const clearFilters = () => setSearchParams({});
+
+  const numFilters = Object.values(filters).filter(
+    (f: any) => f.length > 0
+  ).length;
+  const isFilterApplied = numFilters > 0;
+
   return (
     <div className="hero">
       <div className="hero-content">
-        <h1>
-          <Link to="/projects">Projects</Link>
-        </h1>
+        <h1 onClick={backToList}>Projects</h1>
 
         {/* SUBHEADER / ACTION */}
         <div className="hero-action">
@@ -32,7 +41,9 @@ export default function ProjectHero({
           <div
             className={`hero-action--buttons ${isListView ? "list" : "detail"}`}
           >
+            {/* FILTERS BUTTON */}
             <button
+              id="hero-view-filters"
               className={isFiltering ? "active" : ""}
               onClick={() => {
                 setIsFiltering(!isFiltering);
@@ -43,11 +54,26 @@ export default function ProjectHero({
               <FontAwesomeIcon
                 icon={isFiltering ? faFilterCircleXmark : faFilter}
               />
-              {/* TODO: BUTTON TEXT (REFLECT # TOTAL FILTERS) */}
-              <span className="btn-text">Filters</span>
+              <span className="btn-text">
+                Filters{isFilterApplied ? ` (${numFilters})` : ""}
+              </span>
             </button>
 
+            {/* CLEAR FILTERS BUTTON */}
+            {isFilterApplied && (
+              <button
+                id="hero-clear-filters"
+                onClick={clearFilters}
+                type="button"
+              >
+                <FontAwesomeIcon icon={faCircleXmark} />
+                <span className="btn-text">Clear Filters</span>
+              </button>
+            )}
+
+            {/* VIEW TREE BUTTON */}
             <button
+              id="hero-view-tree"
               className={isTreeShown ? "active" : ""}
               onClick={() => {
                 setIsTreeVisible(!isTreeShown);
@@ -56,13 +82,15 @@ export default function ProjectHero({
               type="button"
             >
               <FontAwesomeIcon icon={isTreeShown ? faFolderOpen : faFolder} />
-              <span className="btn-text">View All</span>
+              <span className="btn-text">
+                {isFilterApplied ? "View Matches" : "View All"}
+              </span>
             </button>
           </div>
         </div>
 
         {/* DEV ONLY - EDIT PROJECT */}
-        {!isEditing && (
+        {!isListView && !isEditing && (
           <button
             id="EditProjectBtn"
             className="btn btn-edit"

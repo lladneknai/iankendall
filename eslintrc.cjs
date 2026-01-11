@@ -4,7 +4,6 @@ module.exports = {
   root: true,
   extends: [
     "airbnb",
-    "prettier",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
   ],
@@ -97,7 +96,7 @@ module.exports = {
       },
     ],
   },
-  plugins: ["prettier", "react", "react-hooks"],
+  plugins: ["react", "react-hooks"],
   overrides: [
     {
       files: ["**/*.ts"],

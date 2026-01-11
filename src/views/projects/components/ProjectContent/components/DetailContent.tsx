@@ -1,8 +1,9 @@
 import { Project } from "@shared";
+import PostContentCTA from "./PostContentCTA";
 
 export default function DetailContent({ project }: { project: Project }) {
   return (
-    <div className="content--main">
+    <div className="content--main content--detail">
       <div className="header">
         <h3>{project.name}</h3>
       </div>
@@ -12,6 +13,7 @@ export default function DetailContent({ project }: { project: Project }) {
           __html: project.content,
         }}
       />
+      <PostContentCTA company={project.company} />
     </div>
   );
 }

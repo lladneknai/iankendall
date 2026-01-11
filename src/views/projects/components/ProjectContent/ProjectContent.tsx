@@ -1,6 +1,6 @@
-import LoadingBar from "@/components/LoadingBar";
 import ProjectGroup from "./components/ProjectGroup";
 import DetailContent from "./components/DetailContent";
+import ProjectsLoading from "./components/ProjectsLoading";
 
 export default function ProjectContent({
   currentProject,
@@ -9,9 +9,13 @@ export default function ProjectContent({
   projectsOrganized,
   selectProject,
 }: any) {
-  // Return loading state for ALL loading - REPLACE WITH A SKELETON
-  if (isLoading) {
-    return <LoadingBar isLoading />;
+  // Return loading state for EITHER load case
+  if (false) {
+    return <ProjectsLoading isLoadingList />;
+  }
+
+  if (isLoading || isLoadingList) {
+    return <ProjectsLoading isLoadingList={isLoadingList} />;
   }
 
   // Return details for selected project
@@ -21,10 +25,7 @@ export default function ProjectContent({
 
   // Return list view when non project selected
   return (
-    <div
-      id="ProjectList"
-      className={`content--main ${isLoadingList ? " loading" : ""}`}
-    >
+    <div id="ProjectList" className="content--main">
       <div className="project-group--timeline" />
       <ProjectGroup
         color="#2d6bf8"

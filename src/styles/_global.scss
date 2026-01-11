@@ -98,6 +98,10 @@ html {
   height: $hero-height-desktop; // overridden for mobile
   justify-content: flex-end;
   width: 100%;
+
+  @include bp(mobile) {
+    height: 11rem;
+  }
 }
 
 .hero-content {
@@ -190,6 +194,10 @@ html {
     margin-right: 0.5rem;
   }
 
+  .ql-font-monospace {
+    font-family: "Courier New", Courier, monospace;
+  }
+
   // Remove default list styling since we're using .ql-ui
   ul li,
   ol li {
@@ -214,6 +222,42 @@ html {
 }
 .bg-coral {
   background: $coral;
+}
+
+//
+// SKELETON LOADER
+//
+.skeleton {
+  animation: skeleton-pulse 2s ease-in-out infinite;
+  background: linear-gradient(90deg, $light-6 0%, $light-4 50%, $light-6 100%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  display: block;
+  height: 100%;
+  opacity: 0.25;
+  width: 100%;
+
+  * {
+    opacity: 0.9;
+  }
+
+  // PLACEHOLDER - DO NOT combine with actual text tags
+  .skeleton-text {
+    background: $light-7;
+    border-radius: 4px;
+    display: inline-block;
+    height: 1em;
+    line-height: 1em;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 //

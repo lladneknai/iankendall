@@ -142,10 +142,6 @@ export interface MessageCreationFormProps extends TypewriterFlowProps {
   onFinish: () => void;
 }
 
-export interface MobileContactDialogProps extends TypewriterFlowProps {
-  suggestionTextAc?: string;
-}
-
 export interface NamePlateProps {
   hammerRef: RefObject<HTMLDivElement>;
 }
@@ -194,22 +190,12 @@ export interface ProjectHeaderProps {
 }
 
 export interface ProjectFiltersProps {
-  // Uses store directly - no props needed
+  isSidebar?: boolean;
 }
 
 export interface ProjectListProps {
   projectsOrganized: ProjectsOrganized;
   selectProject: (key: string) => void;
-}
-
-export interface ProjectSelectProps {
-  isListView?: boolean;
-  isTreeVisible: boolean;
-  selectedKey?: string;
-  projectList: ProjectListItem[];
-  projectsOrganized: ProjectsOrganized;
-  selectProject: (key: string) => void;
-  setIsTreeVisible: (isVisible: boolean) => void;
 }
 
 export interface RevealOnScrollProps {
@@ -238,6 +224,7 @@ export type TextFieldProps<T extends Record<string, any>> = FormFieldProps<T>;
 
 export interface TypewriterProps {
   isAutoType?: boolean;
+  isDesktopHome?: boolean;
   isMobileContact?: boolean;
 }
 
@@ -264,6 +251,7 @@ export interface UseContentEditorProps {
 export interface UseTypewriterAutoTypingProps {
   handleKeystrokeEffects: (key: string) => void;
   isAutoType: boolean;
+  isDesktopHome?: boolean;
   isMobileContact: boolean;
   keyboardInstanceRef: MutableRefObject<KeyboardReactInterface | null>;
   resetKey?: number;

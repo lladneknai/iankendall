@@ -15,6 +15,7 @@ import ProjectPanel from "./components/ProjectPanel";
 const Projects = () => {
   const {
     methods: {
+      backToList,
       onSave,
       selectProject,
       setIsEditing,
@@ -24,10 +25,12 @@ const Projects = () => {
     state: {
       currentProject,
       error,
+      filters,
       isEditing,
       isFiltering,
       isLoading,
       isLoadingList,
+      isLoadingProject,
       isListView,
       isTreeShown,
       projectList,
@@ -39,15 +42,13 @@ const Projects = () => {
   return (
     <div id="Projects" className="page">
       <ProjectHero
+        backToList={backToList}
+        filters={filters}
         isEditing={isEditing}
         isFiltering={isFiltering}
         isListView={isListView}
         isLoading={isLoading}
         isTreeShown={isTreeShown}
-        projectList={projectList}
-        projectsOrganized={projectsOrganized}
-        selectedKey={selectedKey}
-        selectProject={selectProject}
         setIsEditing={setIsEditing}
         setIsFiltering={setIsFiltering}
         setIsTreeVisible={setIsTreeVisible}
@@ -76,12 +77,14 @@ const Projects = () => {
               isListView={isListView}
               isLoading={isLoading}
               isLoadingList={isLoadingList}
+              isLoadingProject={isLoadingProject}
               projectsOrganized={projectsOrganized}
               selectProject={selectProject}
             />
             <ProjectSidebar
               currentProject={currentProject}
               isLoadingList={isLoadingList}
+              isLoadingProject={isLoadingProject}
             />
             <ProjectPanel
               isFiltering={isFiltering}

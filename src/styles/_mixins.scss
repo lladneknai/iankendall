@@ -93,15 +93,33 @@
 }
 
 @mixin slideUpAnimationsHome($ms) {
-  animation: slideUp $ms ease;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity $ms ease, transform $ms ease;
+
   &.shown {
     transform: translateY(0);
     opacity: 1;
   }
+
+  &.hidden {
+    transition: none; // Prevent transition on initial mount
+    opacity: 0;
+    transform: translateY(30px);
+  }
 }
+
+// Scrapped as it messes up on mobile devices.
+// @mixin slideUpAnimationsHome($ms) {
+//   animation: slideUp $ms ease;
+//   opacity: 0;
+//   transform: translateY(30px);
+//   transition: opacity $ms ease, transform $ms ease;
+//   &.shown {
+//     transform: translateY(0);
+//     opacity: 1;
+//   }
+// }
 
 @mixin slideUpAnimationsMenu {
   animation: slideUp 300ms ease;
