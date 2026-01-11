@@ -8,7 +8,6 @@ const MenuItems = ({
   handleMenuToggle,
   handleMouseIn,
   handleMouseOut,
-  isContactDisabled,
   subtext,
 }: MenuItemsProps) => {
   const navigate = useNavigate();
@@ -60,10 +59,10 @@ const MenuItems = ({
           About Me
         </button>
         <button
-          className={`${subtext && subtext !== "contact" ? "gray" : ""} ${
-            isContactDisabled ? "gray strikethrough" : ""
-          }`}
-          disabled={isContactDisabled}
+          // className={`${subtext && subtext !== "contact" ? "gray" : ""} ${
+          // isContactDisabled ? "gray strikethrough" : ""
+          // }`}
+          // disabled={isContactDisabled}
           onClick={handleContactClick}
           onMouseEnter={() => handleMouseIn("contact")}
           onMouseLeave={handleMouseOut}

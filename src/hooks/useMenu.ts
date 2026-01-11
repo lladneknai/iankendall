@@ -30,7 +30,6 @@ export default function useMenu() {
 
   // Route-specific state
   const isLight = useMemo(() => route === "about", [route]);
-  const isContactDisabled = useMemo(() => route === "contact", [route]);
 
   // Animation refs
   const isAnimatingRef = useRef(false);
@@ -218,7 +217,6 @@ export default function useMenu() {
       handleToggleSound,
     },
     state: {
-      isContactDisabled,
       isLight,
       isMenuOpen,
       isScrolled,

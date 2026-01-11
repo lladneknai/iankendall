@@ -19,14 +19,7 @@ const Menu = () => {
       handleNewPage,
       handleToggleSound,
     },
-    state: {
-      isContactDisabled,
-      isLight,
-      isMenuOpen,
-      isScrolled,
-      subtext,
-      subtextShown,
-    },
+    state: { isLight, isMenuOpen, isScrolled, subtext, subtextShown },
   } = useMenu();
 
   return (
@@ -44,7 +37,6 @@ const Menu = () => {
       <div id="MenuContentContainer">
         <div id="MenuContent">
           <MenuItems
-            isContactDisabled={isContactDisabled}
             handleContactClick={handleContactClick}
             handleMenuToggle={handleMenuToggle}
             handleMouseIn={handleMouseIn}

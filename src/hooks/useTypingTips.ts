@@ -4,16 +4,20 @@ import { useAppStore } from "@/store/appStore";
 import { UseTypingTipsProps } from "@shared";
 
 export default function useTypingTips({
+  ignoreAutocompleteSuggestion,
   isAutoTypeConcluded,
   isAutoTyping,
   isPromptRendered,
   isSuggestionRendered,
   progress,
   rows,
+  suggestionTextAc,
 }: UseTypingTipsProps) {
   const isAtLimit = useAppStore((s) => s.isAtLimit);
   const setIsActive = useAppStore((s) => s.setIsActive);
   const [tipText, setTipText] = useState("");
+
+  console.log("[useTypingTips] suggestionTextAc:", suggestionTextAc);
   //
   // TIP CONFIG
   // ----------
@@ -146,13 +150,23 @@ export default function useTypingTips({
     const tipKey = (Object.keys(TIPS) as TipKey[]).find(
       (key) => TIPS[key] === tipText
     );
-    if (tipKey) {
+
+    if (tipKey === "prompt") {
+      ignoreAutocompleteSuggestion();
+      setTipCounts({
+        ...tipCounts,
+        [tipKey]: THRESHOLDS[tipKey] + 1,
+      });
+    } else if (tipKey) {
       setTipText("");
       setTipCounts({
         ...tipCounts,
         [tipKey]: THRESHOLDS[tipKey] + 1,
       });
     }
+
+    console.log("[handleDismissTip] tipKey:", tipKey);
+
     // Since this click will deactivate the Typewriter, re-focus it immediately.
     setIsActive(true);
   };

@@ -67,7 +67,7 @@ export interface CarouselControlsProps {
 export type CheckboxProps<T extends Record<string, any>> = FormFieldProps<T>;
 
 export interface ContactButtonProps {
-  handleContactClick: () => void;
+  handleContactClick: (e: React.MouseEvent) => void;
 }
 
 export interface ContentEditorProps {
@@ -121,9 +121,8 @@ export interface MenuButtonProps {
 }
 
 export interface MenuItemsProps extends MouseHoverHandlers {
-  handleContactClick: () => void;
+  handleContactClick: (e: React.MouseEvent) => void;
   handleMenuToggle: () => void;
-  isContactDisabled: boolean;
   subtext: string;
 }
 
@@ -147,7 +146,7 @@ export interface NamePlateProps {
 }
 
 export interface NavbarProps {
-  handleContactClick: () => void;
+  handleContactClick: (e: React.MouseEvent) => void;
   handleIanKendall: () => void;
   handleMenuToggle: () => void;
   isOpen: boolean;
@@ -270,12 +269,14 @@ export interface UseTypewriterRowsProps {
 }
 
 export interface UseTypingTipsProps {
+  ignoreAutocompleteSuggestion: () => void;
   isAutoTypeConcluded: boolean;
   isAutoTyping: boolean;
   isPromptRendered: boolean;
   isSuggestionRendered: boolean;
   progress: number;
   rows: string[];
+  suggestionTextAc: string;
 }
 
 export interface WysiWygProps {

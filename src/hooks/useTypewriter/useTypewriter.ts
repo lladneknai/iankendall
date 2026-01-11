@@ -47,6 +47,7 @@ export default function useTypewriter({
   // This is the most verbose sub-hook... but there's a lot going on.
   const {
     methods: {
+      ignoreAutocompleteSuggestion,
       resetAutoTypingState,
       setProgress,
       setSuggestionText,
@@ -125,6 +126,7 @@ export default function useTypewriter({
     methods: {
       handleKeyboardEffects,
       handleUserKeystroke,
+      ignoreAutocompleteSuggestion,
       onKeyboardRender,
       resetAutoTypingState,
       setSuggestionText,

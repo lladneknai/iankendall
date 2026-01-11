@@ -115,21 +115,20 @@ export default function useTypewriterAutoTyping({
   }
   // }, progress]);
 
+  function ignoreAutocompleteSuggestion() {
+    setSuggestionTextAc("");
+    setIgnoredSuggestions(ignoredSuggestions + 1);
+    setProgress(progress + 1);
+  }
+
   //
   // HANDLE USER TYPING BEHAVIOR
   // ---------------------------
   // - On each user keystroke, initialize a timeout ref
   // - If the user has stopped typing long enough, run the AC behavior
   // - When the timer expires, the user is presented the next autocomplete suggestion
-  // - If a user IGNORES an autocomplete suggestion, dismiss it and skip to the next one
   //
   function handleUserKeystrokes() {
-    // Handle ignored suggestion
-    if (suggestionTextAc) {
-      setSuggestionTextAc("");
-      setIgnoredSuggestions(ignoredSuggestions + 1);
-      setProgress(progress + 1);
-    }
     // Reset the timer on each keypress
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
@@ -363,6 +362,7 @@ export default function useTypewriterAutoTyping({
   //
   return {
     methods: {
+      ignoreAutocompleteSuggestion,
       initializeWelcomeMessage,
       resetAutoTypingState,
       setProgress,

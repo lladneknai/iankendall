@@ -31,6 +31,7 @@ export default function Typewriter({
 }: TypewriterProps) {
   const {
     methods: {
+      ignoreAutocompleteSuggestion,
       handleKeyboardEffects,
       handleUserKeystroke,
       onKeyboardRender,
@@ -57,12 +58,14 @@ export default function Typewriter({
 
   // Handle tips
   const { handleDismissTip, tipText } = useTypingTips({
+    ignoreAutocompleteSuggestion,
     isAutoTyping,
     isAutoTypeConcluded,
     isPromptRendered: !!suggestionText,
     isSuggestionRendered: !!suggestionTextAc,
     progress,
     rows,
+    suggestionTextAc,
   });
 
   // Global state from stores

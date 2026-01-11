@@ -52,7 +52,7 @@ export const AUTO_COMPLETE_PROMPTS = [
   "[your company]",
   "[something cool]",
   "[phone or email]",
-  "[anything to add?]",
+  "[salutation]",
 ];
 
 export const DESKTOP_INIT_TEXT =
